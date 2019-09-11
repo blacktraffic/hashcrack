@@ -129,7 +129,9 @@ def friendlymap( name ):
          'phps':'2612',
          'sha3':'5000',
          'sha384':'10800',
-         'zip':'13600'
+         'zip':'13600',
+         'wpa':'2500',
+         'wpa-pmk':'2501'
    }
 
    t = fmap.get(name, 'auto')
@@ -570,7 +572,12 @@ def getfirstline( file ):
         with open(file,encoding='utf-8') as f:
             first_line = f.readline().strip()
     except:
-        print("Couldn't parse first line of file")
+        print("Couldn't parse first line of file - trying as latin1")
+        try:
+            with open(file,encoding='latin1') as f:
+                first_line = f.readline().strip()
+        except:
+            print("Couldn't parse first line of file - giving up.")
         
     return first_line
 
