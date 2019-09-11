@@ -221,7 +221,10 @@ def selectparams( hashtype, sink, ruleshome, dicthome ):
                     print(line)
 
 
-    dict=eval(dict)
+    try:                
+        dict=eval(dict)
+    except:
+        dict=smalldict
 
     if not re.search('opencl',hashtype):
         try:
