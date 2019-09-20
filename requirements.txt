@@ -2,4 +2,6 @@ configparser
 bs4
 request
 requests
+jupyter
+bokeh
 

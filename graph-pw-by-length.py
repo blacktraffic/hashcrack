@@ -52,7 +52,7 @@ with open(sys.argv[1]) as inf:
 
 
 #get an appropriate palette, and reverse the order 
-cm = plasma(maxlen)
+cm = plasma(maxlen+2)  
 mcm = cm[::-1]
 
 source = ColumnDataSource(data=dict(lengths=pos, counts=freq, color=mcm ))
@@ -69,4 +69,3 @@ p.ygrid.grid_line_color = None
 
 show(p)
 
-#/opt/python2.7.14/bin/python2.7 graph-by-length.py /var/www/jobs/9a51ca938afe9e12c7839c958c1acaab10379edc/cracked-hashes.txt.html
