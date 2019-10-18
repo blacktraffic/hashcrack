@@ -705,6 +705,7 @@ def main():
     show=args.show
     inhash=args.hash
     crib=args.crib
+    mask=args.mask
 
     if infile is not None:
         infile=os.path.abspath(infile)
@@ -712,13 +713,17 @@ def main():
     if crib is not None:
         crib=os.path.abspath(crib)
 
+    # mask can be an hcmask file
+    if mask is not None:
+        if is_non_zero_file(mask):
+            mask=os.path.abspath(mask)
+
     #clear "have submitted to passcrack" flag if we've been asked to submit
     if args.pc:
         pcsubmit=0
         
     words=args.words
     phrases=args.phrases
-    mask=args.mask
     username=args.username
     dolast=args.last
     sink=args.sink
