@@ -41,7 +41,7 @@ imv=0
 itv=0
 
 #parse our input file to get max
-with open(sys.argv[1]) as inf:
+with open(sys.argv[1], encoding="utf8") as inf:
     for line in inf:
         ans=line.rstrip()
         if re.match(r'Recovered\.\.\.\.\.\.\.\.: (\d+)/(\d+)',ans):                    
@@ -69,7 +69,7 @@ sf=100/maxp
 imv=0
 
 #parse our input file ( #cracked as list, total first )
-with open(sys.argv[1]) as inf:
+with open(sys.argv[1], encoding="utf8") as inf:
     for line in inf:
         ans=line.rstrip()
         if re.match(r'Recovered\.\.\.\.\.\.\.\.: (\d+)/(\d+)',ans):                    
