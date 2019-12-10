@@ -4,8 +4,6 @@ Do you want https://github.com/netmux/HASH-CRACK instead? I'm sorry about the na
 
 This 'hashcrack' is a script which unpacks some hash types, picks sensible options and invokes hashcat.
 
-NVIDIA drivers here: http://www.nvidia.co.uk/Download/index.aspx?lang=en-uk
-
 email: jamie@blacktraffic.co.uk if you need support
 
 I'm not sure if anyone at NCC will be looking after this, but I'll be doing active dev in this branch in future: https://github.com/blacktraffic/hashcrack
