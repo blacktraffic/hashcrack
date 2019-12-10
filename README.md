@@ -1,11 +1,14 @@
 # hashcrack
-unpacks some hash types, picks sensible options and invokes hashcat
+
+Do you want https://github.com/netmux/HASH-CRACK instead? I'm sorry about the name collision; I wasn't aware of it until after this project was released. 
+
+This 'hashcrack' is a script which unpacks some hash types, picks sensible options and invokes hashcat.
 
 NVIDIA drivers here: http://www.nvidia.co.uk/Download/index.aspx?lang=en-uk
 
-alt email: jamie@blacktraffic.co.uk if you need support
+email: jamie@blacktraffic.co.uk if you need support
 
-I'm not sure if anyone at NCC will be looking after this, but I'll be doing active dev in this branch in future: https://github.com/jamieriden/hashcrack
+I'm not sure if anyone at NCC will be looking after this, but I'll be doing active dev in this branch in future: https://github.com/blacktraffic/hashcrack
 
 # python version
 
@@ -24,16 +27,15 @@ This will fetch about 30Gb of dictionaries - YOU HAVE BEEN WARNED
 for 7z files, you will need perl and Compress::Raw::LZMA, so maybe one of these two depending on your perl distribution: 
 
 ActiveState Perl:
-
     ppm install Compress::Raw::LZMA
 
 Strawberry Perl:
-
     cpan install Compress::Raw::LZMA
+
 
 To run - various cases:
 
-Bog standard crack:
+"Bog standard" crack:
 
     python3 hashcrack.py -i <input file>
 
@@ -41,11 +43,12 @@ or:
 
     python3 hashcrack.py --hash <literal hash>
 
+
 Try harder - use words and phrases and previously found passwords 
 
     python3 hashcrack.py --input <input file> --words --phrases --found
 
-Nuclear option - use bigger rules + dict
+Nuclear option - use bigger rules + dict + suffixes 
 
     python3 hashcrack.py --input <input file> --nuke
 
@@ -61,11 +64,13 @@ Try your own mask:
 
     python3 hashcrack.py -i <input file> --mask ?l?l?l?l?l?l
 
-Run an IFM dump you've saved as a zip:
+Run an IFM dump you've saved as a zip - requires impacket for decode
 
     python3 hashcrack.py -i <input file.zip> [-t ifm] 
 
-See also test.bat
+
+
+See also test.bat / test.sh 
 
 Input file may be a docx, pdf, JKS file, etc.
 

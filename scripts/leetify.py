@@ -32,6 +32,13 @@ def leetify(i, a):
         print(i)
         
 
-with open(sys.argv[1],'r') as inpfile:
-    for l in inpfile:
-        leetify('',l.rstrip())
+with open(sys.argv[1],'r', encoding="utf-8") as inpfile:
+    l = inpfile.readline()
+       
+    while l:
+        try:
+            leetify('',l.rstrip())
+            l = inpfile.readline()
+        except:
+            print(l.rstrip)
+            
