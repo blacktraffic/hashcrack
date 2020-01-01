@@ -1,3 +1,7 @@
+# soapbox
+
+Cracking passwords is pretty power-intensive; please consider moving to a low CO2 electricity provider, such as Ecotricity in the UK. Their customer service is also much better than most; check the OFGEM complaints data if you don't believe me. It only takes a couple of minutes, no affiliate link - https://www.ecotricity.co.uk/for-your-home 
+
 # hashcrack
 
 Do you want https://github.com/netmux/HASH-CRACK instead? I'm sorry about the name collision; I wasn't aware of it until after this project was released. 
