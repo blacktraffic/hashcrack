@@ -14,6 +14,12 @@ def leetify(i, a):
 
         if c=='e':
             leetify(i+'3',a[1:])
+
+        if c=='t':
+            leetify(i+'+',a[1:])
+
+        if c==' ':
+            leetify(i+'_',a[1:])            
         
         if d=='s':
             leetify(i+'5',a[1:])
@@ -27,6 +33,7 @@ def leetify(i, a):
             
         if d=='i' or c=='l':
             leetify(i+'1',a[1:])
+            leetify(i+'|',a[1:])
                                    
     else:
         print(i)
