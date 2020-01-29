@@ -11,9 +11,9 @@ pip2path=pip
 pip3path=pip3
 perlpath=perl
 
-hc=C:\Users\JRiden_ADM\Desktop\ncc\hashcrack\hashcat-5.1.0
-rules=C:\Users\JRiden_ADM\Desktop\ncc\hashcrack\rules\
-dict=C:\Users\JRiden_ADM\Desktop\ncc\hashcrack\dict\
+hc=C:\hashcrack\hashcat-5.1.0
+rules=C:\hashcrack\rules\
+dict=C:\hashcrack\dict\
 
 [dicts]
 massivedict=Top2Billion_probable.txt 
@@ -24,7 +24,7 @@ dumbdict=words.txt
 cracked=found.txt
 
 [rules]
-hugerules=l33tnsa.rule
-bigrules=l33tpasspro.rule
-smallrules=l33t64.rule
-nullrules=null.rule    
+hugerules=best84581.rule
+bigrules=best22405.rule
+smallrules=best1222.rule
+nullrules=null.rule 
