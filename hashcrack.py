@@ -3,7 +3,7 @@
 #
 #Released as open source by NCC Group Plc - http://www.nccgroup.com/
 #
-#Developed by Jamie Riden, at NCC Group.
+#originally developed by Jamie Riden, at NCC Group.
 #
 #Forked to http://www.github.com/blacktraffic/hashcrack as I no longer work at NCC
 #so active dev is continuing here. 
@@ -71,6 +71,10 @@ def file_age_in_seconds(pathname):
 #check if a file exists and is non empty
 def is_non_zero_file(fpath):  
     return os.path.isfile(fpath) and os.path.getsize(fpath) > 0
+
+#check if a file exists and is non empty
+def is_non_zero_file_or_dir(fpath):  
+    return (os.path.isfile(fpath) and os.path.getsize(fpath) > 0) or os.path.isdir(fpath)
 
 def rules_exist(fpath,ruleshome):
     if os.path.isfile(fpath) and os.path.getsize(fpath) > 0:
@@ -308,7 +312,7 @@ def runjtr( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome,
 
     if dictoverride:
         d=dictoverride
-        if not is_non_zero_file(d):
+        if not is_non_zero_file_or_dir(d):
             d='dict'+pathsep+d
     else:
         if not re.search('^/',dict):
@@ -344,7 +348,7 @@ def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, 
             
     if rulesoverride:
         r=rulesoverride
-        if not is_non_zero_file(r):
+        if not is_non_zero_file_or_dir(r):
             r='rules'+pathsep+r
     else:
         if not re.search('^/',rules):            
@@ -352,7 +356,7 @@ def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, 
 
     if dictoverride:
         d=dictoverride
-        if not is_non_zero_file(d):
+        if not is_non_zero_file_or_dir(d):
             d='dict'+pathsep+d
     else:
         if not re.search('^/',dict):
@@ -756,8 +760,8 @@ def main():
 
     if dictoverride is not None:
         dictoverride=os.path.abspath(dictoverride)
-        if not is_non_zero_file(dictoverride):
-            print("Can't find dictionary file "+dictoverride)
+        if not is_non_zero_file_or_dir(dictoverride):
+            print("Can't find dictionary file/dir "+dictoverride)
             sys.exit(1)
             
     if rightdict is not None:
@@ -771,8 +775,8 @@ def main():
 
     if rulesoverride is not None:
         rulesoverride=os.path.abspath(rulesoverride)
-        if not is_non_zero_file(rulesoverride):
-            print("Can't find rules file "+rulesoverride)
+        if not is_non_zero_file_or_dir(rulesoverride):
+            print("Can't find rules file/dir "+rulesoverride)
             sys.exit(1)
         
     potfile=args.potfile
