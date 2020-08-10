@@ -270,7 +270,7 @@ def autodetect( line ):
 
 def btexec( sexec, show=0, dryrun=0 ):
 
-    if not show or dryrun:
+    if not show:
         print('RUN:'+sexec)
         
     if dryrun == 0:
@@ -330,9 +330,9 @@ def runjtr( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome,
 def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdictoverride, rulesoverride, mask, lmask, rmask, dolast, ruleshome, words, pathsep, exe, crib, phrases, username, nuke, found, potfile, noinc, show, skip, restore, force, remove, statusfile, leet, prince, princemin, princemax, purplerain, dryrun):
 
     if pathsep=='/':
-        hcbin='./hashcat64.bin'
+        hcbin='./hashcat.bin'
     else:
-        hcbin='hashcat64.exe'
+        hcbin='hashcat.exe'
 
     crackeddict='cracked-passwords.txt'
 
