@@ -3,14 +3,14 @@
 #
 #Released as open source by NCC Group Plc - http://www.nccgroup.com/
 #
-#originally developed by Jamie Riden, at NCC Group.
+#Originally developed by Jamie Riden while at NCC Group. 
 #
-#Forked to http://www.github.com/blacktraffic/hashcrack as I no longer work at NCC
-#so active dev is continuing here. 
+#Now forked to http://www.github.com/blacktraffic/hashcrack as I no longer work
+#at NCC so active dev is continuing here. 
 #
 #This software is licensed under AGPL v3 - see LICENSE.txt
 #
-# v 1.2 'Volume'
+# v 1.3 'Trouble'
 #
 # this badly needs refactoring. it's a helper script that got out of hand
 
@@ -297,7 +297,6 @@ def runjtr( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome,
         jtrbin='./john/run/john'
     else:
         jtrbin='john\\run\\john.exe'
-
         
     try:
         config = configparser.ConfigParser()
@@ -472,7 +471,12 @@ def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, 
                 if re.match('\?',mask): 
                     btexeccwd(hcbin+' -a3 -m '+hashtype+' '+pwdfile+' '+mask+' -i '+trailer+skip,hashcathome,show,dryrun)
                 else:
-                    btexeccwd(hcbin+' -a3 -m '+hashtype+' '+pwdfile+' '+mask+' '+trailer+skip,hashcathome,show,dryrun)
+                    if mask!='default':
+                        #assume it's a file
+                        btexeccwd(hcbin+' -a3 -m '+hashtype+' '+pwdfile+' '+mask+' '+trailer+skip,hashcathome,show,dryrun)
+                    else:
+                        #use the default ?1?2 ... ?2?3 mask with -i
+                        btexeccwd(hcbin+' -a3 -m '+hashtype+' '+pwdfile+' -i '+trailer+skip,hashcathome,show,dryrun)
             if rmask:
                 print("Using specified dict + right mask: "+rmask) 
                 btexeccwd(hcbin+' -a6 -m '+hashtype+' '+pwdfile+' '+d+' -i '+rmask+' '+trailer+skip,hashcathome,show,dryrun)
@@ -632,7 +636,7 @@ def main():
     parser.add_argument('--status', help='Status file' )
     parser.add_argument('--hash', help='Input hash' )
     parser.add_argument('-c','--crib',  help='Crib file - keep it short')
-    parser.add_argument('-m','--mask', help='Mask to use')
+    parser.add_argument('-m','--mask', help='Mask to use, e.g. ?a?a?a, literal "default" to use hashcat default')
     parser.add_argument('--rmask', help='Right hand mask to use with dict')
     parser.add_argument('--lmask', help='Left hand mask to use with dict')
     parser.add_argument('-t','--type', help='Hash type')
@@ -643,22 +647,22 @@ def main():
     parser.add_argument('-tf','--thisfound', help='Use this instead of found.txt')
     parser.add_argument('-P','--prince', action="store_true", help='Use PRINCE preprocessor on the input dictionary')
     parser.add_argument('-R','--rain', action="store_true", help='Use purple rain attack; shuf | pp64 | hashcat -g 300000')
-    parser.add_argument('-pmin','--princemin', help='PRINCE min')
-    parser.add_argument('-pmax','--princemax', help='PRINCE max')
-#    parser.add_argument('-O','--omen', help='Use OMEN preprocessor')
-#    parser.add_argument('-C','--chunk', help='Use this chunk size')    
+    parser.add_argument('--princemin', help='PRINCE min')
+    parser.add_argument('--princemax', help='PRINCE max')
+
     parser.add_argument('-a','--mininc', help='Min increment')
     parser.add_argument('-z','--maxinc', help='Max increment')    
     parser.add_argument('--skip', help='Skip argument to hashcat')
-    
+
+
     parser.add_argument('--restore', action="store_true", help='Restore to last session')
     parser.add_argument('-s','--show', action="store_true", help='Just show stuff')
     parser.add_argument('-l','--last', action="store_true", help='Use last3 file together with the given or default dictionary')
     parser.add_argument('-f','--found', action="store_true", help='Update found list')
-    parser.add_argument('--force', action="store_true", help='Run with CPU as well. Gets you up to 8% percent extra oomph, depending on hash type')
+    parser.add_argument('--force', action="store_true", help='Run with CPU as well. Gets you up to 8 percent extra oomph, depending on hash type')
     parser.add_argument('--remove', action="store_true", help='Remove found hashes from input file')
     parser.add_argument('-w','--words', action="store_true", help='Use words file')
-    parser.add_argument('--noinc', action="store_true", help='Don not use increment')
+    parser.add_argument('--noinc', action="store_true", help='Do not use increment')
     parser.add_argument('-p','--phrases', action="store_true", help='Use phrases file')
     parser.add_argument('-u','--username', action="store_true", help='Override username flag')
     parser.add_argument('-n','--nuke', action="store_true", help='Throw everything at it')
@@ -1014,7 +1018,6 @@ def main():
             
             stype = open(sname,'w')
             ttype = open(tname,'w')
-
  
             with open(infile,encoding='utf-8') as f:
                 for i in f:
@@ -1393,14 +1396,16 @@ def main():
             try: 
                 with open(infile,encoding='utf-8') as f:
                     for i in f:
-                        if not re.search(i,':'): 
-                            ff.write(i[:-21]+':'+i[-21:])
-                            infile=tmpfile                
+                        if re.search(i,'[0-9]'):
+                            if not re.search(i,':'): 
+                                ff.write(i[:-21]+':'+i[-21:])
+                                infile=tmpfile                
             except:
-                print("Could not preprocess zip hash")
+                print("Could not preprocess oracle 11 hash")
                 
             ff.close()
 
+            
         (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
 
         if maxinc is not None:
