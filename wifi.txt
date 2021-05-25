@@ -1,0 +1,21 @@
+New style wifi
+==============
+
+Need: https://github.com/ZerBea/hcxtools
+
+Grab cap files using airodump-ng, or whatever. 
+
+Convert all files ending in .cap to new style format: 
+
+$ ./hcxtools/hcxpcapngtool --prefix localwifi -o wpa.22000 *.cap 
+
+this writes localwifi.22000 (because of --prefix) which is hash type 22000, and also gives you localwifi.essid as a crib file  
+
+then can crack with ./hashcat -m 22000 localwifi.22000
+
+or hashcrack should auto-identify these files
+
+You can filter down to a particular ESSID by
+
+$ ./hcxtools/hcxhashtool -i localwifi.22000 --essid=NETGEAR29 -o NETGEAR29.22000
+
