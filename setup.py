@@ -1,9 +1,11 @@
 #
 #Released as open source by NCC Group Plc - http://www.nccgroup.com/
 #
-#Developed by Jamie Riden, jamie.riden@nccgroup.com
+#Originally developed by Jamie Riden at NCC
+# 
+#Now maintained as separate branch, jamie@blacktraffic.co.uk 
 #
-#http://www.github.com/nccgroup/hashcrack
+#http://www.github.com/blacktraffic/hashcrack
 #
 #This software is licensed under AGPL v3 - see LICENSE.txt
 #
@@ -26,38 +28,25 @@ def main():
     print("Installing configparser and other dependencies - needs 'pip3' on path")
     btexec("pip3 install -r requirements.txt")
 
-    print("Installing impacket - needs 'pip2' on path. this will only affect Windows IFM formats if it's not installed.")
-    btexec("pip2 install impacket==0.9.19")
-       
-    print("Checking for dictionary files - will download some if not present...")
-    print("*** DICTIONARY DOWNLOAD IS BIG, SO EITHER RUN setup-with-dict.py OR UNCOMMENT")    
-    if False: #not is_non_zero_file('dict/breachcompilation.txt'):
-        if not is_non_zero_file('empdict.zip'):
-            urllib.request.urlretrieve ("http://www.blacktraffic.co.uk/pw-dict-public/empdict.zip", "empdict.zip")
-        print("Got dictionary zip, expanding...")    
-        zip_ref = zipfile.ZipFile('empdict.zip', 'r')
-        zip_ref.extractall('.')
-        zip_ref.close()
-
-    if not is_non_zero_file('hashcat-5.1.0.7z'):
-        print("Got hashcat-5.1.0, expanding...")    
-        urllib.request.urlretrieve("https://hashcat.net/files/hashcat-5.1.0.7z","hashcat-5.1.0.7z")
-        btexec('7z x hashcat-5.1.0.7z')
+    if not is_non_zero_file('hashcat-6.1.1.7z'):
+        print("Got hashcat-6.1.1, expanding...")    
+        urllib.request.urlretrieve("https://hashcat.net/files/hashcat-6.1.1.7z","hashcat-6.1.1.7z")
+        btexec('7z x hashcat-6.1.1.7z')
 
     print("Getting JksPrivkPrepare.jar - for Java keystores")
     if not is_non_zero_file('JksPrivkPrepare.jar'):
         urllib.request.urlretrieve("https://github.com/floyd-fuh/JKS-private-key-cracker-hashcat/raw/master/JksPrivkPrepare.jar","JksPrivkPrepare.jar")
 
-    print("Getting impacket-0.9.19 - might need to get a different one to match the pip install of impacket")
-    if not is_non_zero_file('impacket_0_9_19.zip'):
-        urllib.request.urlretrieve("https://github.com/CoreSecurity/impacket/archive/impacket_0_9_19.zip","impacket_0_9_19.zip")
+    print("Getting impacket-0.9.22 - might need to get a different one to match the pip install of impacket")
+    if not is_non_zero_file('impacket_0_9_22.zip'):
+        urllib.request.urlretrieve("https://github.com/CoreSecurity/impacket/archive/impacket_0_9_22.zip","impacket_0_9_22.zip")
         
-    zip_ref = zipfile.ZipFile('impacket_0_9_19.zip', 'r')
+    zip_ref = zipfile.ZipFile('impacket_0_9_22.zip', 'r')
     zip_ref.extractall('.')
     zip_ref.close()
 
     try:
-        os.rename('impacket-impacket_0_9_19','impacket')
+        os.rename('impacket-impacket_0_9_22','impacket')
     except:
         print("Couldn't rename impacket - assuming already exists")
 
@@ -73,10 +62,10 @@ def main():
     except:
         print("Couldn't rename john - assuming already exists")
         
-    shutil.copy2('rules/leet2.rule','hashcat-5.1.0/rules/')
-    shutil.copy2('rules/allcase.rule','hashcat-5.1.0/rules/')
-    shutil.copy2('rules/nsav2dive.rule','hashcat-5.1.0/rules/')
-    shutil.copy2('rules/l33tpasspro.rule','hashcat-5.1.0/rules/')
+    shutil.copy2('rules/leet2.rule','hashcat-6.1.1/rules/')
+    shutil.copy2('rules/allcase.rule','hashcat-6.1.1/rules/')
+    shutil.copy2('rules/nsav2dive.rule','hashcat-6.1.1/rules/')
+    shutil.copy2('rules/l33tpasspro.rule','hashcat-6.1.1/rules/')
     
     print("Done - now change the paths in hashcrack.cfg to point to dict, rules, hashcat")        
 
