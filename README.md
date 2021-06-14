@@ -24,16 +24,13 @@ If you don't have Python in your path:
     <path to python>/python.exe -m pip install -r requirements.txt
     <path to python>/python.exe setup.py
 
-This will fetch about 30Gb of dictionaries - YOU HAVE BEEN WARNED
-
-for 7z files, you will need perl and Compress::Raw::LZMA, so maybe one of these two depending on your perl distribution: 
+for 7z files, you may need perl and Compress::Raw::LZMA, so maybe one of these two depending on your perl distribution: 
 
 ActiveState Perl:
     ppm install Compress::Raw::LZMA
 
 Strawberry Perl:
     cpan install Compress::Raw::LZMA
-
 
 To run - various cases:
 
