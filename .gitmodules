@@ -1,0 +1,3 @@
+[submodule "hashcrack-php"]
+	path = hashcrack-php
+	url = git@github.com:blacktraffic/hashcrack-php.git
