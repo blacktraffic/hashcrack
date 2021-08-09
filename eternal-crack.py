@@ -3,12 +3,13 @@
 import sys
 import os
 import re
+import argparse
 
 def subsq(state, remains, n, wf):
 
     #don't do more than this many tweaks
-    if n>4:
-        if len(state+remains)>4:
+    if n>5:
+        if len(state+remains)>6:
             wf.write(state+remains+"\n")
             return
         
@@ -18,7 +19,7 @@ def subsq(state, remains, n, wf):
         subsq(state+c,remains[1:],n,wf)
         subsq(state,remains[1:],n+1,wf)
        
-    else:
+    else:        
         #only output fragments longer than this 
         if len(state)>6:
             wf.write(state+"\n")
@@ -39,7 +40,7 @@ def subsq_file(filename):
     wf.close()
 
 
-def stem_file(filename,pattern):
+def stem_file(filename,pattern="[^A-Za-z0-9]"):
 
     wf = open(filename+".stem","w")
     
@@ -47,23 +48,24 @@ def stem_file(filename,pattern):
         l = inpfile.readline()
 
         while l:
-            l = re.sub('[^A-Za-z0-9]','',l)
+            l = re.sub(pattern,'',l)
 
             if isinstance(l, str):
                 wf.write(l+"\n")
                 
             l = inpfile.readline()
-            l = re.sub('[^A-Za-z0-9]','',l)
+            l = re.sub(pattern,'',l)
             
     wf.close()
 
-
-
+def bt_exec(command):
+    print("EXEC: "+command)
+    os.system(command)
 
 def recompute(hashfile, hashtype):
     #spit out the known hashes so far
-    print("python hashcrack.py -d dict\Top32Million-probable.txt -t "+hashtype+" -i "+hashfile+" -r rules\InsidePro-PasswordsPro.rule  --show  | perl get-passwords-from-pot.pl > "+hashfile+".tmp.pass")
-    os.system("python hashcrack.py -d dict\Top32Million-probable.txt -t "+hashtype+" -i "+hashfile+" -r rules\InsidePro-PasswordsPro.rule  --show  | perl get-passwords-from-pot.pl > "+hashfile+".tmp.pass")
+    print("python hashcrack.py -t "+hashtype+" -i "+hashfile+" -r rules\InsidePro-PasswordsPro.rule  --show  | perl get-passwords-from-pot.pl > "+hashfile+".tmp.pass")
+    bt_exec("python hashcrack.py -t "+hashtype+" -i "+hashfile+" -r rules\InsidePro-PasswordsPro.rule  --show  | perl get-passwords-from-pot.pl > "+hashfile+".tmp.pass")
 
     #take those and generate some subsequences and stems
     print("Stemming passwords...")
@@ -74,33 +76,61 @@ def recompute(hashfile, hashtype):
 
 # todo mix-in
 
-hashfile="hashes.txt"
 hashtype="1000"
 
+parser = argparse.ArgumentParser(description='Helps to crack passwords')
+parser.add_argument('-i','--input', help='Input file' )
+parser.add_argument('-m','--mix', help='Mix-in file' )
+parser.add_argument('-n','--number', help='Number of iterations' )
+parser.add_argument('-t','--type', help='Hash type (defaults to ntlm/1000)')
+args = parser.parse_args()
+
+if not args.input:
+    die("Please specify [--input|-i] <input file> ")
+    
+hashfile=args.input
+
 #replay those at the remaining passwords with tweaks:
-print("Cracking stage 1 - nsav2dive.rule")
-print("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.subs -t ntlm -i "+hashfile+" -r rules/nsav2dive.rule")
-os.system("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.subs -t ntlm -i "+hashfile+" -r rules/nsav2dive.rule")
-recompute(hashfile, hashtype)
 
-print("Cracking stage 2 - insertions.rule")
-print("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.subs -t ntlm -i "+hashfile+" -r rules/insertions.rule")
-os.system("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.subs -t ntlm -i "+hashfile+" -r rules/insertions.rule")
-recompute(hashfile, hashtype)
+iterations=1 
+if args.number and args.number>1:
+    iterations=args.number
 
-print("Cracking stage 3 - leetspeak...")
-print("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.stem -t ntlm -i "+hashfile+" -3")
-os.system("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.stem -t ntlm -i "+hashfile+" -3")
-recompute(hashfile, hashtype)
+if args.mix:
+    mix=os.path.abspath(args.mix)
+    print("Cracking stage - mixin crib...")
+    bt_exec("python hashcrack.py --noinc -c "+mix+" -t ntlm -i "+hashfile+" -3")
 
-print("Cracking stage 4 - right mask...")
-print("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.stem -t ntlm -i "+hashfile+" --rmask ?a?a?a")
-os.system("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.stem -t ntlm -i "+hashfile+" --rmask ?a?a?a")
-recompute(hashfile, hashtype)
+    print("Cracking stage - mixin purple rain (leetspeak)...")
+    bt_exec("python hashcrack.py --noinc -d "+mix+" -t ntlm -i "+hashfile+" -3")
 
-print("Cracking stage 5 - purple rain...")
-print("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.subs -t ntlm -i "+hashfile+" -R")
-os.system("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.subs -t ntlm -i "+hashfile+" -R")
-recompute(hashfile, hashtype)
+    print("Cracking stage - mixin purple rain (random rules plus prince)...")
+    bt_exec("python hashcrack.py --noinc -d "+mix+" -t ntlm -i "+hashfile+" -R")
+    recompute(hashfile, hashtype)
+
+for x in range(iterations):
+
+    recompute(hashfile, hashtype)
+
+    print("Cracking stage - insertions.rule / subs")
+    bt_exec("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.subs -t ntlm -i "+hashfile+" -r rules/insertions.rule")
+    recompute(hashfile, hashtype)
+
+    #todo add rules
+    print("Cracking stage - leetspeak / stem...")
+    bt_exec("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.stem -t ntlm -i "+hashfile+" -3 -r rules/nsav2dive.rule")
+    recompute(hashfile, hashtype)
+
+    print("Cracking stage - right mask / subs ...")
+    bt_exec("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.subs -t ntlm -i "+hashfile+" --rmask ?a?a?a")
+    recompute(hashfile, hashtype)
+
+    print("Cracking stage - left mask / subs ...")
+    bt_exec("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.subs -t ntlm -i "+hashfile+" --lmask ?a?a")
+    recompute(hashfile, hashtype)
+
+    print("Cracking stage - purple rain (random rules plus prince) / subs ...")
+    bt_exec("python hashcrack.py --noinc -d "+hashfile+".tmp.pass.subs -t ntlm -i "+hashfile+" -R")
+    recompute(hashfile, hashtype)
 
 
