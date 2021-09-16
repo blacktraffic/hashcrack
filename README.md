@@ -12,6 +12,22 @@ email: jamie@blacktraffic.co.uk if you need support
 
 I'm not sure if anyone at NCC will be looking after this, but I'll be doing active dev in this branch in future: https://github.com/blacktraffic/hashcrack
 
+# docker version
+
+Very beta, but you can try docker pull / docker run to invoke this. Remember to map your dict folder - the image got too big when I tried to include all the usual dictionary files. 
+
+    docker pull blacktraffic/hashcrack:0.6
+    docker run  --gpus all -v ~/dict/:/opt/hashcrack/dict -it "blacktraffic/hashcrack:0.6"
+    
+    root@b5b8bb766abb:/opt/hashcrack# ./hashcrack.py -i tests/sha256crypt.txt
+    
+    Ruleshome /opt/hashcrack/rules/
+    Dicthome /opt/hashcrack/dict/
+    HChome /opt/hashcrack/hashcat-6.2.2
+    RH /opt/hashcrack/rules
+    Reading file: /opt/hashcrack/tests/sha256crypt.txt
+    Autodetected sha256crypt ...
+
 # python version
 
 To install:
