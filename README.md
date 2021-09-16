@@ -14,7 +14,7 @@ I'm not sure if anyone at NCC will be looking after this, but I'll be doing acti
 
 # docker version
 
-Very beta, but you can try docker pull / docker run to invoke this. Remember to map your dict folder - the image got too big when I tried to include all the usual dictionary files. 
+Very beta, but you can try docker pull / docker run to invoke this. Remember to map your dict folder - the image got too big when I tried to include all the usual dictionary files. See https://hub.docker.com/repository/docker/blacktraffic/hashcrack 
 
     docker pull blacktraffic/hashcrack:0.6
     docker run  --gpus all -v ~/dict/:/opt/hashcrack/dict -it "blacktraffic/hashcrack:0.6"
