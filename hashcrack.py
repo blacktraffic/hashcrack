@@ -1,18 +1,24 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
 #
-#Released as open source by NCC Group Plc - http://www.nccgroup.com/
+# Released as open source by NCC Group Plc - http://www.nccgroup.com/
 #
-#Originally developed by Jamie Riden while at NCC Group. 
+# Originally developed by Jamie Riden while at NCC Group. 
 #
-#Now forked to http://www.github.com/blacktraffic/hashcrack as I no longer work
-#at NCC so active dev is continuing here. 
+# Now forked to http://www.github.com/blacktraffic/hashcrack as I no longer work
+# at NCC so active dev is continuing here.
 #
-#This software is licensed under AGPL v3 - see LICENSE.txt
 #
-# v 1.4 'I will break you'
+# This software is licensed under AGPL v3 - see LICENSE.txt
+#
+# v 1.5 'Not Invented Here'
 #
 # this badly needs refactoring. it's a helper script that got out of hand
+
+# TODO use foo.ntds.cleartext from IFM as a crib when running IFM
+# TODO strip out machine accounts from IFM; no one cares and it messes up stats
+# TODO tweaks for use as web app back-end
+
 
 import re
 import base64
@@ -356,10 +362,10 @@ def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, 
     if xrules:
         x=xrules
         if not is_non_zero_file_or_dir(r):
-            r='rules'+pathsep+r
+            xr='rules'+pathsep+r
     else:
         if not re.search('^/',rules):            
-            r=ruleshome+pathsep+rules
+            xr=ruleshome+pathsep+rules
 
 
             
@@ -430,7 +436,7 @@ def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, 
         print("Processing crib file...")
         tmpcrib=crib+'.tmp'
         btexeccwd(hcbin+' --stdout '+crib+'  -r '+ruleshome+pathsep+'leet2.rule -o '+tmpcrib,hashcathome,dryrun)
-        btexeccwd(hcbin+' -a0 -m '+hashtype+' '+pwdfile+' '+tmpcrib+' -r '+ruleshome+pathsep+'best64.rule --loopback '+trailer,hashcathome,show,dryrun)
+        btexeccwd(hcbin+' -a0 -m '+hashtype+' '+pwdfile+' '+tmpcrib+' -r '+ruleshome+pathsep+'best84581.rule --loopback '+trailer,hashcathome,show,dryrun)
         return
 
     if found:
@@ -645,7 +651,7 @@ def main():
     incr=''
     unix=0
             
-    parser = argparse.ArgumentParser(description='Description of your program')
+    parser = argparse.ArgumentParser(description='Helps to crack passwords')
     parser.add_argument('-i','--input', help='Input file' )
     parser.add_argument('--status', help='Status file' )
     parser.add_argument('--hash', help='Input hash' )
@@ -742,24 +748,29 @@ def main():
         pathstyle='unix'
         unix=1
         crackopts=crackopts+" -w4 "
-        hashcathome='./hashcat-5.1.0'
-        ruleshome='./hashcat-5.1.0/rules'
+        hashcathome='./hashcat-6.1.1'
+        ruleshome='./hashcat-6.1.1/rules'
         exe='.bin'
     else:
         if re.match(r'Windows',p_os):
             if not show:
                 print("Running under win32")
             exe='.exe'
-            hashcathome='hashcat-5.1.0' #relative path issues with 4.10
+            hashcathome='hashcat-6.1.1' #relative path issues with 4.10
             pathstyle='win32'
             pathsep=r'\\'
-            ruleshome='hashcat-5.1.0\\rules'
-            crackopts=crackopts+" -w3 "
+            ruleshome='hashcat-6.1.1\\rules'
+            crackopts=crackopts+" -w1 "
         else:
             print("Unknown platform")
             exit
             
 
+    if pathsep=='/':
+        hcbin='./hashcat.bin'
+    else:
+        hcbin='hashcat.exe'
+        
     trailer=crackopts+' --session hc'
 
     if maxinc is not None:
@@ -842,7 +853,7 @@ def main():
         javapath='java'
         python2path='python'
         perlpath='perl'
-        hcpath=os.path.abspath('hashcat-5.1.0')
+        hcpath=os.path.abspath('hashcat-6.1.1')
 
         
     hashtype=args.type
@@ -934,7 +945,7 @@ def main():
     colonmap={ '10':1,
                '11':1,
                '12':1,
-               '20':1,
+               '20':3,
                '21':1,
                '22':1,
                '23':1,
@@ -1018,10 +1029,11 @@ def main():
     #if we've got more colons than that, need --username flag
     if colons>expectedcolons:
        username=1
-                        
-    hcbin=hashcathome+pathsep+r'hashcat64'+exe
 
     #preprocess some types
+
+    if hashtype=='shadow':
+        stype='shadow'
     
     #juniper/palo alto/ios type 5
     if hashtype=='juniper' or hashtype=='paloalto' or hashtype=='ios5':
@@ -1140,6 +1152,34 @@ def main():
             
             runjtr(hashcathome, tmpfile2, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdict, rulesoverride, mask, lmask, rmask, dolast, ruleshome, words, pathsep, exe, crib, phrases, username, nuke , found, potfile, noinc, show, skip, restore, force, remove, statusfile, leet, prince, princemin, princemax, purplerain, dryrun, xrules)  
 
+        if stype=='shadow':
+            ff = open(tmpfile,'w')
+
+            try:
+                hashtype='auto'
+                with open(infile,encoding='utf-8') as f:
+                    for i in f:
+                        #print(i)
+                        l=i.split(':')
+                        u=l[0]
+                        h=l[1]
+                        ff.write(u+":"+h+"\n")
+                        if hashtype=="auto": 
+                            hashtype=autodetect(h)
+                    
+            except:
+                print("Couldn't preprocess shadow file")
+
+            ff.close()
+            username=1
+                
+            (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+
+            if maxinc is not None:
+                inc=maxinc
+            
+            runhc(hashcathome, tmpfile, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdict, rulesoverride, mask, lmask, rmask, dolast, ruleshome, words, pathsep, exe, crib, phrases, username, nuke , found, potfile, noinc, show, skip, restore, force, remove, statusfile, leet, prince, princemin, princemax, purplerain, dryrun, xrules)  
+            
         if stype=='zip':
             #windows / linux switch
             if pathsep=='/':
@@ -1177,8 +1217,9 @@ def main():
         # reg - 3 reg hives in a zip file - SAM, SYSTEM, SECURITY
         if stype=='ifm' or stype=='reg':
             
-            tdir=tempfile.gettempdir()
-            print("temp dir: "+tdir)
+            tdir=tempfile.mkdtemp()
+            
+            print("Using temp dir: "+tdir)
 
             zip_file = zipfile.ZipFile(infile, 'r')
             
@@ -1193,7 +1234,7 @@ def main():
                 target = open(os.path.join(tdir, filename), "wb")
                 with source, target:
                     shutil.copyfileobj(source, target)
-                    #print("Extracting "+filename)
+                    print("Extracting "+filename)
                     
                 target.close()
                 source.close()
@@ -1223,9 +1264,26 @@ def main():
 
                     
             else:
-                btexec(python2path+' impacket/examples/secretsdump.py -system '+tdir+pathsep+'SYSTEM  -ntds '+tdir+pathsep+'ntds.dit LOCAL -outputfile '+tmpfile) 
+                # do user status step for NTDIS, as domains often have lots of inactive users
+                
+                btexec(python2path+' impacket/examples/secretsdump.py -history -user-status -system '+tdir+pathsep+'SYSTEM  -ntds '+tdir+pathsep+'ntds.dit LOCAL -outputfile '+tmpfile) 
 
                 infile=tmpfile+'.ntds'
+
+                #TODO cat infile | grep 'Enabled' | cut -f 1 -d' ' > infile2 ; mv infile2 infile
+
+                ff = open(tmpfile2,'w')
+
+                try: 
+                    with open(tmpfile,encoding='utf-8') as f:
+                        for i in f: 
+                            if re.match('Enabled', i):
+                                ## todo dump machine accounts, ie. no $ 
+                              l=i.split(' ')
+                              h=l[0]
+                              ff.write(h+"\n")
+                except:
+                    print("Failed to parse ntds file - check impacket setup, and python2")
             
                 if not is_non_zero_file(infile):
                     print("Failed to generate ntds file - check impacket setup, and python2")
@@ -1255,8 +1313,10 @@ def main():
                 outfile.close()
 
                 hashtype='1000'
+
+                allcaserules=os.path.abspath("rules/allcase.rule")
             
-                btexeccwd(hcbin+' -a0 -m '+hashtype+' '+infile+' '+tmpfile2+' -r rules/allcase.rule '+trailer,hashcathome,show,dryrun)
+                btexeccwd(hcbin+' -a0 -m '+hashtype+' '+infile+' '+tmpfile2+' -r '+allcaserules+' '+trailer,hashcathome,show,dryrun)
 
             hashtype='1000'
 
