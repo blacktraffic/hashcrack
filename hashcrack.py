@@ -8,17 +8,27 @@
 # Now forked to http://www.github.com/blacktraffic/hashcrack as I no longer work
 # at NCC so active dev is continuing here.
 #
+# 
 #
 # This software is licensed under AGPL v3 - see LICENSE.txt
 #
-# v 1.5 'Not Invented Here'
+# v 1.7 'Cargo Cult'
 #
 # this badly needs refactoring. it's a helper script that got out of hand
 
-# TODO use foo.ntds.cleartext from IFM as a crib when running IFM
-# TODO strip out machine accounts from IFM; no one cares and it messes up stats
-# TODO tweaks for use as web app back-end
+#how to:
+#
+# get mssql hashes: 
+# SELECT name + ':' + master.sys.fn_varbintohexstr(password_hash) from master.sys.sql_logins ; 
 
+# get AD hashes via NTDSUTIL 
+#C:\>ntdsutil
+#ntdsutil: activate instance ntds
+#ntdsutil: ifm
+#ifm: create full c:\temp\ifm
+#ifm: quit
+#ntdsutil: quit
+#Then zip c:\temp\ifm and submit as -t ifm -i ifm.zip. This needs impacket to unpack 
 
 import re
 import base64
@@ -637,10 +647,7 @@ def main():
     princemin='8'
     princemax='999'
     
-    # for hashcat4
-    crackopts=" -O --quiet "
     crackopts=" -O "
-    crackopts=" -O --bitmap-max=26 "
 
     uname=''
     loc=''
@@ -912,16 +919,7 @@ def main():
 
         if re.search(r'\.gpg$',infile):
             hashtype='gpg'
-            stype='gpg'
-
-#ifm support
-#C:\>ntdsutil
-#ntdsutil: activate instance ntds
-#ntdsutil: ifm
-#ifm: create full c:\temp\ifm
-#ifm: quit
-#ntdsutil: quit
-#Then zip c:\temp\ifm and submit this.
+            stype='gpg'            
             
     if infile:
         line=getfirstline(infile)
@@ -929,18 +927,47 @@ def main():
         line=inhash
 
     if hashtype=='auto':
+
         if stype is not None:
             if stype!='oracle':
                 hashtype=autodetect(line)
         else:
             hashtype=autodetect(line)
-            
+
+        #jwt base64 decode             
+        try:
+            try:
+                decodedBytes = base64.b64decode(line)
+            except:
+                try:
+                    decodedBytes = base64.b64decode(line+'=')
+                except:
+                    try:
+                        decodedBytes = base64.b64decode(line+'==')
+                    except:
+                        print("Doesn't look like base64")
+                                               
+            decodedStr = str(decodedBytes[:40], "ascii")
+
+            print(decodedStr)
+
+            if re.search(r'"alg"',decodedStr):
+                print('base64 decode suggests JWT...')
+                if re.search(r'"HS(256|512)"',decodedStr):
+                    print('base64 decode suggests HMAC-based JWT, so can try to crack')
+                    hashtype='16500'
+                else:
+                    print('doesn\'t look like a crackable JWT')                
+        except:
+            print("Doesn't look like a JWT")
+
         if hashtype=='pwdump':
             stype='pwdump'
 
         if hashtype=='oracle':
             stype='oracle'
 
+    print(hashtype)
     # how many colons we're expecting by hash type
     colonmap={ '10':1,
                '11':1,
@@ -1265,30 +1292,54 @@ def main():
                     
             else:
                 # do user status step for NTDIS, as domains often have lots of inactive users
-                
-                btexec(python2path+' impacket/examples/secretsdump.py -history -user-status -system '+tdir+pathsep+'SYSTEM  -ntds '+tdir+pathsep+'ntds.dit LOCAL -outputfile '+tmpfile) 
+
+                #most people won't want history i think - but we'll provide it as an option
+                btexec(python2path+' impacket/examples/secretsdump.py -history -user-status -system '+tdir+pathsep+'SYSTEM  -ntds '+tdir+pathsep+'ntds.dit LOCAL -outputfile '+tmpfile)
 
                 infile=tmpfile+'.ntds'
+                cribfile=tmpfile+'.cleartext.crib'
+                hist=tmpfile+'.pwdump.history'
+                pwdump=tmpfile+'.pwdump'                 
 
-                #TODO cat infile | grep 'Enabled' | cut -f 1 -d' ' > infile2 ; mv infile2 infile
-
-                ff = open(tmpfile2,'w')
+                histf = open(hist,'w')
+                pdumpf = open(pwdump,'w')
 
                 try: 
-                    with open(tmpfile,encoding='utf-8') as f:
-                        for i in f: 
-                            if re.match('Enabled', i):
-                                ## todo dump machine accounts, ie. no $ 
-                              l=i.split(' ')
-                              h=l[0]
-                              ff.write(h+"\n")
+                    with open(infile,encoding='utf-8') as f:
+                        for i in f:
+                            if re.search(r'Enabled', i):
+                                # lose inactive accounts
+                                if not re.search('\$',i):
+                                    ## lose the machine accounts, ie. no $ 
+                                    l=i.split(' ')
+                                    h=l[0] #lose enabled/disabled status 
+                                    histf.write(h+"\n")                    
+                                    if not re.search('_history',h):
+                                        pdumpf.write(h+"\n")
+                                    
                 except:
                     print("Failed to parse ntds file - check impacket setup, and python2")
+
+                histf.close()
+                pdumpf.close()                
+                
+                print("Wrote file "+hist+" (with password history, if present) and\n"+pwdump+" without history")
             
                 if not is_non_zero_file(infile):
                     print("Failed to generate ntds file - check impacket setup, and python2")
                     sys.exit(1)
+
+                if is_non_zero_file(infile+'.cleartext'):
+
+                    getregexpfromfile(':([^:]+)$',infile+'.cleartext',cribfile,False)
                     
+                    print("Running crib from cleartext output")
+                    btexeccwd(hcbin+' -a0 -m 1000 '+pwdump+' '+cribfile+' '+trailer,hashcathome,show,dryrun)
+
+                infile=pwdump
+
+                #TODO unlink tdir
+                
             hashtype='1000'
             stype='pwdump'     # fall through to pwdump processing now, cos that's what we've got
             
@@ -1368,8 +1419,7 @@ def main():
             if hashtype=='null':
                 print("Failed to  file - check python2 and jtr path - specifically john/run/office2john.py")
                 sys.exit(1)
-                
-                
+                                
             (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
 
             if maxinc is not None:
@@ -1405,8 +1455,7 @@ def main():
 
             if hashtype=='null':
                 print("Failed to  file - check perl and jtr path - specifically john/run/pdf2john.pl")
-                sys.exit(1)
-                
+                sys.exit(1)                
 
             (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
 
