@@ -45,7 +45,7 @@ import time
 import stat
 import configparser
 import platform
-import requests, urllib3, datetime, bs4
+import urllib3, datetime
 import array
 
 # strip out the given regexp from ifile and stick it in ofile - unique strips out dupes if True
@@ -937,15 +937,15 @@ def main():
         #jwt base64 decode             
         try:
             try:
-                decodedBytes = base64.b64decode(line)
+                decodedBytes = base64.b64decode(line[0:40])
             except:
                 try:
-                    decodedBytes = base64.b64decode(line+'=')
+                    decodedBytes = base64.b64decode(line[0:40]+'=')
                 except:
                     try:
-                        decodedBytes = base64.b64decode(line+'==')
+                        decodedBytes = base64.b64decode(line[0:40]+'==')
                     except:
-                        print("Doesn't look like base64")
+                        print("Doesn't look like base64 - no base64 decode possible")
                                                
             decodedStr = str(decodedBytes[:40], "ascii")
 
