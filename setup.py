@@ -28,10 +28,10 @@ def main():
     print("Installing configparser and other dependencies - needs 'pip3' on path")
     btexec("pip3 install -r requirements.txt")
 
-    if not is_non_zero_file('hashcat-6.1.1.7z'):
-        print("Got hashcat-6.1.1, expanding...")    
-        urllib.request.urlretrieve("https://hashcat.net/files/hashcat-6.1.1.7z","hashcat-6.1.1.7z")
-        btexec('7z x hashcat-6.1.1.7z')
+    if not is_non_zero_file('hashcat-6.2.5.7z'):
+        print("Got hashcat-6.2.5, expanding...")    
+        urllib.request.urlretrieve("https://hashcat.net/files/hashcat-6.2.5.7z","hashcat-6.2.5.7z")
+        btexec('7z x hashcat-6.2.5.7z')
 
     print("Getting JksPrivkPrepare.jar - for Java keystores")
     if not is_non_zero_file('JksPrivkPrepare.jar'):
@@ -62,10 +62,10 @@ def main():
     except:
         print("Couldn't rename john - assuming already exists")
         
-    shutil.copy2('rules/leet2.rule','hashcat-6.1.1/rules/')
-    shutil.copy2('rules/allcase.rule','hashcat-6.1.1/rules/')
-    shutil.copy2('rules/nsav2dive.rule','hashcat-6.1.1/rules/')
-    shutil.copy2('rules/l33tpasspro.rule','hashcat-6.1.1/rules/')
+    shutil.copy2('rules/leet2.rule','hashcat-6.2.5/rules/')
+    shutil.copy2('rules/allcase.rule','hashcat-6.2.5/rules/')
+    shutil.copy2('rules/nsav2dive.rule','hashcat-6.2.5/rules/')
+    shutil.copy2('rules/l33tpasspro.rule','hashcat-6.2.5/rules/')
     
     print("Done - now change the paths in hashcrack.cfg to point to dict, rules, hashcat")        
 
