@@ -59,13 +59,13 @@ def main():
     zip_ref.close()
 
     try:        
-        os.rename('JohnTheRipper-bleeding-jumbo','john')
+        os.rename('john-bleeding-jumbo','john')
     except:
         print("Couldn't rename john - assuming already exists")
 
 
     if not is_non_zero_file('princeprocessor-0.22.7z'):
-        urllib.request.urlretrieve("https://github.com/hashcat/princeprocessor/releases/download/v0.22/princeprocessor-0.22.7z")
+        urllib.request.urlretrieve("https://github.com/hashcat/princeprocessor/releases/download/v0.22/princeprocessor-0.22.7z","princeprocessor-0.22.7z")
         btexec('7z x princeprocessor-0.22.7z')
     try:        
         os.rename('princeprocessor-0.22','princeprocessor')
