@@ -1434,7 +1434,7 @@ def main():
             if maxinc is not None:
                 inc=maxinc
                 
-            runhc(hashcathome=hashcathome, pwdfile=tmpfile2, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, dolast=dolast, ruleshome=ruleshome, words=words, pathsep=pathsep, exe=exe, crib=crib, phrases=phrases, username=username, nuke=nuke, found=found, potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
+            runhc(hashcathome=hashcathome, pwdfile=tmpfile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, dolast=dolast, ruleshome=ruleshome, words=words, pathsep=pathsep, exe=exe, crib=crib, phrases=phrases, username=1, nuke=nuke, found=found, potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
 
         #PDF, various subtypes
         if stype=='pdf':

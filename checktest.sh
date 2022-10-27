@@ -33,12 +33,6 @@ echo "md5crypt passed"
 else echo "md5crypt - FAILED"
 fi
 
-python3 hashcrack.py --hash tests/apachemd5.txt --show | grep :foo
-if [ $? == '0' ] ; then
-echo "Apache MD5 passed"
-else echo "Apache MD5 - FAILED"
-fi
-
 # ifm
 
 python3 hashcrack.py -i /home/jamie/dev/hashcrack/tests/ifm.zip.tmp.pwdump --show | grep Password1
@@ -54,7 +48,11 @@ echo "2400 (Cisco) passed"
 else echo "2400 (Cisco) - FAILED"
 fi
 
-python3 hashcrack.py --hash '{ssha1}06$bJbkFGJAB30L2e23$dCESGOsP7jaIIAJ1QAcmaGeG.kr'
+python3 hashcrack.py --hash '{ssha1}06$bJbkFGJAB30L2e23$dCESGOsP7jaIIAJ1QAcmaGeG.kr' --show | grep :hashcat
+if [ $? == '0' ] ; then
+echo "{ssha1} passed"
+else echo "{ssha1} - FAILED"
+fi
 
 # autodetect - hashcat example hashes where the answer is "hashcat"
 python3 hashcrack.py -i tests/sha256crypt.txt --show | grep hashcat
@@ -76,33 +74,65 @@ echo "10500 (PDF) passed"
 else echo "10500 (PDF) - FAILED"
 fi
 
-
 #autodetect Word
-python3 hashcrack.py -i tests/test-abc.docx
+python3 hashcrack.py -i tests/test-abc.docx --show | grep :abc
+if [ $? == '0' ] ; then
+echo "DOCX passed"
+else echo "DOCX - FAILED"
+fi
 
 # manual type selection - hashcat example hashes where the answer is "hashcat"
 
 # oracle 7
-python3 hashcrack.py --hash "7A963A529D2E3229:3682427524" -t 3100
+python3 hashcrack.py --hash "7A963A529D2E3229:3682427524" -t 3100 --show | grep :HASHCAT
+if [ $? == '0' ] ; then
+echo "Oracle7 passed"
+else echo "Oracle7 - FAILED"
+fi
 
 # oracle 11
-python3 hashcrack.py --hash "ac5f1e62d21fd0529428b84d42e8955b04966703:38445748184477378130" -t 112
+python3 hashcrack.py --hash "ac5f1e62d21fd0529428b84d42e8955b04966703:38445748184477378130" -t 112 --show | grep :hashcat
+if [ $? == '0' ] ; then
+echo "Oracle11 passed"
+else echo "Oracle11 - FAILED"
+fi
 
 # oracle 12+
-python3 hashcrack.py --hash "78281A9C0CF626BD05EFC4F41B515B61D6C4D95A250CD4A605CA0EF97168D670EBCB5673B6F5A2FB9CC4E0C0101E659C0C4E3B9B3BEDA846CD15508E88685A2334141655046766111066420254008225" -t 12300
+python3 hashcrack.py --hash "78281A9C0CF626BD05EFC4F41B515B61D6C4D95A250CD4A605CA0EF97168D670EBCB5673B6F5A2FB9CC4E0C0101E659C0C4E3B9B3BEDA846CD15508E88685A2334141655046766111066420254008225" -t 12300 --show | grep :hashcat
+if [ $? == '0' ] ; then
+echo "Oracle12+ passed"
+else echo "Oracle12+ - FAILED"
+fi
 
 #mssql 2000
-python3 hashcrack.py --hash "0x01002702560500000000000000000000000000000000000000008db43dd9b1972a636ad0c7d4b8c515cb8ce46578" -t 131
+python3 hashcrack.py --hash "0x01002702560500000000000000000000000000000000000000008db43dd9b1972a636ad0c7d4b8c515cb8ce46578" -t 131 --show | grep :HASHCAT
+if [ $? == '0' ] ; then
+echo "mssql 2000 passed"
+else echo "mssql 2000 - FAILED"
+fi
 
 #mssql 2005
-python3 hashcrack.py --hash "0x010018102152f8f28c8499d8ef263c53f8be369d799f931b2fbe" -t 132
+python3 hashcrack.py --hash "0x010018102152f8f28c8499d8ef263c53f8be369d799f931b2fbe" -t 132 --show | grep :hashcat
+if [ $? == '0' ] ; then
+echo "mssql 2005 passed"
+else echo "mssql 2005 - FAILED"
+fi
 
-python3 hashcrack.py --hash "u4-netntlm::kNS:338d08f8e26de93300000000000000000000000000000000:9526fb8c23a90751cdd619b6cea564742e1e4bf33006ba41:cb8086049ec4736c" -t 5500
+python3 hashcrack.py --hash "u4-netntlm::kNS:338d08f8e26de93300000000000000000000000000000000:9526fb8c23a90751cdd619b6cea564742e1e4bf33006ba41:cb8086049ec4736c" -t 5500 --show | grep :hashcat
+if [ $? == '0' ] ; then
+echo "netntlm v1 passed"
+else echo "netntlm v1 - FAILED"
+fi
 
-python3 hashcrack.py --hash "admin::N46iSNekpT:08ca45b7d7ea58ee:88dcbe4446168966a153a0064958dac6:5c7830315c7830310000000000000b45c67103d07d7b95acd12ffa11230e0000000052920b85f78d013c31cdb3b92f5d765c783030" -t 5600
+python3 hashcrack.py --hash "admin::N46iSNekpT:08ca45b7d7ea58ee:88dcbe4446168966a153a0064958dac6:5c7830315c7830310000000000000b45c67103d07d7b95acd12ffa11230e0000000052920b85f78d013c31cdb3b92f5d765c783030" -t 5600 --show | grep :hashcat
+if [ $? == '0' ] ; then
+echo "netntlm v2 passed"
+else echo "netntlm v2 - FAILED"
+fi
 
-python3 hashcrack.py --hash "b7c2d6f13a43dce2e44ad120a9cd8a13d0ca23f0414275c0bbe1070d2d1299b1c04da0f1a0f1e4e2537300263a2200000000000000000000140768617368636174:472bdabe2d5d4bffd6add7b3ba79a291d104a9ef" -t 7300
 
-python3 hashcrack.py -i tests/sha3.txt -t sha3
-
-python3 hashcrack.py -i tests/ripe.txt -t ripemd
+python3 hashcrack.py -i tests/Responder.db --show | grep Passw0rd
+if [ $? == '0' ] ; then
+echo "Responder DB passed"
+else echo "Responder DB - FAILED"
+fi
