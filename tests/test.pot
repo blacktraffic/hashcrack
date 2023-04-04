@@ -1,0 +1,3 @@
+$HEX[a3646566]
+test
+test£
