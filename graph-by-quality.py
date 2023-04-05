@@ -89,7 +89,7 @@ mcm = cm[::-1]
 
 msource = ColumnDataSource(data=dict(ticks=pos, cracked=freq, color=mcm ))
 
-p = figure(x_range=(0,tick), y_range=(0,100.0*total/sf), plot_height=600, title="Passwords by Time To Crack (number on left, proportion of total on right)", toolbar_location=None, tools="")
+p = figure(x_range=(0,tick), y_range=(0,100.0*total/sf), height=600, title="Passwords by Time To Crack (number on left, proportion of total on right)", toolbar_location=None, tools="")
 
 p.xaxis.axis_label='Ticks (10s each)'
 p.yaxis.axis_label='Quantity'
@@ -97,7 +97,7 @@ p.yaxis.axis_label='Quantity'
 p.extra_y_ranges = {"Percentage": Range1d(start=0, end=maxp)}
 p.add_layout(LinearAxis(y_range_name="Percentage"), 'right')
 
-p.vbar(x='ticks', top='cracked', width=1, color='color', legend=False, source=msource)
+p.vbar(x='ticks', top='cracked', width=1, color='color', source=msource)
 
 p.xgrid.grid_line_color = None
 p.ygrid.grid_line_color = None
