@@ -1,6 +1,6 @@
 # soapbox
 
-Cracking passwords is pretty power-intensive; please consider moving to a low CO2 electricity provider, such as Ecotricity in the UK. Their customer service is also much better than most; check the OFGEM complaints data if you don't believe me. It only takes a couple of minutes, no affiliate link - https://www.ecotricity.co.uk/for-your-home 
+Cracking passwords is pretty power-intensive; please consider moving to a low CO2 electricity provider, such as Octopus, or Ecotricity in the UK. Their customer service is also much better than most; check the OFGEM complaints data if you don't believe me.
 
 # hashcrack
 
@@ -11,6 +11,10 @@ This 'hashcrack' is a script which unpacks some hash types, picks sensible optio
 email: jamie@blacktraffic.co.uk if you need support
 
 I'm not sure if anyone at NCC will be looking after this, but I'll be doing active dev in this branch in future: https://github.com/blacktraffic/hashcrack
+
+# in the "news"
+
+I place 14th in CMYIC 2020 using this, in a team of one, so it can't be that bad :) See - https://contest-2020.korelogic.com/stats.html 
 
 # docker version
 
