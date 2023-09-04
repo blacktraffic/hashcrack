@@ -1,0 +1,4488 @@
+: ## nothing, reverse, case... base stuff
+: :
+: r
+: u
+: T0
+: 
+: ## simple number append
+: $0
+: $1
+: $2
+: $3
+: $4
+: $5
+: $6
+: $7
+: $8
+: $9
+: 
+: ## special number append
+: $0 $0
+: $0 $1
+: $0 $2
+: $1 $1
+: $1 $2
+: $1 $3
+: $2 $1
+: $2 $2
+: $2 $3
+: $6 $9
+: $7 $7
+: $8 $8
+: $9 $9
+: $1 $2 $3
+: 
+: ## high frequency append
+: $e
+: $s
+: 
+: ## high frequency overwrite at end
+: ] $a
+: ] ] $s
+: ] ] $a
+: ] ] $e $r
+: ] ] $i $e
+: ] ] ] $o
+: ] ] ] $y
+: ] ] ] $1 $2 $3
+: ] ] ] $m $a $n
+: ] ] ] $d $o $g
+: 
+: ## high frequency prepend
+: ^1
+: ^e ^h ^t
+: 
+: ## high frequency overwrite at start
+: o0d
+: o0m o1a
+: 
+: ## leetify
+: so0
+: si1
+: se3
+: 
+: ## simple extracts
+: D2
+: D2 D2
+: D3
+: D4
+: 
+: ## undouble word
+: '5 D3
+: '5 $1
+: 
+: ## removes suffixes from 'strongified' passwords in dict
+: ]
+: ] ]
+: ] ] ]
+: ] ] ] d
+: ] ] D1 ]
+: 
+: ## rotates
+: +5 ] } } } } '4
+: O02 { { { { { {
+: } ] ] {
+: } } -0 O12
+: } } }
+: } } } } '4
+: } } } } } '5
+: } } } } } } Y4 '4 d
+: 
+: ## unknown
+: *04 +0 '4
+: *05 O03 d '3 p1
+: +0 +0 +0 +0 +0 +0 +0 +0
+: +0 +0 +0 O12
+: Z4 '8 O42
+: Z5 '6 O31 ] p1
+: Z5 *75 '5 { O02
+: d O28 Y4 '4 d
+: f *A5 '8 O14
+: p2 '7 p1 O58
+: O14 d p2 '6
+s * ## nothing, reverse, case... base stuff
+s * :
+s * r
+s * u
+s * T0
+s * 
+s * ## simple number append
+s * $0
+s * $1
+s * $2
+s * $3
+s * $4
+s * $5
+s * $6
+s * $7
+s * $8
+s * $9
+s * 
+s * ## special number append
+s * $0 $0
+s * $0 $1
+s * $0 $2
+s * $1 $1
+s * $1 $2
+s * $1 $3
+s * $2 $1
+s * $2 $2
+s * $2 $3
+s * $6 $9
+s * $7 $7
+s * $8 $8
+s * $9 $9
+s * $1 $2 $3
+s * 
+s * ## high frequency append
+s * $e
+s * $s
+s * 
+s * ## high frequency overwrite at end
+s * ] $a
+s * ] ] $s
+s * ] ] $a
+s * ] ] $e $r
+s * ] ] $i $e
+s * ] ] ] $o
+s * ] ] ] $y
+s * ] ] ] $1 $2 $3
+s * ] ] ] $m $a $n
+s * ] ] ] $d $o $g
+s * 
+s * ## high frequency prepend
+s * ^1
+s * ^e ^h ^t
+s * 
+s * ## high frequency overwrite at start
+s * o0d
+s * o0m o1a
+s * 
+s * ## leetify
+s * so0
+s * si1
+s * se3
+s * 
+s * ## simple extracts
+s * D2
+s * D2 D2
+s * D3
+s * D4
+s * 
+s * ## undouble word
+s * '5 D3
+s * '5 $1
+s * 
+s * ## removes suffixes from 'strongified' passwords in dict
+s * ]
+s * ] ]
+s * ] ] ]
+s * ] ] ] d
+s * ] ] D1 ]
+s * 
+s * ## rotates
+s * +5 ] } } } } '4
+s * O02 { { { { { {
+s * } ] ] {
+s * } } -0 O12
+s * } } }
+s * } } } } '4
+s * } } } } } '5
+s * } } } } } } Y4 '4 d
+s * 
+s * ## unknown
+s * *04 +0 '4
+s * *05 O03 d '3 p1
+s * +0 +0 +0 +0 +0 +0 +0 +0
+s * +0 +0 +0 O12
+s * Z4 '8 O42
+s * Z5 '6 O31 ] p1
+s * Z5 *75 '5 { O02
+s * d O28 Y4 '4 d
+s * f *A5 '8 O14
+s * p2 '7 p1 O58
+s * O14 d p2 '6
+s $ ## nothing, reverse, case... base stuff
+s $ :
+s $ r
+s $ u
+s $ T0
+s $ 
+s $ ## simple number append
+s $ $0
+s $ $1
+s $ $2
+s $ $3
+s $ $4
+s $ $5
+s $ $6
+s $ $7
+s $ $8
+s $ $9
+s $ 
+s $ ## special number append
+s $ $0 $0
+s $ $0 $1
+s $ $0 $2
+s $ $1 $1
+s $ $1 $2
+s $ $1 $3
+s $ $2 $1
+s $ $2 $2
+s $ $2 $3
+s $ $6 $9
+s $ $7 $7
+s $ $8 $8
+s $ $9 $9
+s $ $1 $2 $3
+s $ 
+s $ ## high frequency append
+s $ $e
+s $ $s
+s $ 
+s $ ## high frequency overwrite at end
+s $ ] $a
+s $ ] ] $s
+s $ ] ] $a
+s $ ] ] $e $r
+s $ ] ] $i $e
+s $ ] ] ] $o
+s $ ] ] ] $y
+s $ ] ] ] $1 $2 $3
+s $ ] ] ] $m $a $n
+s $ ] ] ] $d $o $g
+s $ 
+s $ ## high frequency prepend
+s $ ^1
+s $ ^e ^h ^t
+s $ 
+s $ ## high frequency overwrite at start
+s $ o0d
+s $ o0m o1a
+s $ 
+s $ ## leetify
+s $ so0
+s $ si1
+s $ se3
+s $ 
+s $ ## simple extracts
+s $ D2
+s $ D2 D2
+s $ D3
+s $ D4
+s $ 
+s $ ## undouble word
+s $ '5 D3
+s $ '5 $1
+s $ 
+s $ ## removes suffixes from 'strongified' passwords in dict
+s $ ]
+s $ ] ]
+s $ ] ] ]
+s $ ] ] ] d
+s $ ] ] D1 ]
+s $ 
+s $ ## rotates
+s $ +5 ] } } } } '4
+s $ O02 { { { { { {
+s $ } ] ] {
+s $ } } -0 O12
+s $ } } }
+s $ } } } } '4
+s $ } } } } } '5
+s $ } } } } } } Y4 '4 d
+s $ 
+s $ ## unknown
+s $ *04 +0 '4
+s $ *05 O03 d '3 p1
+s $ +0 +0 +0 +0 +0 +0 +0 +0
+s $ +0 +0 +0 O12
+s $ Z4 '8 O42
+s $ Z5 '6 O31 ] p1
+s $ Z5 *75 '5 { O02
+s $ d O28 Y4 '4 d
+s $ f *A5 '8 O14
+s $ p2 '7 p1 O58
+s $ O14 d p2 '6
+s % ## nothing, reverse, case... base stuff
+s % :
+s % r
+s % u
+s % T0
+s % 
+s % ## simple number append
+s % $0
+s % $1
+s % $2
+s % $3
+s % $4
+s % $5
+s % $6
+s % $7
+s % $8
+s % $9
+s % 
+s % ## special number append
+s % $0 $0
+s % $0 $1
+s % $0 $2
+s % $1 $1
+s % $1 $2
+s % $1 $3
+s % $2 $1
+s % $2 $2
+s % $2 $3
+s % $6 $9
+s % $7 $7
+s % $8 $8
+s % $9 $9
+s % $1 $2 $3
+s % 
+s % ## high frequency append
+s % $e
+s % $s
+s % 
+s % ## high frequency overwrite at end
+s % ] $a
+s % ] ] $s
+s % ] ] $a
+s % ] ] $e $r
+s % ] ] $i $e
+s % ] ] ] $o
+s % ] ] ] $y
+s % ] ] ] $1 $2 $3
+s % ] ] ] $m $a $n
+s % ] ] ] $d $o $g
+s % 
+s % ## high frequency prepend
+s % ^1
+s % ^e ^h ^t
+s % 
+s % ## high frequency overwrite at start
+s % o0d
+s % o0m o1a
+s % 
+s % ## leetify
+s % so0
+s % si1
+s % se3
+s % 
+s % ## simple extracts
+s % D2
+s % D2 D2
+s % D3
+s % D4
+s % 
+s % ## undouble word
+s % '5 D3
+s % '5 $1
+s % 
+s % ## removes suffixes from 'strongified' passwords in dict
+s % ]
+s % ] ]
+s % ] ] ]
+s % ] ] ] d
+s % ] ] D1 ]
+s % 
+s % ## rotates
+s % +5 ] } } } } '4
+s % O02 { { { { { {
+s % } ] ] {
+s % } } -0 O12
+s % } } }
+s % } } } } '4
+s % } } } } } '5
+s % } } } } } } Y4 '4 d
+s % 
+s % ## unknown
+s % *04 +0 '4
+s % *05 O03 d '3 p1
+s % +0 +0 +0 +0 +0 +0 +0 +0
+s % +0 +0 +0 O12
+s % Z4 '8 O42
+s % Z5 '6 O31 ] p1
+s % Z5 *75 '5 { O02
+s % d O28 Y4 '4 d
+s % f *A5 '8 O14
+s % p2 '7 p1 O58
+s % O14 d p2 '6
+s - ## nothing, reverse, case... base stuff
+s - :
+s - r
+s - u
+s - T0
+s - 
+s - ## simple number append
+s - $0
+s - $1
+s - $2
+s - $3
+s - $4
+s - $5
+s - $6
+s - $7
+s - $8
+s - $9
+s - 
+s - ## special number append
+s - $0 $0
+s - $0 $1
+s - $0 $2
+s - $1 $1
+s - $1 $2
+s - $1 $3
+s - $2 $1
+s - $2 $2
+s - $2 $3
+s - $6 $9
+s - $7 $7
+s - $8 $8
+s - $9 $9
+s - $1 $2 $3
+s - 
+s - ## high frequency append
+s - $e
+s - $s
+s - 
+s - ## high frequency overwrite at end
+s - ] $a
+s - ] ] $s
+s - ] ] $a
+s - ] ] $e $r
+s - ] ] $i $e
+s - ] ] ] $o
+s - ] ] ] $y
+s - ] ] ] $1 $2 $3
+s - ] ] ] $m $a $n
+s - ] ] ] $d $o $g
+s - 
+s - ## high frequency prepend
+s - ^1
+s - ^e ^h ^t
+s - 
+s - ## high frequency overwrite at start
+s - o0d
+s - o0m o1a
+s - 
+s - ## leetify
+s - so0
+s - si1
+s - se3
+s - 
+s - ## simple extracts
+s - D2
+s - D2 D2
+s - D3
+s - D4
+s - 
+s - ## undouble word
+s - '5 D3
+s - '5 $1
+s - 
+s - ## removes suffixes from 'strongified' passwords in dict
+s - ]
+s - ] ]
+s - ] ] ]
+s - ] ] ] d
+s - ] ] D1 ]
+s - 
+s - ## rotates
+s - +5 ] } } } } '4
+s - O02 { { { { { {
+s - } ] ] {
+s - } } -0 O12
+s - } } }
+s - } } } } '4
+s - } } } } } '5
+s - } } } } } } Y4 '4 d
+s - 
+s - ## unknown
+s - *04 +0 '4
+s - *05 O03 d '3 p1
+s - +0 +0 +0 +0 +0 +0 +0 +0
+s - +0 +0 +0 O12
+s - Z4 '8 O42
+s - Z5 '6 O31 ] p1
+s - Z5 *75 '5 { O02
+s - d O28 Y4 '4 d
+s - f *A5 '8 O14
+s - p2 '7 p1 O58
+s - O14 d p2 '6
+s _ ## nothing, reverse, case... base stuff
+s _ :
+s _ r
+s _ u
+s _ T0
+s _ 
+s _ ## simple number append
+s _ $0
+s _ $1
+s _ $2
+s _ $3
+s _ $4
+s _ $5
+s _ $6
+s _ $7
+s _ $8
+s _ $9
+s _ 
+s _ ## special number append
+s _ $0 $0
+s _ $0 $1
+s _ $0 $2
+s _ $1 $1
+s _ $1 $2
+s _ $1 $3
+s _ $2 $1
+s _ $2 $2
+s _ $2 $3
+s _ $6 $9
+s _ $7 $7
+s _ $8 $8
+s _ $9 $9
+s _ $1 $2 $3
+s _ 
+s _ ## high frequency append
+s _ $e
+s _ $s
+s _ 
+s _ ## high frequency overwrite at end
+s _ ] $a
+s _ ] ] $s
+s _ ] ] $a
+s _ ] ] $e $r
+s _ ] ] $i $e
+s _ ] ] ] $o
+s _ ] ] ] $y
+s _ ] ] ] $1 $2 $3
+s _ ] ] ] $m $a $n
+s _ ] ] ] $d $o $g
+s _ 
+s _ ## high frequency prepend
+s _ ^1
+s _ ^e ^h ^t
+s _ 
+s _ ## high frequency overwrite at start
+s _ o0d
+s _ o0m o1a
+s _ 
+s _ ## leetify
+s _ so0
+s _ si1
+s _ se3
+s _ 
+s _ ## simple extracts
+s _ D2
+s _ D2 D2
+s _ D3
+s _ D4
+s _ 
+s _ ## undouble word
+s _ '5 D3
+s _ '5 $1
+s _ 
+s _ ## removes suffixes from 'strongified' passwords in dict
+s _ ]
+s _ ] ]
+s _ ] ] ]
+s _ ] ] ] d
+s _ ] ] D1 ]
+s _ 
+s _ ## rotates
+s _ +5 ] } } } } '4
+s _ O02 { { { { { {
+s _ } ] ] {
+s _ } } -0 O12
+s _ } } }
+s _ } } } } '4
+s _ } } } } } '5
+s _ } } } } } } Y4 '4 d
+s _ 
+s _ ## unknown
+s _ *04 +0 '4
+s _ *05 O03 d '3 p1
+s _ +0 +0 +0 +0 +0 +0 +0 +0
+s _ +0 +0 +0 O12
+s _ Z4 '8 O42
+s _ Z5 '6 O31 ] p1
+s _ Z5 *75 '5 { O02
+s _ d O28 Y4 '4 d
+s _ f *A5 '8 O14
+s _ p2 '7 p1 O58
+s _ O14 d p2 '6
+s = ## nothing, reverse, case... base stuff
+s = :
+s = r
+s = u
+s = T0
+s = 
+s = ## simple number append
+s = $0
+s = $1
+s = $2
+s = $3
+s = $4
+s = $5
+s = $6
+s = $7
+s = $8
+s = $9
+s = 
+s = ## special number append
+s = $0 $0
+s = $0 $1
+s = $0 $2
+s = $1 $1
+s = $1 $2
+s = $1 $3
+s = $2 $1
+s = $2 $2
+s = $2 $3
+s = $6 $9
+s = $7 $7
+s = $8 $8
+s = $9 $9
+s = $1 $2 $3
+s = 
+s = ## high frequency append
+s = $e
+s = $s
+s = 
+s = ## high frequency overwrite at end
+s = ] $a
+s = ] ] $s
+s = ] ] $a
+s = ] ] $e $r
+s = ] ] $i $e
+s = ] ] ] $o
+s = ] ] ] $y
+s = ] ] ] $1 $2 $3
+s = ] ] ] $m $a $n
+s = ] ] ] $d $o $g
+s = 
+s = ## high frequency prepend
+s = ^1
+s = ^e ^h ^t
+s = 
+s = ## high frequency overwrite at start
+s = o0d
+s = o0m o1a
+s = 
+s = ## leetify
+s = so0
+s = si1
+s = se3
+s = 
+s = ## simple extracts
+s = D2
+s = D2 D2
+s = D3
+s = D4
+s = 
+s = ## undouble word
+s = '5 D3
+s = '5 $1
+s = 
+s = ## removes suffixes from 'strongified' passwords in dict
+s = ]
+s = ] ]
+s = ] ] ]
+s = ] ] ] d
+s = ] ] D1 ]
+s = 
+s = ## rotates
+s = +5 ] } } } } '4
+s = O02 { { { { { {
+s = } ] ] {
+s = } } -0 O12
+s = } } }
+s = } } } } '4
+s = } } } } } '5
+s = } } } } } } Y4 '4 d
+s = 
+s = ## unknown
+s = *04 +0 '4
+s = *05 O03 d '3 p1
+s = +0 +0 +0 +0 +0 +0 +0 +0
+s = +0 +0 +0 O12
+s = Z4 '8 O42
+s = Z5 '6 O31 ] p1
+s = Z5 *75 '5 { O02
+s = d O28 Y4 '4 d
+s = f *A5 '8 O14
+s = p2 '7 p1 O58
+s = O14 d p2 '6
+s % ## nothing, reverse, case... base stuff
+s % :
+s % r
+s % u
+s % T0
+s % 
+s % ## simple number append
+s % $0
+s % $1
+s % $2
+s % $3
+s % $4
+s % $5
+s % $6
+s % $7
+s % $8
+s % $9
+s % 
+s % ## special number append
+s % $0 $0
+s % $0 $1
+s % $0 $2
+s % $1 $1
+s % $1 $2
+s % $1 $3
+s % $2 $1
+s % $2 $2
+s % $2 $3
+s % $6 $9
+s % $7 $7
+s % $8 $8
+s % $9 $9
+s % $1 $2 $3
+s % 
+s % ## high frequency append
+s % $e
+s % $s
+s % 
+s % ## high frequency overwrite at end
+s % ] $a
+s % ] ] $s
+s % ] ] $a
+s % ] ] $e $r
+s % ] ] $i $e
+s % ] ] ] $o
+s % ] ] ] $y
+s % ] ] ] $1 $2 $3
+s % ] ] ] $m $a $n
+s % ] ] ] $d $o $g
+s % 
+s % ## high frequency prepend
+s % ^1
+s % ^e ^h ^t
+s % 
+s % ## high frequency overwrite at start
+s % o0d
+s % o0m o1a
+s % 
+s % ## leetify
+s % so0
+s % si1
+s % se3
+s % 
+s % ## simple extracts
+s % D2
+s % D2 D2
+s % D3
+s % D4
+s % 
+s % ## undouble word
+s % '5 D3
+s % '5 $1
+s % 
+s % ## removes suffixes from 'strongified' passwords in dict
+s % ]
+s % ] ]
+s % ] ] ]
+s % ] ] ] d
+s % ] ] D1 ]
+s % 
+s % ## rotates
+s % +5 ] } } } } '4
+s % O02 { { { { { {
+s % } ] ] {
+s % } } -0 O12
+s % } } }
+s % } } } } '4
+s % } } } } } '5
+s % } } } } } } Y4 '4 d
+s % 
+s % ## unknown
+s % *04 +0 '4
+s % *05 O03 d '3 p1
+s % +0 +0 +0 +0 +0 +0 +0 +0
+s % +0 +0 +0 O12
+s % Z4 '8 O42
+s % Z5 '6 O31 ] p1
+s % Z5 *75 '5 { O02
+s % d O28 Y4 '4 d
+s % f *A5 '8 O14
+s % p2 '7 p1 O58
+s % O14 d p2 '6
+s , ## nothing, reverse, case... base stuff
+s , :
+s , r
+s , u
+s , T0
+s , 
+s , ## simple number append
+s , $0
+s , $1
+s , $2
+s , $3
+s , $4
+s , $5
+s , $6
+s , $7
+s , $8
+s , $9
+s , 
+s , ## special number append
+s , $0 $0
+s , $0 $1
+s , $0 $2
+s , $1 $1
+s , $1 $2
+s , $1 $3
+s , $2 $1
+s , $2 $2
+s , $2 $3
+s , $6 $9
+s , $7 $7
+s , $8 $8
+s , $9 $9
+s , $1 $2 $3
+s , 
+s , ## high frequency append
+s , $e
+s , $s
+s , 
+s , ## high frequency overwrite at end
+s , ] $a
+s , ] ] $s
+s , ] ] $a
+s , ] ] $e $r
+s , ] ] $i $e
+s , ] ] ] $o
+s , ] ] ] $y
+s , ] ] ] $1 $2 $3
+s , ] ] ] $m $a $n
+s , ] ] ] $d $o $g
+s , 
+s , ## high frequency prepend
+s , ^1
+s , ^e ^h ^t
+s , 
+s , ## high frequency overwrite at start
+s , o0d
+s , o0m o1a
+s , 
+s , ## leetify
+s , so0
+s , si1
+s , se3
+s , 
+s , ## simple extracts
+s , D2
+s , D2 D2
+s , D3
+s , D4
+s , 
+s , ## undouble word
+s , '5 D3
+s , '5 $1
+s , 
+s , ## removes suffixes from 'strongified' passwords in dict
+s , ]
+s , ] ]
+s , ] ] ]
+s , ] ] ] d
+s , ] ] D1 ]
+s , 
+s , ## rotates
+s , +5 ] } } } } '4
+s , O02 { { { { { {
+s , } ] ] {
+s , } } -0 O12
+s , } } }
+s , } } } } '4
+s , } } } } } '5
+s , } } } } } } Y4 '4 d
+s , 
+s , ## unknown
+s , *04 +0 '4
+s , *05 O03 d '3 p1
+s , +0 +0 +0 +0 +0 +0 +0 +0
+s , +0 +0 +0 O12
+s , Z4 '8 O42
+s , Z5 '6 O31 ] p1
+s , Z5 *75 '5 { O02
+s , d O28 Y4 '4 d
+s , f *A5 '8 O14
+s , p2 '7 p1 O58
+s , O14 d p2 '6
+s & ## nothing, reverse, case... base stuff
+s & :
+s & r
+s & u
+s & T0
+s & 
+s & ## simple number append
+s & $0
+s & $1
+s & $2
+s & $3
+s & $4
+s & $5
+s & $6
+s & $7
+s & $8
+s & $9
+s & 
+s & ## special number append
+s & $0 $0
+s & $0 $1
+s & $0 $2
+s & $1 $1
+s & $1 $2
+s & $1 $3
+s & $2 $1
+s & $2 $2
+s & $2 $3
+s & $6 $9
+s & $7 $7
+s & $8 $8
+s & $9 $9
+s & $1 $2 $3
+s & 
+s & ## high frequency append
+s & $e
+s & $s
+s & 
+s & ## high frequency overwrite at end
+s & ] $a
+s & ] ] $s
+s & ] ] $a
+s & ] ] $e $r
+s & ] ] $i $e
+s & ] ] ] $o
+s & ] ] ] $y
+s & ] ] ] $1 $2 $3
+s & ] ] ] $m $a $n
+s & ] ] ] $d $o $g
+s & 
+s & ## high frequency prepend
+s & ^1
+s & ^e ^h ^t
+s & 
+s & ## high frequency overwrite at start
+s & o0d
+s & o0m o1a
+s & 
+s & ## leetify
+s & so0
+s & si1
+s & se3
+s & 
+s & ## simple extracts
+s & D2
+s & D2 D2
+s & D3
+s & D4
+s & 
+s & ## undouble word
+s & '5 D3
+s & '5 $1
+s & 
+s & ## removes suffixes from 'strongified' passwords in dict
+s & ]
+s & ] ]
+s & ] ] ]
+s & ] ] ] d
+s & ] ] D1 ]
+s & 
+s & ## rotates
+s & +5 ] } } } } '4
+s & O02 { { { { { {
+s & } ] ] {
+s & } } -0 O12
+s & } } }
+s & } } } } '4
+s & } } } } } '5
+s & } } } } } } Y4 '4 d
+s & 
+s & ## unknown
+s & *04 +0 '4
+s & *05 O03 d '3 p1
+s & +0 +0 +0 +0 +0 +0 +0 +0
+s & +0 +0 +0 O12
+s & Z4 '8 O42
+s & Z5 '6 O31 ] p1
+s & Z5 *75 '5 { O02
+s & d O28 Y4 '4 d
+s & f *A5 '8 O14
+s & p2 '7 p1 O58
+s & O14 d p2 '6
+s " ## nothing, reverse, case... base stuff
+s " :
+s " r
+s " u
+s " T0
+s " 
+s " ## simple number append
+s " $0
+s " $1
+s " $2
+s " $3
+s " $4
+s " $5
+s " $6
+s " $7
+s " $8
+s " $9
+s " 
+s " ## special number append
+s " $0 $0
+s " $0 $1
+s " $0 $2
+s " $1 $1
+s " $1 $2
+s " $1 $3
+s " $2 $1
+s " $2 $2
+s " $2 $3
+s " $6 $9
+s " $7 $7
+s " $8 $8
+s " $9 $9
+s " $1 $2 $3
+s " 
+s " ## high frequency append
+s " $e
+s " $s
+s " 
+s " ## high frequency overwrite at end
+s " ] $a
+s " ] ] $s
+s " ] ] $a
+s " ] ] $e $r
+s " ] ] $i $e
+s " ] ] ] $o
+s " ] ] ] $y
+s " ] ] ] $1 $2 $3
+s " ] ] ] $m $a $n
+s " ] ] ] $d $o $g
+s " 
+s " ## high frequency prepend
+s " ^1
+s " ^e ^h ^t
+s " 
+s " ## high frequency overwrite at start
+s " o0d
+s " o0m o1a
+s " 
+s " ## leetify
+s " so0
+s " si1
+s " se3
+s " 
+s " ## simple extracts
+s " D2
+s " D2 D2
+s " D3
+s " D4
+s " 
+s " ## undouble word
+s " '5 D3
+s " '5 $1
+s " 
+s " ## removes suffixes from 'strongified' passwords in dict
+s " ]
+s " ] ]
+s " ] ] ]
+s " ] ] ] d
+s " ] ] D1 ]
+s " 
+s " ## rotates
+s " +5 ] } } } } '4
+s " O02 { { { { { {
+s " } ] ] {
+s " } } -0 O12
+s " } } }
+s " } } } } '4
+s " } } } } } '5
+s " } } } } } } Y4 '4 d
+s " 
+s " ## unknown
+s " *04 +0 '4
+s " *05 O03 d '3 p1
+s " +0 +0 +0 +0 +0 +0 +0 +0
+s " +0 +0 +0 O12
+s " Z4 '8 O42
+s " Z5 '6 O31 ] p1
+s " Z5 *75 '5 { O02
+s " d O28 Y4 '4 d
+s " f *A5 '8 O14
+s " p2 '7 p1 O58
+s " O14 d p2 '6
+s # ## nothing, reverse, case... base stuff
+s # :
+s # r
+s # u
+s # T0
+s # 
+s # ## simple number append
+s # $0
+s # $1
+s # $2
+s # $3
+s # $4
+s # $5
+s # $6
+s # $7
+s # $8
+s # $9
+s # 
+s # ## special number append
+s # $0 $0
+s # $0 $1
+s # $0 $2
+s # $1 $1
+s # $1 $2
+s # $1 $3
+s # $2 $1
+s # $2 $2
+s # $2 $3
+s # $6 $9
+s # $7 $7
+s # $8 $8
+s # $9 $9
+s # $1 $2 $3
+s # 
+s # ## high frequency append
+s # $e
+s # $s
+s # 
+s # ## high frequency overwrite at end
+s # ] $a
+s # ] ] $s
+s # ] ] $a
+s # ] ] $e $r
+s # ] ] $i $e
+s # ] ] ] $o
+s # ] ] ] $y
+s # ] ] ] $1 $2 $3
+s # ] ] ] $m $a $n
+s # ] ] ] $d $o $g
+s # 
+s # ## high frequency prepend
+s # ^1
+s # ^e ^h ^t
+s # 
+s # ## high frequency overwrite at start
+s # o0d
+s # o0m o1a
+s # 
+s # ## leetify
+s # so0
+s # si1
+s # se3
+s # 
+s # ## simple extracts
+s # D2
+s # D2 D2
+s # D3
+s # D4
+s # 
+s # ## undouble word
+s # '5 D3
+s # '5 $1
+s # 
+s # ## removes suffixes from 'strongified' passwords in dict
+s # ]
+s # ] ]
+s # ] ] ]
+s # ] ] ] d
+s # ] ] D1 ]
+s # 
+s # ## rotates
+s # +5 ] } } } } '4
+s # O02 { { { { { {
+s # } ] ] {
+s # } } -0 O12
+s # } } }
+s # } } } } '4
+s # } } } } } '5
+s # } } } } } } Y4 '4 d
+s # 
+s # ## unknown
+s # *04 +0 '4
+s # *05 O03 d '3 p1
+s # +0 +0 +0 +0 +0 +0 +0 +0
+s # +0 +0 +0 O12
+s # Z4 '8 O42
+s # Z5 '6 O31 ] p1
+s # Z5 *75 '5 { O02
+s # d O28 Y4 '4 d
+s # f *A5 '8 O14
+s # p2 '7 p1 O58
+s # O14 d p2 '6
+s @ ## nothing, reverse, case... base stuff
+s @ :
+s @ r
+s @ u
+s @ T0
+s @ 
+s @ ## simple number append
+s @ $0
+s @ $1
+s @ $2
+s @ $3
+s @ $4
+s @ $5
+s @ $6
+s @ $7
+s @ $8
+s @ $9
+s @ 
+s @ ## special number append
+s @ $0 $0
+s @ $0 $1
+s @ $0 $2
+s @ $1 $1
+s @ $1 $2
+s @ $1 $3
+s @ $2 $1
+s @ $2 $2
+s @ $2 $3
+s @ $6 $9
+s @ $7 $7
+s @ $8 $8
+s @ $9 $9
+s @ $1 $2 $3
+s @ 
+s @ ## high frequency append
+s @ $e
+s @ $s
+s @ 
+s @ ## high frequency overwrite at end
+s @ ] $a
+s @ ] ] $s
+s @ ] ] $a
+s @ ] ] $e $r
+s @ ] ] $i $e
+s @ ] ] ] $o
+s @ ] ] ] $y
+s @ ] ] ] $1 $2 $3
+s @ ] ] ] $m $a $n
+s @ ] ] ] $d $o $g
+s @ 
+s @ ## high frequency prepend
+s @ ^1
+s @ ^e ^h ^t
+s @ 
+s @ ## high frequency overwrite at start
+s @ o0d
+s @ o0m o1a
+s @ 
+s @ ## leetify
+s @ so0
+s @ si1
+s @ se3
+s @ 
+s @ ## simple extracts
+s @ D2
+s @ D2 D2
+s @ D3
+s @ D4
+s @ 
+s @ ## undouble word
+s @ '5 D3
+s @ '5 $1
+s @ 
+s @ ## removes suffixes from 'strongified' passwords in dict
+s @ ]
+s @ ] ]
+s @ ] ] ]
+s @ ] ] ] d
+s @ ] ] D1 ]
+s @ 
+s @ ## rotates
+s @ +5 ] } } } } '4
+s @ O02 { { { { { {
+s @ } ] ] {
+s @ } } -0 O12
+s @ } } }
+s @ } } } } '4
+s @ } } } } } '5
+s @ } } } } } } Y4 '4 d
+s @ 
+s @ ## unknown
+s @ *04 +0 '4
+s @ *05 O03 d '3 p1
+s @ +0 +0 +0 +0 +0 +0 +0 +0
+s @ +0 +0 +0 O12
+s @ Z4 '8 O42
+s @ Z5 '6 O31 ] p1
+s @ Z5 *75 '5 { O02
+s @ d O28 Y4 '4 d
+s @ f *A5 '8 O14
+s @ p2 '7 p1 O58
+s @ O14 d p2 '6
+s . ## nothing, reverse, case... base stuff
+s . :
+s . r
+s . u
+s . T0
+s . 
+s . ## simple number append
+s . $0
+s . $1
+s . $2
+s . $3
+s . $4
+s . $5
+s . $6
+s . $7
+s . $8
+s . $9
+s . 
+s . ## special number append
+s . $0 $0
+s . $0 $1
+s . $0 $2
+s . $1 $1
+s . $1 $2
+s . $1 $3
+s . $2 $1
+s . $2 $2
+s . $2 $3
+s . $6 $9
+s . $7 $7
+s . $8 $8
+s . $9 $9
+s . $1 $2 $3
+s . 
+s . ## high frequency append
+s . $e
+s . $s
+s . 
+s . ## high frequency overwrite at end
+s . ] $a
+s . ] ] $s
+s . ] ] $a
+s . ] ] $e $r
+s . ] ] $i $e
+s . ] ] ] $o
+s . ] ] ] $y
+s . ] ] ] $1 $2 $3
+s . ] ] ] $m $a $n
+s . ] ] ] $d $o $g
+s . 
+s . ## high frequency prepend
+s . ^1
+s . ^e ^h ^t
+s . 
+s . ## high frequency overwrite at start
+s . o0d
+s . o0m o1a
+s . 
+s . ## leetify
+s . so0
+s . si1
+s . se3
+s . 
+s . ## simple extracts
+s . D2
+s . D2 D2
+s . D3
+s . D4
+s . 
+s . ## undouble word
+s . '5 D3
+s . '5 $1
+s . 
+s . ## removes suffixes from 'strongified' passwords in dict
+s . ]
+s . ] ]
+s . ] ] ]
+s . ] ] ] d
+s . ] ] D1 ]
+s . 
+s . ## rotates
+s . +5 ] } } } } '4
+s . O02 { { { { { {
+s . } ] ] {
+s . } } -0 O12
+s . } } }
+s . } } } } '4
+s . } } } } } '5
+s . } } } } } } Y4 '4 d
+s . 
+s . ## unknown
+s . *04 +0 '4
+s . *05 O03 d '3 p1
+s . +0 +0 +0 +0 +0 +0 +0 +0
+s . +0 +0 +0 O12
+s . Z4 '8 O42
+s . Z5 '6 O31 ] p1
+s . Z5 *75 '5 { O02
+s . d O28 Y4 '4 d
+s . f *A5 '8 O14
+s . p2 '7 p1 O58
+s . O14 d p2 '6
+s , ## nothing, reverse, case... base stuff
+s , :
+s , r
+s , u
+s , T0
+s , 
+s , ## simple number append
+s , $0
+s , $1
+s , $2
+s , $3
+s , $4
+s , $5
+s , $6
+s , $7
+s , $8
+s , $9
+s , 
+s , ## special number append
+s , $0 $0
+s , $0 $1
+s , $0 $2
+s , $1 $1
+s , $1 $2
+s , $1 $3
+s , $2 $1
+s , $2 $2
+s , $2 $3
+s , $6 $9
+s , $7 $7
+s , $8 $8
+s , $9 $9
+s , $1 $2 $3
+s , 
+s , ## high frequency append
+s , $e
+s , $s
+s , 
+s , ## high frequency overwrite at end
+s , ] $a
+s , ] ] $s
+s , ] ] $a
+s , ] ] $e $r
+s , ] ] $i $e
+s , ] ] ] $o
+s , ] ] ] $y
+s , ] ] ] $1 $2 $3
+s , ] ] ] $m $a $n
+s , ] ] ] $d $o $g
+s , 
+s , ## high frequency prepend
+s , ^1
+s , ^e ^h ^t
+s , 
+s , ## high frequency overwrite at start
+s , o0d
+s , o0m o1a
+s , 
+s , ## leetify
+s , so0
+s , si1
+s , se3
+s , 
+s , ## simple extracts
+s , D2
+s , D2 D2
+s , D3
+s , D4
+s , 
+s , ## undouble word
+s , '5 D3
+s , '5 $1
+s , 
+s , ## removes suffixes from 'strongified' passwords in dict
+s , ]
+s , ] ]
+s , ] ] ]
+s , ] ] ] d
+s , ] ] D1 ]
+s , 
+s , ## rotates
+s , +5 ] } } } } '4
+s , O02 { { { { { {
+s , } ] ] {
+s , } } -0 O12
+s , } } }
+s , } } } } '4
+s , } } } } } '5
+s , } } } } } } Y4 '4 d
+s , 
+s , ## unknown
+s , *04 +0 '4
+s , *05 O03 d '3 p1
+s , +0 +0 +0 +0 +0 +0 +0 +0
+s , +0 +0 +0 O12
+s , Z4 '8 O42
+s , Z5 '6 O31 ] p1
+s , Z5 *75 '5 { O02
+s , d O28 Y4 '4 d
+s , f *A5 '8 O14
+s , p2 '7 p1 O58
+s , O14 d p2 '6
+s / ## nothing, reverse, case... base stuff
+s / :
+s / r
+s / u
+s / T0
+s / 
+s / ## simple number append
+s / $0
+s / $1
+s / $2
+s / $3
+s / $4
+s / $5
+s / $6
+s / $7
+s / $8
+s / $9
+s / 
+s / ## special number append
+s / $0 $0
+s / $0 $1
+s / $0 $2
+s / $1 $1
+s / $1 $2
+s / $1 $3
+s / $2 $1
+s / $2 $2
+s / $2 $3
+s / $6 $9
+s / $7 $7
+s / $8 $8
+s / $9 $9
+s / $1 $2 $3
+s / 
+s / ## high frequency append
+s / $e
+s / $s
+s / 
+s / ## high frequency overwrite at end
+s / ] $a
+s / ] ] $s
+s / ] ] $a
+s / ] ] $e $r
+s / ] ] $i $e
+s / ] ] ] $o
+s / ] ] ] $y
+s / ] ] ] $1 $2 $3
+s / ] ] ] $m $a $n
+s / ] ] ] $d $o $g
+s / 
+s / ## high frequency prepend
+s / ^1
+s / ^e ^h ^t
+s / 
+s / ## high frequency overwrite at start
+s / o0d
+s / o0m o1a
+s / 
+s / ## leetify
+s / so0
+s / si1
+s / se3
+s / 
+s / ## simple extracts
+s / D2
+s / D2 D2
+s / D3
+s / D4
+s / 
+s / ## undouble word
+s / '5 D3
+s / '5 $1
+s / 
+s / ## removes suffixes from 'strongified' passwords in dict
+s / ]
+s / ] ]
+s / ] ] ]
+s / ] ] ] d
+s / ] ] D1 ]
+s / 
+s / ## rotates
+s / +5 ] } } } } '4
+s / O02 { { { { { {
+s / } ] ] {
+s / } } -0 O12
+s / } } }
+s / } } } } '4
+s / } } } } } '5
+s / } } } } } } Y4 '4 d
+s / 
+s / ## unknown
+s / *04 +0 '4
+s / *05 O03 d '3 p1
+s / +0 +0 +0 +0 +0 +0 +0 +0
+s / +0 +0 +0 O12
+s / Z4 '8 O42
+s / Z5 '6 O31 ] p1
+s / Z5 *75 '5 { O02
+s / d O28 Y4 '4 d
+s / f *A5 '8 O14
+s / p2 '7 p1 O58
+s / O14 d p2 '6
+s ! ## nothing, reverse, case... base stuff
+s ! :
+s ! r
+s ! u
+s ! T0
+s ! 
+s ! ## simple number append
+s ! $0
+s ! $1
+s ! $2
+s ! $3
+s ! $4
+s ! $5
+s ! $6
+s ! $7
+s ! $8
+s ! $9
+s ! 
+s ! ## special number append
+s ! $0 $0
+s ! $0 $1
+s ! $0 $2
+s ! $1 $1
+s ! $1 $2
+s ! $1 $3
+s ! $2 $1
+s ! $2 $2
+s ! $2 $3
+s ! $6 $9
+s ! $7 $7
+s ! $8 $8
+s ! $9 $9
+s ! $1 $2 $3
+s ! 
+s ! ## high frequency append
+s ! $e
+s ! $s
+s ! 
+s ! ## high frequency overwrite at end
+s ! ] $a
+s ! ] ] $s
+s ! ] ] $a
+s ! ] ] $e $r
+s ! ] ] $i $e
+s ! ] ] ] $o
+s ! ] ] ] $y
+s ! ] ] ] $1 $2 $3
+s ! ] ] ] $m $a $n
+s ! ] ] ] $d $o $g
+s ! 
+s ! ## high frequency prepend
+s ! ^1
+s ! ^e ^h ^t
+s ! 
+s ! ## high frequency overwrite at start
+s ! o0d
+s ! o0m o1a
+s ! 
+s ! ## leetify
+s ! so0
+s ! si1
+s ! se3
+s ! 
+s ! ## simple extracts
+s ! D2
+s ! D2 D2
+s ! D3
+s ! D4
+s ! 
+s ! ## undouble word
+s ! '5 D3
+s ! '5 $1
+s ! 
+s ! ## removes suffixes from 'strongified' passwords in dict
+s ! ]
+s ! ] ]
+s ! ] ] ]
+s ! ] ] ] d
+s ! ] ] D1 ]
+s ! 
+s ! ## rotates
+s ! +5 ] } } } } '4
+s ! O02 { { { { { {
+s ! } ] ] {
+s ! } } -0 O12
+s ! } } }
+s ! } } } } '4
+s ! } } } } } '5
+s ! } } } } } } Y4 '4 d
+s ! 
+s ! ## unknown
+s ! *04 +0 '4
+s ! *05 O03 d '3 p1
+s ! +0 +0 +0 +0 +0 +0 +0 +0
+s ! +0 +0 +0 O12
+s ! Z4 '8 O42
+s ! Z5 '6 O31 ] p1
+s ! Z5 *75 '5 { O02
+s ! d O28 Y4 '4 d
+s ! f *A5 '8 O14
+s ! p2 '7 p1 O58
+s ! O14 d p2 '6
+@ ## nothing, reverse, case... base stuff
+@ :
+@ r
+@ u
+@ T0
+@ 
+@ ## simple number append
+@ $0
+@ $1
+@ $2
+@ $3
+@ $4
+@ $5
+@ $6
+@ $7
+@ $8
+@ $9
+@ 
+@ ## special number append
+@ $0 $0
+@ $0 $1
+@ $0 $2
+@ $1 $1
+@ $1 $2
+@ $1 $3
+@ $2 $1
+@ $2 $2
+@ $2 $3
+@ $6 $9
+@ $7 $7
+@ $8 $8
+@ $9 $9
+@ $1 $2 $3
+@ 
+@ ## high frequency append
+@ $e
+@ $s
+@ 
+@ ## high frequency overwrite at end
+@ ] $a
+@ ] ] $s
+@ ] ] $a
+@ ] ] $e $r
+@ ] ] $i $e
+@ ] ] ] $o
+@ ] ] ] $y
+@ ] ] ] $1 $2 $3
+@ ] ] ] $m $a $n
+@ ] ] ] $d $o $g
+@ 
+@ ## high frequency prepend
+@ ^1
+@ ^e ^h ^t
+@ 
+@ ## high frequency overwrite at start
+@ o0d
+@ o0m o1a
+@ 
+@ ## leetify
+@ so0
+@ si1
+@ se3
+@ 
+@ ## simple extracts
+@ D2
+@ D2 D2
+@ D3
+@ D4
+@ 
+@ ## undouble word
+@ '5 D3
+@ '5 $1
+@ 
+@ ## removes suffixes from 'strongified' passwords in dict
+@ ]
+@ ] ]
+@ ] ] ]
+@ ] ] ] d
+@ ] ] D1 ]
+@ 
+@ ## rotates
+@ +5 ] } } } } '4
+@ O02 { { { { { {
+@ } ] ] {
+@ } } -0 O12
+@ } } }
+@ } } } } '4
+@ } } } } } '5
+@ } } } } } } Y4 '4 d
+@ 
+@ ## unknown
+@ *04 +0 '4
+@ *05 O03 d '3 p1
+@ +0 +0 +0 +0 +0 +0 +0 +0
+@ +0 +0 +0 O12
+@ Z4 '8 O42
+@ Z5 '6 O31 ] p1
+@ Z5 *75 '5 { O02
+@ d O28 Y4 '4 d
+@ f *A5 '8 O14
+@ p2 '7 p1 O58
+@ O14 d p2 '6
+E ## nothing, reverse, case... base stuff
+E :
+E r
+E u
+E T0
+E 
+E ## simple number append
+E $0
+E $1
+E $2
+E $3
+E $4
+E $5
+E $6
+E $7
+E $8
+E $9
+E 
+E ## special number append
+E $0 $0
+E $0 $1
+E $0 $2
+E $1 $1
+E $1 $2
+E $1 $3
+E $2 $1
+E $2 $2
+E $2 $3
+E $6 $9
+E $7 $7
+E $8 $8
+E $9 $9
+E $1 $2 $3
+E 
+E ## high frequency append
+E $e
+E $s
+E 
+E ## high frequency overwrite at end
+E ] $a
+E ] ] $s
+E ] ] $a
+E ] ] $e $r
+E ] ] $i $e
+E ] ] ] $o
+E ] ] ] $y
+E ] ] ] $1 $2 $3
+E ] ] ] $m $a $n
+E ] ] ] $d $o $g
+E 
+E ## high frequency prepend
+E ^1
+E ^e ^h ^t
+E 
+E ## high frequency overwrite at start
+E o0d
+E o0m o1a
+E 
+E ## leetify
+E so0
+E si1
+E se3
+E 
+E ## simple extracts
+E D2
+E D2 D2
+E D3
+E D4
+E 
+E ## undouble word
+E '5 D3
+E '5 $1
+E 
+E ## removes suffixes from 'strongified' passwords in dict
+E ]
+E ] ]
+E ] ] ]
+E ] ] ] d
+E ] ] D1 ]
+E 
+E ## rotates
+E +5 ] } } } } '4
+E O02 { { { { { {
+E } ] ] {
+E } } -0 O12
+E } } }
+E } } } } '4
+E } } } } } '5
+E } } } } } } Y4 '4 d
+E 
+E ## unknown
+E *04 +0 '4
+E *05 O03 d '3 p1
+E +0 +0 +0 +0 +0 +0 +0 +0
+E +0 +0 +0 O12
+E Z4 '8 O42
+E Z5 '6 O31 ] p1
+E Z5 *75 '5 { O02
+E d O28 Y4 '4 d
+E f *A5 '8 O14
+E p2 '7 p1 O58
+E O14 d p2 '6
+Es - ## nothing, reverse, case... base stuff
+Es - :
+Es - r
+Es - u
+Es - T0
+Es - 
+Es - ## simple number append
+Es - $0
+Es - $1
+Es - $2
+Es - $3
+Es - $4
+Es - $5
+Es - $6
+Es - $7
+Es - $8
+Es - $9
+Es - 
+Es - ## special number append
+Es - $0 $0
+Es - $0 $1
+Es - $0 $2
+Es - $1 $1
+Es - $1 $2
+Es - $1 $3
+Es - $2 $1
+Es - $2 $2
+Es - $2 $3
+Es - $6 $9
+Es - $7 $7
+Es - $8 $8
+Es - $9 $9
+Es - $1 $2 $3
+Es - 
+Es - ## high frequency append
+Es - $e
+Es - $s
+Es - 
+Es - ## high frequency overwrite at end
+Es - ] $a
+Es - ] ] $s
+Es - ] ] $a
+Es - ] ] $e $r
+Es - ] ] $i $e
+Es - ] ] ] $o
+Es - ] ] ] $y
+Es - ] ] ] $1 $2 $3
+Es - ] ] ] $m $a $n
+Es - ] ] ] $d $o $g
+Es - 
+Es - ## high frequency prepend
+Es - ^1
+Es - ^e ^h ^t
+Es - 
+Es - ## high frequency overwrite at start
+Es - o0d
+Es - o0m o1a
+Es - 
+Es - ## leetify
+Es - so0
+Es - si1
+Es - se3
+Es - 
+Es - ## simple extracts
+Es - D2
+Es - D2 D2
+Es - D3
+Es - D4
+Es - 
+Es - ## undouble word
+Es - '5 D3
+Es - '5 $1
+Es - 
+Es - ## removes suffixes from 'strongified' passwords in dict
+Es - ]
+Es - ] ]
+Es - ] ] ]
+Es - ] ] ] d
+Es - ] ] D1 ]
+Es - 
+Es - ## rotates
+Es - +5 ] } } } } '4
+Es - O02 { { { { { {
+Es - } ] ] {
+Es - } } -0 O12
+Es - } } }
+Es - } } } } '4
+Es - } } } } } '5
+Es - } } } } } } Y4 '4 d
+Es - 
+Es - ## unknown
+Es - *04 +0 '4
+Es - *05 O03 d '3 p1
+Es - +0 +0 +0 +0 +0 +0 +0 +0
+Es - +0 +0 +0 O12
+Es - Z4 '8 O42
+Es - Z5 '6 O31 ] p1
+Es - Z5 *75 '5 { O02
+Es - d O28 Y4 '4 d
+Es - f *A5 '8 O14
+Es - p2 '7 p1 O58
+Es - O14 d p2 '6
+Es , ## nothing, reverse, case... base stuff
+Es , :
+Es , r
+Es , u
+Es , T0
+Es , 
+Es , ## simple number append
+Es , $0
+Es , $1
+Es , $2
+Es , $3
+Es , $4
+Es , $5
+Es , $6
+Es , $7
+Es , $8
+Es , $9
+Es , 
+Es , ## special number append
+Es , $0 $0
+Es , $0 $1
+Es , $0 $2
+Es , $1 $1
+Es , $1 $2
+Es , $1 $3
+Es , $2 $1
+Es , $2 $2
+Es , $2 $3
+Es , $6 $9
+Es , $7 $7
+Es , $8 $8
+Es , $9 $9
+Es , $1 $2 $3
+Es , 
+Es , ## high frequency append
+Es , $e
+Es , $s
+Es , 
+Es , ## high frequency overwrite at end
+Es , ] $a
+Es , ] ] $s
+Es , ] ] $a
+Es , ] ] $e $r
+Es , ] ] $i $e
+Es , ] ] ] $o
+Es , ] ] ] $y
+Es , ] ] ] $1 $2 $3
+Es , ] ] ] $m $a $n
+Es , ] ] ] $d $o $g
+Es , 
+Es , ## high frequency prepend
+Es , ^1
+Es , ^e ^h ^t
+Es , 
+Es , ## high frequency overwrite at start
+Es , o0d
+Es , o0m o1a
+Es , 
+Es , ## leetify
+Es , so0
+Es , si1
+Es , se3
+Es , 
+Es , ## simple extracts
+Es , D2
+Es , D2 D2
+Es , D3
+Es , D4
+Es , 
+Es , ## undouble word
+Es , '5 D3
+Es , '5 $1
+Es , 
+Es , ## removes suffixes from 'strongified' passwords in dict
+Es , ]
+Es , ] ]
+Es , ] ] ]
+Es , ] ] ] d
+Es , ] ] D1 ]
+Es , 
+Es , ## rotates
+Es , +5 ] } } } } '4
+Es , O02 { { { { { {
+Es , } ] ] {
+Es , } } -0 O12
+Es , } } }
+Es , } } } } '4
+Es , } } } } } '5
+Es , } } } } } } Y4 '4 d
+Es , 
+Es , ## unknown
+Es , *04 +0 '4
+Es , *05 O03 d '3 p1
+Es , +0 +0 +0 +0 +0 +0 +0 +0
+Es , +0 +0 +0 O12
+Es , Z4 '8 O42
+Es , Z5 '6 O31 ] p1
+Es , Z5 *75 '5 { O02
+Es , d O28 Y4 '4 d
+Es , f *A5 '8 O14
+Es , p2 '7 p1 O58
+Es , O14 d p2 '6
+Es _ ## nothing, reverse, case... base stuff
+Es _ :
+Es _ r
+Es _ u
+Es _ T0
+Es _ 
+Es _ ## simple number append
+Es _ $0
+Es _ $1
+Es _ $2
+Es _ $3
+Es _ $4
+Es _ $5
+Es _ $6
+Es _ $7
+Es _ $8
+Es _ $9
+Es _ 
+Es _ ## special number append
+Es _ $0 $0
+Es _ $0 $1
+Es _ $0 $2
+Es _ $1 $1
+Es _ $1 $2
+Es _ $1 $3
+Es _ $2 $1
+Es _ $2 $2
+Es _ $2 $3
+Es _ $6 $9
+Es _ $7 $7
+Es _ $8 $8
+Es _ $9 $9
+Es _ $1 $2 $3
+Es _ 
+Es _ ## high frequency append
+Es _ $e
+Es _ $s
+Es _ 
+Es _ ## high frequency overwrite at end
+Es _ ] $a
+Es _ ] ] $s
+Es _ ] ] $a
+Es _ ] ] $e $r
+Es _ ] ] $i $e
+Es _ ] ] ] $o
+Es _ ] ] ] $y
+Es _ ] ] ] $1 $2 $3
+Es _ ] ] ] $m $a $n
+Es _ ] ] ] $d $o $g
+Es _ 
+Es _ ## high frequency prepend
+Es _ ^1
+Es _ ^e ^h ^t
+Es _ 
+Es _ ## high frequency overwrite at start
+Es _ o0d
+Es _ o0m o1a
+Es _ 
+Es _ ## leetify
+Es _ so0
+Es _ si1
+Es _ se3
+Es _ 
+Es _ ## simple extracts
+Es _ D2
+Es _ D2 D2
+Es _ D3
+Es _ D4
+Es _ 
+Es _ ## undouble word
+Es _ '5 D3
+Es _ '5 $1
+Es _ 
+Es _ ## removes suffixes from 'strongified' passwords in dict
+Es _ ]
+Es _ ] ]
+Es _ ] ] ]
+Es _ ] ] ] d
+Es _ ] ] D1 ]
+Es _ 
+Es _ ## rotates
+Es _ +5 ] } } } } '4
+Es _ O02 { { { { { {
+Es _ } ] ] {
+Es _ } } -0 O12
+Es _ } } }
+Es _ } } } } '4
+Es _ } } } } } '5
+Es _ } } } } } } Y4 '4 d
+Es _ 
+Es _ ## unknown
+Es _ *04 +0 '4
+Es _ *05 O03 d '3 p1
+Es _ +0 +0 +0 +0 +0 +0 +0 +0
+Es _ +0 +0 +0 O12
+Es _ Z4 '8 O42
+Es _ Z5 '6 O31 ] p1
+Es _ Z5 *75 '5 { O02
+Es _ d O28 Y4 '4 d
+Es _ f *A5 '8 O14
+Es _ p2 '7 p1 O58
+Es _ O14 d p2 '6
+Es = ## nothing, reverse, case... base stuff
+Es = :
+Es = r
+Es = u
+Es = T0
+Es = 
+Es = ## simple number append
+Es = $0
+Es = $1
+Es = $2
+Es = $3
+Es = $4
+Es = $5
+Es = $6
+Es = $7
+Es = $8
+Es = $9
+Es = 
+Es = ## special number append
+Es = $0 $0
+Es = $0 $1
+Es = $0 $2
+Es = $1 $1
+Es = $1 $2
+Es = $1 $3
+Es = $2 $1
+Es = $2 $2
+Es = $2 $3
+Es = $6 $9
+Es = $7 $7
+Es = $8 $8
+Es = $9 $9
+Es = $1 $2 $3
+Es = 
+Es = ## high frequency append
+Es = $e
+Es = $s
+Es = 
+Es = ## high frequency overwrite at end
+Es = ] $a
+Es = ] ] $s
+Es = ] ] $a
+Es = ] ] $e $r
+Es = ] ] $i $e
+Es = ] ] ] $o
+Es = ] ] ] $y
+Es = ] ] ] $1 $2 $3
+Es = ] ] ] $m $a $n
+Es = ] ] ] $d $o $g
+Es = 
+Es = ## high frequency prepend
+Es = ^1
+Es = ^e ^h ^t
+Es = 
+Es = ## high frequency overwrite at start
+Es = o0d
+Es = o0m o1a
+Es = 
+Es = ## leetify
+Es = so0
+Es = si1
+Es = se3
+Es = 
+Es = ## simple extracts
+Es = D2
+Es = D2 D2
+Es = D3
+Es = D4
+Es = 
+Es = ## undouble word
+Es = '5 D3
+Es = '5 $1
+Es = 
+Es = ## removes suffixes from 'strongified' passwords in dict
+Es = ]
+Es = ] ]
+Es = ] ] ]
+Es = ] ] ] d
+Es = ] ] D1 ]
+Es = 
+Es = ## rotates
+Es = +5 ] } } } } '4
+Es = O02 { { { { { {
+Es = } ] ] {
+Es = } } -0 O12
+Es = } } }
+Es = } } } } '4
+Es = } } } } } '5
+Es = } } } } } } Y4 '4 d
+Es = 
+Es = ## unknown
+Es = *04 +0 '4
+Es = *05 O03 d '3 p1
+Es = +0 +0 +0 +0 +0 +0 +0 +0
+Es = +0 +0 +0 O12
+Es = Z4 '8 O42
+Es = Z5 '6 O31 ] p1
+Es = Z5 *75 '5 { O02
+Es = d O28 Y4 '4 d
+Es = f *A5 '8 O14
+Es = p2 '7 p1 O58
+Es = O14 d p2 '6
+Es % ## nothing, reverse, case... base stuff
+Es % :
+Es % r
+Es % u
+Es % T0
+Es % 
+Es % ## simple number append
+Es % $0
+Es % $1
+Es % $2
+Es % $3
+Es % $4
+Es % $5
+Es % $6
+Es % $7
+Es % $8
+Es % $9
+Es % 
+Es % ## special number append
+Es % $0 $0
+Es % $0 $1
+Es % $0 $2
+Es % $1 $1
+Es % $1 $2
+Es % $1 $3
+Es % $2 $1
+Es % $2 $2
+Es % $2 $3
+Es % $6 $9
+Es % $7 $7
+Es % $8 $8
+Es % $9 $9
+Es % $1 $2 $3
+Es % 
+Es % ## high frequency append
+Es % $e
+Es % $s
+Es % 
+Es % ## high frequency overwrite at end
+Es % ] $a
+Es % ] ] $s
+Es % ] ] $a
+Es % ] ] $e $r
+Es % ] ] $i $e
+Es % ] ] ] $o
+Es % ] ] ] $y
+Es % ] ] ] $1 $2 $3
+Es % ] ] ] $m $a $n
+Es % ] ] ] $d $o $g
+Es % 
+Es % ## high frequency prepend
+Es % ^1
+Es % ^e ^h ^t
+Es % 
+Es % ## high frequency overwrite at start
+Es % o0d
+Es % o0m o1a
+Es % 
+Es % ## leetify
+Es % so0
+Es % si1
+Es % se3
+Es % 
+Es % ## simple extracts
+Es % D2
+Es % D2 D2
+Es % D3
+Es % D4
+Es % 
+Es % ## undouble word
+Es % '5 D3
+Es % '5 $1
+Es % 
+Es % ## removes suffixes from 'strongified' passwords in dict
+Es % ]
+Es % ] ]
+Es % ] ] ]
+Es % ] ] ] d
+Es % ] ] D1 ]
+Es % 
+Es % ## rotates
+Es % +5 ] } } } } '4
+Es % O02 { { { { { {
+Es % } ] ] {
+Es % } } -0 O12
+Es % } } }
+Es % } } } } '4
+Es % } } } } } '5
+Es % } } } } } } Y4 '4 d
+Es % 
+Es % ## unknown
+Es % *04 +0 '4
+Es % *05 O03 d '3 p1
+Es % +0 +0 +0 +0 +0 +0 +0 +0
+Es % +0 +0 +0 O12
+Es % Z4 '8 O42
+Es % Z5 '6 O31 ] p1
+Es % Z5 *75 '5 { O02
+Es % d O28 Y4 '4 d
+Es % f *A5 '8 O14
+Es % p2 '7 p1 O58
+Es % O14 d p2 '6
+Es , ## nothing, reverse, case... base stuff
+Es , :
+Es , r
+Es , u
+Es , T0
+Es , 
+Es , ## simple number append
+Es , $0
+Es , $1
+Es , $2
+Es , $3
+Es , $4
+Es , $5
+Es , $6
+Es , $7
+Es , $8
+Es , $9
+Es , 
+Es , ## special number append
+Es , $0 $0
+Es , $0 $1
+Es , $0 $2
+Es , $1 $1
+Es , $1 $2
+Es , $1 $3
+Es , $2 $1
+Es , $2 $2
+Es , $2 $3
+Es , $6 $9
+Es , $7 $7
+Es , $8 $8
+Es , $9 $9
+Es , $1 $2 $3
+Es , 
+Es , ## high frequency append
+Es , $e
+Es , $s
+Es , 
+Es , ## high frequency overwrite at end
+Es , ] $a
+Es , ] ] $s
+Es , ] ] $a
+Es , ] ] $e $r
+Es , ] ] $i $e
+Es , ] ] ] $o
+Es , ] ] ] $y
+Es , ] ] ] $1 $2 $3
+Es , ] ] ] $m $a $n
+Es , ] ] ] $d $o $g
+Es , 
+Es , ## high frequency prepend
+Es , ^1
+Es , ^e ^h ^t
+Es , 
+Es , ## high frequency overwrite at start
+Es , o0d
+Es , o0m o1a
+Es , 
+Es , ## leetify
+Es , so0
+Es , si1
+Es , se3
+Es , 
+Es , ## simple extracts
+Es , D2
+Es , D2 D2
+Es , D3
+Es , D4
+Es , 
+Es , ## undouble word
+Es , '5 D3
+Es , '5 $1
+Es , 
+Es , ## removes suffixes from 'strongified' passwords in dict
+Es , ]
+Es , ] ]
+Es , ] ] ]
+Es , ] ] ] d
+Es , ] ] D1 ]
+Es , 
+Es , ## rotates
+Es , +5 ] } } } } '4
+Es , O02 { { { { { {
+Es , } ] ] {
+Es , } } -0 O12
+Es , } } }
+Es , } } } } '4
+Es , } } } } } '5
+Es , } } } } } } Y4 '4 d
+Es , 
+Es , ## unknown
+Es , *04 +0 '4
+Es , *05 O03 d '3 p1
+Es , +0 +0 +0 +0 +0 +0 +0 +0
+Es , +0 +0 +0 O12
+Es , Z4 '8 O42
+Es , Z5 '6 O31 ] p1
+Es , Z5 *75 '5 { O02
+Es , d O28 Y4 '4 d
+Es , f *A5 '8 O14
+Es , p2 '7 p1 O58
+Es , O14 d p2 '6
+Es & ## nothing, reverse, case... base stuff
+Es & :
+Es & r
+Es & u
+Es & T0
+Es & 
+Es & ## simple number append
+Es & $0
+Es & $1
+Es & $2
+Es & $3
+Es & $4
+Es & $5
+Es & $6
+Es & $7
+Es & $8
+Es & $9
+Es & 
+Es & ## special number append
+Es & $0 $0
+Es & $0 $1
+Es & $0 $2
+Es & $1 $1
+Es & $1 $2
+Es & $1 $3
+Es & $2 $1
+Es & $2 $2
+Es & $2 $3
+Es & $6 $9
+Es & $7 $7
+Es & $8 $8
+Es & $9 $9
+Es & $1 $2 $3
+Es & 
+Es & ## high frequency append
+Es & $e
+Es & $s
+Es & 
+Es & ## high frequency overwrite at end
+Es & ] $a
+Es & ] ] $s
+Es & ] ] $a
+Es & ] ] $e $r
+Es & ] ] $i $e
+Es & ] ] ] $o
+Es & ] ] ] $y
+Es & ] ] ] $1 $2 $3
+Es & ] ] ] $m $a $n
+Es & ] ] ] $d $o $g
+Es & 
+Es & ## high frequency prepend
+Es & ^1
+Es & ^e ^h ^t
+Es & 
+Es & ## high frequency overwrite at start
+Es & o0d
+Es & o0m o1a
+Es & 
+Es & ## leetify
+Es & so0
+Es & si1
+Es & se3
+Es & 
+Es & ## simple extracts
+Es & D2
+Es & D2 D2
+Es & D3
+Es & D4
+Es & 
+Es & ## undouble word
+Es & '5 D3
+Es & '5 $1
+Es & 
+Es & ## removes suffixes from 'strongified' passwords in dict
+Es & ]
+Es & ] ]
+Es & ] ] ]
+Es & ] ] ] d
+Es & ] ] D1 ]
+Es & 
+Es & ## rotates
+Es & +5 ] } } } } '4
+Es & O02 { { { { { {
+Es & } ] ] {
+Es & } } -0 O12
+Es & } } }
+Es & } } } } '4
+Es & } } } } } '5
+Es & } } } } } } Y4 '4 d
+Es & 
+Es & ## unknown
+Es & *04 +0 '4
+Es & *05 O03 d '3 p1
+Es & +0 +0 +0 +0 +0 +0 +0 +0
+Es & +0 +0 +0 O12
+Es & Z4 '8 O42
+Es & Z5 '6 O31 ] p1
+Es & Z5 *75 '5 { O02
+Es & d O28 Y4 '4 d
+Es & f *A5 '8 O14
+Es & p2 '7 p1 O58
+Es & O14 d p2 '6
+Es " ## nothing, reverse, case... base stuff
+Es " :
+Es " r
+Es " u
+Es " T0
+Es " 
+Es " ## simple number append
+Es " $0
+Es " $1
+Es " $2
+Es " $3
+Es " $4
+Es " $5
+Es " $6
+Es " $7
+Es " $8
+Es " $9
+Es " 
+Es " ## special number append
+Es " $0 $0
+Es " $0 $1
+Es " $0 $2
+Es " $1 $1
+Es " $1 $2
+Es " $1 $3
+Es " $2 $1
+Es " $2 $2
+Es " $2 $3
+Es " $6 $9
+Es " $7 $7
+Es " $8 $8
+Es " $9 $9
+Es " $1 $2 $3
+Es " 
+Es " ## high frequency append
+Es " $e
+Es " $s
+Es " 
+Es " ## high frequency overwrite at end
+Es " ] $a
+Es " ] ] $s
+Es " ] ] $a
+Es " ] ] $e $r
+Es " ] ] $i $e
+Es " ] ] ] $o
+Es " ] ] ] $y
+Es " ] ] ] $1 $2 $3
+Es " ] ] ] $m $a $n
+Es " ] ] ] $d $o $g
+Es " 
+Es " ## high frequency prepend
+Es " ^1
+Es " ^e ^h ^t
+Es " 
+Es " ## high frequency overwrite at start
+Es " o0d
+Es " o0m o1a
+Es " 
+Es " ## leetify
+Es " so0
+Es " si1
+Es " se3
+Es " 
+Es " ## simple extracts
+Es " D2
+Es " D2 D2
+Es " D3
+Es " D4
+Es " 
+Es " ## undouble word
+Es " '5 D3
+Es " '5 $1
+Es " 
+Es " ## removes suffixes from 'strongified' passwords in dict
+Es " ]
+Es " ] ]
+Es " ] ] ]
+Es " ] ] ] d
+Es " ] ] D1 ]
+Es " 
+Es " ## rotates
+Es " +5 ] } } } } '4
+Es " O02 { { { { { {
+Es " } ] ] {
+Es " } } -0 O12
+Es " } } }
+Es " } } } } '4
+Es " } } } } } '5
+Es " } } } } } } Y4 '4 d
+Es " 
+Es " ## unknown
+Es " *04 +0 '4
+Es " *05 O03 d '3 p1
+Es " +0 +0 +0 +0 +0 +0 +0 +0
+Es " +0 +0 +0 O12
+Es " Z4 '8 O42
+Es " Z5 '6 O31 ] p1
+Es " Z5 *75 '5 { O02
+Es " d O28 Y4 '4 d
+Es " f *A5 '8 O14
+Es " p2 '7 p1 O58
+Es " O14 d p2 '6
+Es # ## nothing, reverse, case... base stuff
+Es # :
+Es # r
+Es # u
+Es # T0
+Es # 
+Es # ## simple number append
+Es # $0
+Es # $1
+Es # $2
+Es # $3
+Es # $4
+Es # $5
+Es # $6
+Es # $7
+Es # $8
+Es # $9
+Es # 
+Es # ## special number append
+Es # $0 $0
+Es # $0 $1
+Es # $0 $2
+Es # $1 $1
+Es # $1 $2
+Es # $1 $3
+Es # $2 $1
+Es # $2 $2
+Es # $2 $3
+Es # $6 $9
+Es # $7 $7
+Es # $8 $8
+Es # $9 $9
+Es # $1 $2 $3
+Es # 
+Es # ## high frequency append
+Es # $e
+Es # $s
+Es # 
+Es # ## high frequency overwrite at end
+Es # ] $a
+Es # ] ] $s
+Es # ] ] $a
+Es # ] ] $e $r
+Es # ] ] $i $e
+Es # ] ] ] $o
+Es # ] ] ] $y
+Es # ] ] ] $1 $2 $3
+Es # ] ] ] $m $a $n
+Es # ] ] ] $d $o $g
+Es # 
+Es # ## high frequency prepend
+Es # ^1
+Es # ^e ^h ^t
+Es # 
+Es # ## high frequency overwrite at start
+Es # o0d
+Es # o0m o1a
+Es # 
+Es # ## leetify
+Es # so0
+Es # si1
+Es # se3
+Es # 
+Es # ## simple extracts
+Es # D2
+Es # D2 D2
+Es # D3
+Es # D4
+Es # 
+Es # ## undouble word
+Es # '5 D3
+Es # '5 $1
+Es # 
+Es # ## removes suffixes from 'strongified' passwords in dict
+Es # ]
+Es # ] ]
+Es # ] ] ]
+Es # ] ] ] d
+Es # ] ] D1 ]
+Es # 
+Es # ## rotates
+Es # +5 ] } } } } '4
+Es # O02 { { { { { {
+Es # } ] ] {
+Es # } } -0 O12
+Es # } } }
+Es # } } } } '4
+Es # } } } } } '5
+Es # } } } } } } Y4 '4 d
+Es # 
+Es # ## unknown
+Es # *04 +0 '4
+Es # *05 O03 d '3 p1
+Es # +0 +0 +0 +0 +0 +0 +0 +0
+Es # +0 +0 +0 O12
+Es # Z4 '8 O42
+Es # Z5 '6 O31 ] p1
+Es # Z5 *75 '5 { O02
+Es # d O28 Y4 '4 d
+Es # f *A5 '8 O14
+Es # p2 '7 p1 O58
+Es # O14 d p2 '6
+Es @ ## nothing, reverse, case... base stuff
+Es @ :
+Es @ r
+Es @ u
+Es @ T0
+Es @ 
+Es @ ## simple number append
+Es @ $0
+Es @ $1
+Es @ $2
+Es @ $3
+Es @ $4
+Es @ $5
+Es @ $6
+Es @ $7
+Es @ $8
+Es @ $9
+Es @ 
+Es @ ## special number append
+Es @ $0 $0
+Es @ $0 $1
+Es @ $0 $2
+Es @ $1 $1
+Es @ $1 $2
+Es @ $1 $3
+Es @ $2 $1
+Es @ $2 $2
+Es @ $2 $3
+Es @ $6 $9
+Es @ $7 $7
+Es @ $8 $8
+Es @ $9 $9
+Es @ $1 $2 $3
+Es @ 
+Es @ ## high frequency append
+Es @ $e
+Es @ $s
+Es @ 
+Es @ ## high frequency overwrite at end
+Es @ ] $a
+Es @ ] ] $s
+Es @ ] ] $a
+Es @ ] ] $e $r
+Es @ ] ] $i $e
+Es @ ] ] ] $o
+Es @ ] ] ] $y
+Es @ ] ] ] $1 $2 $3
+Es @ ] ] ] $m $a $n
+Es @ ] ] ] $d $o $g
+Es @ 
+Es @ ## high frequency prepend
+Es @ ^1
+Es @ ^e ^h ^t
+Es @ 
+Es @ ## high frequency overwrite at start
+Es @ o0d
+Es @ o0m o1a
+Es @ 
+Es @ ## leetify
+Es @ so0
+Es @ si1
+Es @ se3
+Es @ 
+Es @ ## simple extracts
+Es @ D2
+Es @ D2 D2
+Es @ D3
+Es @ D4
+Es @ 
+Es @ ## undouble word
+Es @ '5 D3
+Es @ '5 $1
+Es @ 
+Es @ ## removes suffixes from 'strongified' passwords in dict
+Es @ ]
+Es @ ] ]
+Es @ ] ] ]
+Es @ ] ] ] d
+Es @ ] ] D1 ]
+Es @ 
+Es @ ## rotates
+Es @ +5 ] } } } } '4
+Es @ O02 { { { { { {
+Es @ } ] ] {
+Es @ } } -0 O12
+Es @ } } }
+Es @ } } } } '4
+Es @ } } } } } '5
+Es @ } } } } } } Y4 '4 d
+Es @ 
+Es @ ## unknown
+Es @ *04 +0 '4
+Es @ *05 O03 d '3 p1
+Es @ +0 +0 +0 +0 +0 +0 +0 +0
+Es @ +0 +0 +0 O12
+Es @ Z4 '8 O42
+Es @ Z5 '6 O31 ] p1
+Es @ Z5 *75 '5 { O02
+Es @ d O28 Y4 '4 d
+Es @ f *A5 '8 O14
+Es @ p2 '7 p1 O58
+Es @ O14 d p2 '6
+Es . ## nothing, reverse, case... base stuff
+Es . :
+Es . r
+Es . u
+Es . T0
+Es . 
+Es . ## simple number append
+Es . $0
+Es . $1
+Es . $2
+Es . $3
+Es . $4
+Es . $5
+Es . $6
+Es . $7
+Es . $8
+Es . $9
+Es . 
+Es . ## special number append
+Es . $0 $0
+Es . $0 $1
+Es . $0 $2
+Es . $1 $1
+Es . $1 $2
+Es . $1 $3
+Es . $2 $1
+Es . $2 $2
+Es . $2 $3
+Es . $6 $9
+Es . $7 $7
+Es . $8 $8
+Es . $9 $9
+Es . $1 $2 $3
+Es . 
+Es . ## high frequency append
+Es . $e
+Es . $s
+Es . 
+Es . ## high frequency overwrite at end
+Es . ] $a
+Es . ] ] $s
+Es . ] ] $a
+Es . ] ] $e $r
+Es . ] ] $i $e
+Es . ] ] ] $o
+Es . ] ] ] $y
+Es . ] ] ] $1 $2 $3
+Es . ] ] ] $m $a $n
+Es . ] ] ] $d $o $g
+Es . 
+Es . ## high frequency prepend
+Es . ^1
+Es . ^e ^h ^t
+Es . 
+Es . ## high frequency overwrite at start
+Es . o0d
+Es . o0m o1a
+Es . 
+Es . ## leetify
+Es . so0
+Es . si1
+Es . se3
+Es . 
+Es . ## simple extracts
+Es . D2
+Es . D2 D2
+Es . D3
+Es . D4
+Es . 
+Es . ## undouble word
+Es . '5 D3
+Es . '5 $1
+Es . 
+Es . ## removes suffixes from 'strongified' passwords in dict
+Es . ]
+Es . ] ]
+Es . ] ] ]
+Es . ] ] ] d
+Es . ] ] D1 ]
+Es . 
+Es . ## rotates
+Es . +5 ] } } } } '4
+Es . O02 { { { { { {
+Es . } ] ] {
+Es . } } -0 O12
+Es . } } }
+Es . } } } } '4
+Es . } } } } } '5
+Es . } } } } } } Y4 '4 d
+Es . 
+Es . ## unknown
+Es . *04 +0 '4
+Es . *05 O03 d '3 p1
+Es . +0 +0 +0 +0 +0 +0 +0 +0
+Es . +0 +0 +0 O12
+Es . Z4 '8 O42
+Es . Z5 '6 O31 ] p1
+Es . Z5 *75 '5 { O02
+Es . d O28 Y4 '4 d
+Es . f *A5 '8 O14
+Es . p2 '7 p1 O58
+Es . O14 d p2 '6
+Es / ## nothing, reverse, case... base stuff
+Es / :
+Es / r
+Es / u
+Es / T0
+Es / 
+Es / ## simple number append
+Es / $0
+Es / $1
+Es / $2
+Es / $3
+Es / $4
+Es / $5
+Es / $6
+Es / $7
+Es / $8
+Es / $9
+Es / 
+Es / ## special number append
+Es / $0 $0
+Es / $0 $1
+Es / $0 $2
+Es / $1 $1
+Es / $1 $2
+Es / $1 $3
+Es / $2 $1
+Es / $2 $2
+Es / $2 $3
+Es / $6 $9
+Es / $7 $7
+Es / $8 $8
+Es / $9 $9
+Es / $1 $2 $3
+Es / 
+Es / ## high frequency append
+Es / $e
+Es / $s
+Es / 
+Es / ## high frequency overwrite at end
+Es / ] $a
+Es / ] ] $s
+Es / ] ] $a
+Es / ] ] $e $r
+Es / ] ] $i $e
+Es / ] ] ] $o
+Es / ] ] ] $y
+Es / ] ] ] $1 $2 $3
+Es / ] ] ] $m $a $n
+Es / ] ] ] $d $o $g
+Es / 
+Es / ## high frequency prepend
+Es / ^1
+Es / ^e ^h ^t
+Es / 
+Es / ## high frequency overwrite at start
+Es / o0d
+Es / o0m o1a
+Es / 
+Es / ## leetify
+Es / so0
+Es / si1
+Es / se3
+Es / 
+Es / ## simple extracts
+Es / D2
+Es / D2 D2
+Es / D3
+Es / D4
+Es / 
+Es / ## undouble word
+Es / '5 D3
+Es / '5 $1
+Es / 
+Es / ## removes suffixes from 'strongified' passwords in dict
+Es / ]
+Es / ] ]
+Es / ] ] ]
+Es / ] ] ] d
+Es / ] ] D1 ]
+Es / 
+Es / ## rotates
+Es / +5 ] } } } } '4
+Es / O02 { { { { { {
+Es / } ] ] {
+Es / } } -0 O12
+Es / } } }
+Es / } } } } '4
+Es / } } } } } '5
+Es / } } } } } } Y4 '4 d
+Es / 
+Es / ## unknown
+Es / *04 +0 '4
+Es / *05 O03 d '3 p1
+Es / +0 +0 +0 +0 +0 +0 +0 +0
+Es / +0 +0 +0 O12
+Es / Z4 '8 O42
+Es / Z5 '6 O31 ] p1
+Es / Z5 *75 '5 { O02
+Es / d O28 Y4 '4 d
+Es / f *A5 '8 O14
+Es / p2 '7 p1 O58
+Es / O14 d p2 '6
+E@ ## nothing, reverse, case... base stuff
+E@ :
+E@ r
+E@ u
+E@ T0
+E@ 
+E@ ## simple number append
+E@ $0
+E@ $1
+E@ $2
+E@ $3
+E@ $4
+E@ $5
+E@ $6
+E@ $7
+E@ $8
+E@ $9
+E@ 
+E@ ## special number append
+E@ $0 $0
+E@ $0 $1
+E@ $0 $2
+E@ $1 $1
+E@ $1 $2
+E@ $1 $3
+E@ $2 $1
+E@ $2 $2
+E@ $2 $3
+E@ $6 $9
+E@ $7 $7
+E@ $8 $8
+E@ $9 $9
+E@ $1 $2 $3
+E@ 
+E@ ## high frequency append
+E@ $e
+E@ $s
+E@ 
+E@ ## high frequency overwrite at end
+E@ ] $a
+E@ ] ] $s
+E@ ] ] $a
+E@ ] ] $e $r
+E@ ] ] $i $e
+E@ ] ] ] $o
+E@ ] ] ] $y
+E@ ] ] ] $1 $2 $3
+E@ ] ] ] $m $a $n
+E@ ] ] ] $d $o $g
+E@ 
+E@ ## high frequency prepend
+E@ ^1
+E@ ^e ^h ^t
+E@ 
+E@ ## high frequency overwrite at start
+E@ o0d
+E@ o0m o1a
+E@ 
+E@ ## leetify
+E@ so0
+E@ si1
+E@ se3
+E@ 
+E@ ## simple extracts
+E@ D2
+E@ D2 D2
+E@ D3
+E@ D4
+E@ 
+E@ ## undouble word
+E@ '5 D3
+E@ '5 $1
+E@ 
+E@ ## removes suffixes from 'strongified' passwords in dict
+E@ ]
+E@ ] ]
+E@ ] ] ]
+E@ ] ] ] d
+E@ ] ] D1 ]
+E@ 
+E@ ## rotates
+E@ +5 ] } } } } '4
+E@ O02 { { { { { {
+E@ } ] ] {
+E@ } } -0 O12
+E@ } } }
+E@ } } } } '4
+E@ } } } } } '5
+E@ } } } } } } Y4 '4 d
+E@ 
+E@ ## unknown
+E@ *04 +0 '4
+E@ *05 O03 d '3 p1
+E@ +0 +0 +0 +0 +0 +0 +0 +0
+E@ +0 +0 +0 O12
+E@ Z4 '8 O42
+E@ Z5 '6 O31 ] p1
+E@ Z5 *75 '5 { O02
+E@ d O28 Y4 '4 d
+E@ f *A5 '8 O14
+E@ p2 '7 p1 O58
+E@ O14 d p2 '6
+Es ! ## nothing, reverse, case... base stuff
+Es ! :
+Es ! r
+Es ! u
+Es ! T0
+Es ! 
+Es ! ## simple number append
+Es ! $0
+Es ! $1
+Es ! $2
+Es ! $3
+Es ! $4
+Es ! $5
+Es ! $6
+Es ! $7
+Es ! $8
+Es ! $9
+Es ! 
+Es ! ## special number append
+Es ! $0 $0
+Es ! $0 $1
+Es ! $0 $2
+Es ! $1 $1
+Es ! $1 $2
+Es ! $1 $3
+Es ! $2 $1
+Es ! $2 $2
+Es ! $2 $3
+Es ! $6 $9
+Es ! $7 $7
+Es ! $8 $8
+Es ! $9 $9
+Es ! $1 $2 $3
+Es ! 
+Es ! ## high frequency append
+Es ! $e
+Es ! $s
+Es ! 
+Es ! ## high frequency overwrite at end
+Es ! ] $a
+Es ! ] ] $s
+Es ! ] ] $a
+Es ! ] ] $e $r
+Es ! ] ] $i $e
+Es ! ] ] ] $o
+Es ! ] ] ] $y
+Es ! ] ] ] $1 $2 $3
+Es ! ] ] ] $m $a $n
+Es ! ] ] ] $d $o $g
+Es ! 
+Es ! ## high frequency prepend
+Es ! ^1
+Es ! ^e ^h ^t
+Es ! 
+Es ! ## high frequency overwrite at start
+Es ! o0d
+Es ! o0m o1a
+Es ! 
+Es ! ## leetify
+Es ! so0
+Es ! si1
+Es ! se3
+Es ! 
+Es ! ## simple extracts
+Es ! D2
+Es ! D2 D2
+Es ! D3
+Es ! D4
+Es ! 
+Es ! ## undouble word
+Es ! '5 D3
+Es ! '5 $1
+Es ! 
+Es ! ## removes suffixes from 'strongified' passwords in dict
+Es ! ]
+Es ! ] ]
+Es ! ] ] ]
+Es ! ] ] ] d
+Es ! ] ] D1 ]
+Es ! 
+Es ! ## rotates
+Es ! +5 ] } } } } '4
+Es ! O02 { { { { { {
+Es ! } ] ] {
+Es ! } } -0 O12
+Es ! } } }
+Es ! } } } } '4
+Es ! } } } } } '5
+Es ! } } } } } } Y4 '4 d
+Es ! 
+Es ! ## unknown
+Es ! *04 +0 '4
+Es ! *05 O03 d '3 p1
+Es ! +0 +0 +0 +0 +0 +0 +0 +0
+Es ! +0 +0 +0 O12
+Es ! Z4 '8 O42
+Es ! Z5 '6 O31 ] p1
+Es ! Z5 *75 '5 { O02
+Es ! d O28 Y4 '4 d
+Es ! f *A5 '8 O14
+Es ! p2 '7 p1 O58
+Es ! O14 d p2 '6
+c ## nothing, reverse, case... base stuff
+c :
+c r
+c u
+c T0
+c 
+c ## simple number append
+c $0
+c $1
+c $2
+c $3
+c $4
+c $5
+c $6
+c $7
+c $8
+c $9
+c 
+c ## special number append
+c $0 $0
+c $0 $1
+c $0 $2
+c $1 $1
+c $1 $2
+c $1 $3
+c $2 $1
+c $2 $2
+c $2 $3
+c $6 $9
+c $7 $7
+c $8 $8
+c $9 $9
+c $1 $2 $3
+c 
+c ## high frequency append
+c $e
+c $s
+c 
+c ## high frequency overwrite at end
+c ] $a
+c ] ] $s
+c ] ] $a
+c ] ] $e $r
+c ] ] $i $e
+c ] ] ] $o
+c ] ] ] $y
+c ] ] ] $1 $2 $3
+c ] ] ] $m $a $n
+c ] ] ] $d $o $g
+c 
+c ## high frequency prepend
+c ^1
+c ^e ^h ^t
+c 
+c ## high frequency overwrite at start
+c o0d
+c o0m o1a
+c 
+c ## leetify
+c so0
+c si1
+c se3
+c 
+c ## simple extracts
+c D2
+c D2 D2
+c D3
+c D4
+c 
+c ## undouble word
+c '5 D3
+c '5 $1
+c 
+c ## removes suffixes from 'strongified' passwords in dict
+c ]
+c ] ]
+c ] ] ]
+c ] ] ] d
+c ] ] D1 ]
+c 
+c ## rotates
+c +5 ] } } } } '4
+c O02 { { { { { {
+c } ] ] {
+c } } -0 O12
+c } } }
+c } } } } '4
+c } } } } } '5
+c } } } } } } Y4 '4 d
+c 
+c ## unknown
+c *04 +0 '4
+c *05 O03 d '3 p1
+c +0 +0 +0 +0 +0 +0 +0 +0
+c +0 +0 +0 O12
+c Z4 '8 O42
+c Z5 '6 O31 ] p1
+c Z5 *75 '5 { O02
+c d O28 Y4 '4 d
+c f *A5 '8 O14
+c p2 '7 p1 O58
+c O14 d p2 '6
+u ## nothing, reverse, case... base stuff
+u :
+u r
+u u
+u T0
+u 
+u ## simple number append
+u $0
+u $1
+u $2
+u $3
+u $4
+u $5
+u $6
+u $7
+u $8
+u $9
+u 
+u ## special number append
+u $0 $0
+u $0 $1
+u $0 $2
+u $1 $1
+u $1 $2
+u $1 $3
+u $2 $1
+u $2 $2
+u $2 $3
+u $6 $9
+u $7 $7
+u $8 $8
+u $9 $9
+u $1 $2 $3
+u 
+u ## high frequency append
+u $e
+u $s
+u 
+u ## high frequency overwrite at end
+u ] $a
+u ] ] $s
+u ] ] $a
+u ] ] $e $r
+u ] ] $i $e
+u ] ] ] $o
+u ] ] ] $y
+u ] ] ] $1 $2 $3
+u ] ] ] $m $a $n
+u ] ] ] $d $o $g
+u 
+u ## high frequency prepend
+u ^1
+u ^e ^h ^t
+u 
+u ## high frequency overwrite at start
+u o0d
+u o0m o1a
+u 
+u ## leetify
+u so0
+u si1
+u se3
+u 
+u ## simple extracts
+u D2
+u D2 D2
+u D3
+u D4
+u 
+u ## undouble word
+u '5 D3
+u '5 $1
+u 
+u ## removes suffixes from 'strongified' passwords in dict
+u ]
+u ] ]
+u ] ] ]
+u ] ] ] d
+u ] ] D1 ]
+u 
+u ## rotates
+u +5 ] } } } } '4
+u O02 { { { { { {
+u } ] ] {
+u } } -0 O12
+u } } }
+u } } } } '4
+u } } } } } '5
+u } } } } } } Y4 '4 d
+u 
+u ## unknown
+u *04 +0 '4
+u *05 O03 d '3 p1
+u +0 +0 +0 +0 +0 +0 +0 +0
+u +0 +0 +0 O12
+u Z4 '8 O42
+u Z5 '6 O31 ] p1
+u Z5 *75 '5 { O02
+u d O28 Y4 '4 d
+u f *A5 '8 O14
+u p2 '7 p1 O58
+u O14 d p2 '6
+C ## nothing, reverse, case... base stuff
+C :
+C r
+C u
+C T0
+C 
+C ## simple number append
+C $0
+C $1
+C $2
+C $3
+C $4
+C $5
+C $6
+C $7
+C $8
+C $9
+C 
+C ## special number append
+C $0 $0
+C $0 $1
+C $0 $2
+C $1 $1
+C $1 $2
+C $1 $3
+C $2 $1
+C $2 $2
+C $2 $3
+C $6 $9
+C $7 $7
+C $8 $8
+C $9 $9
+C $1 $2 $3
+C 
+C ## high frequency append
+C $e
+C $s
+C 
+C ## high frequency overwrite at end
+C ] $a
+C ] ] $s
+C ] ] $a
+C ] ] $e $r
+C ] ] $i $e
+C ] ] ] $o
+C ] ] ] $y
+C ] ] ] $1 $2 $3
+C ] ] ] $m $a $n
+C ] ] ] $d $o $g
+C 
+C ## high frequency prepend
+C ^1
+C ^e ^h ^t
+C 
+C ## high frequency overwrite at start
+C o0d
+C o0m o1a
+C 
+C ## leetify
+C so0
+C si1
+C se3
+C 
+C ## simple extracts
+C D2
+C D2 D2
+C D3
+C D4
+C 
+C ## undouble word
+C '5 D3
+C '5 $1
+C 
+C ## removes suffixes from 'strongified' passwords in dict
+C ]
+C ] ]
+C ] ] ]
+C ] ] ] d
+C ] ] D1 ]
+C 
+C ## rotates
+C +5 ] } } } } '4
+C O02 { { { { { {
+C } ] ] {
+C } } -0 O12
+C } } }
+C } } } } '4
+C } } } } } '5
+C } } } } } } Y4 '4 d
+C 
+C ## unknown
+C *04 +0 '4
+C *05 O03 d '3 p1
+C +0 +0 +0 +0 +0 +0 +0 +0
+C +0 +0 +0 O12
+C Z4 '8 O42
+C Z5 '6 O31 ] p1
+C Z5 *75 '5 { O02
+C d O28 Y4 '4 d
+C f *A5 '8 O14
+C p2 '7 p1 O58
+C O14 d p2 '6
+@ c ## nothing, reverse, case... base stuff
+@ c :
+@ c r
+@ c u
+@ c T0
+@ c 
+@ c ## simple number append
+@ c $0
+@ c $1
+@ c $2
+@ c $3
+@ c $4
+@ c $5
+@ c $6
+@ c $7
+@ c $8
+@ c $9
+@ c 
+@ c ## special number append
+@ c $0 $0
+@ c $0 $1
+@ c $0 $2
+@ c $1 $1
+@ c $1 $2
+@ c $1 $3
+@ c $2 $1
+@ c $2 $2
+@ c $2 $3
+@ c $6 $9
+@ c $7 $7
+@ c $8 $8
+@ c $9 $9
+@ c $1 $2 $3
+@ c 
+@ c ## high frequency append
+@ c $e
+@ c $s
+@ c 
+@ c ## high frequency overwrite at end
+@ c ] $a
+@ c ] ] $s
+@ c ] ] $a
+@ c ] ] $e $r
+@ c ] ] $i $e
+@ c ] ] ] $o
+@ c ] ] ] $y
+@ c ] ] ] $1 $2 $3
+@ c ] ] ] $m $a $n
+@ c ] ] ] $d $o $g
+@ c 
+@ c ## high frequency prepend
+@ c ^1
+@ c ^e ^h ^t
+@ c 
+@ c ## high frequency overwrite at start
+@ c o0d
+@ c o0m o1a
+@ c 
+@ c ## leetify
+@ c so0
+@ c si1
+@ c se3
+@ c 
+@ c ## simple extracts
+@ c D2
+@ c D2 D2
+@ c D3
+@ c D4
+@ c 
+@ c ## undouble word
+@ c '5 D3
+@ c '5 $1
+@ c 
+@ c ## removes suffixes from 'strongified' passwords in dict
+@ c ]
+@ c ] ]
+@ c ] ] ]
+@ c ] ] ] d
+@ c ] ] D1 ]
+@ c 
+@ c ## rotates
+@ c +5 ] } } } } '4
+@ c O02 { { { { { {
+@ c } ] ] {
+@ c } } -0 O12
+@ c } } }
+@ c } } } } '4
+@ c } } } } } '5
+@ c } } } } } } Y4 '4 d
+@ c 
+@ c ## unknown
+@ c *04 +0 '4
+@ c *05 O03 d '3 p1
+@ c +0 +0 +0 +0 +0 +0 +0 +0
+@ c +0 +0 +0 O12
+@ c Z4 '8 O42
+@ c Z5 '6 O31 ] p1
+@ c Z5 *75 '5 { O02
+@ c d O28 Y4 '4 d
+@ c f *A5 '8 O14
+@ c p2 '7 p1 O58
+@ c O14 d p2 '6
+@ C ## nothing, reverse, case... base stuff
+@ C :
+@ C r
+@ C u
+@ C T0
+@ C 
+@ C ## simple number append
+@ C $0
+@ C $1
+@ C $2
+@ C $3
+@ C $4
+@ C $5
+@ C $6
+@ C $7
+@ C $8
+@ C $9
+@ C 
+@ C ## special number append
+@ C $0 $0
+@ C $0 $1
+@ C $0 $2
+@ C $1 $1
+@ C $1 $2
+@ C $1 $3
+@ C $2 $1
+@ C $2 $2
+@ C $2 $3
+@ C $6 $9
+@ C $7 $7
+@ C $8 $8
+@ C $9 $9
+@ C $1 $2 $3
+@ C 
+@ C ## high frequency append
+@ C $e
+@ C $s
+@ C 
+@ C ## high frequency overwrite at end
+@ C ] $a
+@ C ] ] $s
+@ C ] ] $a
+@ C ] ] $e $r
+@ C ] ] $i $e
+@ C ] ] ] $o
+@ C ] ] ] $y
+@ C ] ] ] $1 $2 $3
+@ C ] ] ] $m $a $n
+@ C ] ] ] $d $o $g
+@ C 
+@ C ## high frequency prepend
+@ C ^1
+@ C ^e ^h ^t
+@ C 
+@ C ## high frequency overwrite at start
+@ C o0d
+@ C o0m o1a
+@ C 
+@ C ## leetify
+@ C so0
+@ C si1
+@ C se3
+@ C 
+@ C ## simple extracts
+@ C D2
+@ C D2 D2
+@ C D3
+@ C D4
+@ C 
+@ C ## undouble word
+@ C '5 D3
+@ C '5 $1
+@ C 
+@ C ## removes suffixes from 'strongified' passwords in dict
+@ C ]
+@ C ] ]
+@ C ] ] ]
+@ C ] ] ] d
+@ C ] ] D1 ]
+@ C 
+@ C ## rotates
+@ C +5 ] } } } } '4
+@ C O02 { { { { { {
+@ C } ] ] {
+@ C } } -0 O12
+@ C } } }
+@ C } } } } '4
+@ C } } } } } '5
+@ C } } } } } } Y4 '4 d
+@ C 
+@ C ## unknown
+@ C *04 +0 '4
+@ C *05 O03 d '3 p1
+@ C +0 +0 +0 +0 +0 +0 +0 +0
+@ C +0 +0 +0 O12
+@ C Z4 '8 O42
+@ C Z5 '6 O31 ] p1
+@ C Z5 *75 '5 { O02
+@ C d O28 Y4 '4 d
+@ C f *A5 '8 O14
+@ C p2 '7 p1 O58
+@ C O14 d p2 '6
+@ u ## nothing, reverse, case... base stuff
+@ u :
+@ u r
+@ u u
+@ u T0
+@ u 
+@ u ## simple number append
+@ u $0
+@ u $1
+@ u $2
+@ u $3
+@ u $4
+@ u $5
+@ u $6
+@ u $7
+@ u $8
+@ u $9
+@ u 
+@ u ## special number append
+@ u $0 $0
+@ u $0 $1
+@ u $0 $2
+@ u $1 $1
+@ u $1 $2
+@ u $1 $3
+@ u $2 $1
+@ u $2 $2
+@ u $2 $3
+@ u $6 $9
+@ u $7 $7
+@ u $8 $8
+@ u $9 $9
+@ u $1 $2 $3
+@ u 
+@ u ## high frequency append
+@ u $e
+@ u $s
+@ u 
+@ u ## high frequency overwrite at end
+@ u ] $a
+@ u ] ] $s
+@ u ] ] $a
+@ u ] ] $e $r
+@ u ] ] $i $e
+@ u ] ] ] $o
+@ u ] ] ] $y
+@ u ] ] ] $1 $2 $3
+@ u ] ] ] $m $a $n
+@ u ] ] ] $d $o $g
+@ u 
+@ u ## high frequency prepend
+@ u ^1
+@ u ^e ^h ^t
+@ u 
+@ u ## high frequency overwrite at start
+@ u o0d
+@ u o0m o1a
+@ u 
+@ u ## leetify
+@ u so0
+@ u si1
+@ u se3
+@ u 
+@ u ## simple extracts
+@ u D2
+@ u D2 D2
+@ u D3
+@ u D4
+@ u 
+@ u ## undouble word
+@ u '5 D3
+@ u '5 $1
+@ u 
+@ u ## removes suffixes from 'strongified' passwords in dict
+@ u ]
+@ u ] ]
+@ u ] ] ]
+@ u ] ] ] d
+@ u ] ] D1 ]
+@ u 
+@ u ## rotates
+@ u +5 ] } } } } '4
+@ u O02 { { { { { {
+@ u } ] ] {
+@ u } } -0 O12
+@ u } } }
+@ u } } } } '4
+@ u } } } } } '5
+@ u } } } } } } Y4 '4 d
+@ u 
+@ u ## unknown
+@ u *04 +0 '4
+@ u *05 O03 d '3 p1
+@ u +0 +0 +0 +0 +0 +0 +0 +0
+@ u +0 +0 +0 O12
+@ u Z4 '8 O42
+@ u Z5 '6 O31 ] p1
+@ u Z5 *75 '5 { O02
+@ u d O28 Y4 '4 d
+@ u f *A5 '8 O14
+@ u p2 '7 p1 O58
+@ u O14 d p2 '6
+s - e- ## nothing, reverse, case... base stuff
+s - e- :
+s - e- r
+s - e- u
+s - e- T0
+s - e- 
+s - e- ## simple number append
+s - e- $0
+s - e- $1
+s - e- $2
+s - e- $3
+s - e- $4
+s - e- $5
+s - e- $6
+s - e- $7
+s - e- $8
+s - e- $9
+s - e- 
+s - e- ## special number append
+s - e- $0 $0
+s - e- $0 $1
+s - e- $0 $2
+s - e- $1 $1
+s - e- $1 $2
+s - e- $1 $3
+s - e- $2 $1
+s - e- $2 $2
+s - e- $2 $3
+s - e- $6 $9
+s - e- $7 $7
+s - e- $8 $8
+s - e- $9 $9
+s - e- $1 $2 $3
+s - e- 
+s - e- ## high frequency append
+s - e- $e
+s - e- $s
+s - e- 
+s - e- ## high frequency overwrite at end
+s - e- ] $a
+s - e- ] ] $s
+s - e- ] ] $a
+s - e- ] ] $e $r
+s - e- ] ] $i $e
+s - e- ] ] ] $o
+s - e- ] ] ] $y
+s - e- ] ] ] $1 $2 $3
+s - e- ] ] ] $m $a $n
+s - e- ] ] ] $d $o $g
+s - e- 
+s - e- ## high frequency prepend
+s - e- ^1
+s - e- ^e ^h ^t
+s - e- 
+s - e- ## high frequency overwrite at start
+s - e- o0d
+s - e- o0m o1a
+s - e- 
+s - e- ## leetify
+s - e- so0
+s - e- si1
+s - e- se3
+s - e- 
+s - e- ## simple extracts
+s - e- D2
+s - e- D2 D2
+s - e- D3
+s - e- D4
+s - e- 
+s - e- ## undouble word
+s - e- '5 D3
+s - e- '5 $1
+s - e- 
+s - e- ## removes suffixes from 'strongified' passwords in dict
+s - e- ]
+s - e- ] ]
+s - e- ] ] ]
+s - e- ] ] ] d
+s - e- ] ] D1 ]
+s - e- 
+s - e- ## rotates
+s - e- +5 ] } } } } '4
+s - e- O02 { { { { { {
+s - e- } ] ] {
+s - e- } } -0 O12
+s - e- } } }
+s - e- } } } } '4
+s - e- } } } } } '5
+s - e- } } } } } } Y4 '4 d
+s - e- 
+s - e- ## unknown
+s - e- *04 +0 '4
+s - e- *05 O03 d '3 p1
+s - e- +0 +0 +0 +0 +0 +0 +0 +0
+s - e- +0 +0 +0 O12
+s - e- Z4 '8 O42
+s - e- Z5 '6 O31 ] p1
+s - e- Z5 *75 '5 { O02
+s - e- d O28 Y4 '4 d
+s - e- f *A5 '8 O14
+s - e- p2 '7 p1 O58
+s - e- O14 d p2 '6
+s . e. ## nothing, reverse, case... base stuff
+s . e. :
+s . e. r
+s . e. u
+s . e. T0
+s . e. 
+s . e. ## simple number append
+s . e. $0
+s . e. $1
+s . e. $2
+s . e. $3
+s . e. $4
+s . e. $5
+s . e. $6
+s . e. $7
+s . e. $8
+s . e. $9
+s . e. 
+s . e. ## special number append
+s . e. $0 $0
+s . e. $0 $1
+s . e. $0 $2
+s . e. $1 $1
+s . e. $1 $2
+s . e. $1 $3
+s . e. $2 $1
+s . e. $2 $2
+s . e. $2 $3
+s . e. $6 $9
+s . e. $7 $7
+s . e. $8 $8
+s . e. $9 $9
+s . e. $1 $2 $3
+s . e. 
+s . e. ## high frequency append
+s . e. $e
+s . e. $s
+s . e. 
+s . e. ## high frequency overwrite at end
+s . e. ] $a
+s . e. ] ] $s
+s . e. ] ] $a
+s . e. ] ] $e $r
+s . e. ] ] $i $e
+s . e. ] ] ] $o
+s . e. ] ] ] $y
+s . e. ] ] ] $1 $2 $3
+s . e. ] ] ] $m $a $n
+s . e. ] ] ] $d $o $g
+s . e. 
+s . e. ## high frequency prepend
+s . e. ^1
+s . e. ^e ^h ^t
+s . e. 
+s . e. ## high frequency overwrite at start
+s . e. o0d
+s . e. o0m o1a
+s . e. 
+s . e. ## leetify
+s . e. so0
+s . e. si1
+s . e. se3
+s . e. 
+s . e. ## simple extracts
+s . e. D2
+s . e. D2 D2
+s . e. D3
+s . e. D4
+s . e. 
+s . e. ## undouble word
+s . e. '5 D3
+s . e. '5 $1
+s . e. 
+s . e. ## removes suffixes from 'strongified' passwords in dict
+s . e. ]
+s . e. ] ]
+s . e. ] ] ]
+s . e. ] ] ] d
+s . e. ] ] D1 ]
+s . e. 
+s . e. ## rotates
+s . e. +5 ] } } } } '4
+s . e. O02 { { { { { {
+s . e. } ] ] {
+s . e. } } -0 O12
+s . e. } } }
+s . e. } } } } '4
+s . e. } } } } } '5
+s . e. } } } } } } Y4 '4 d
+s . e. 
+s . e. ## unknown
+s . e. *04 +0 '4
+s . e. *05 O03 d '3 p1
+s . e. +0 +0 +0 +0 +0 +0 +0 +0
+s . e. +0 +0 +0 O12
+s . e. Z4 '8 O42
+s . e. Z5 '6 O31 ] p1
+s . e. Z5 *75 '5 { O02
+s . e. d O28 Y4 '4 d
+s . e. f *A5 '8 O14
+s . e. p2 '7 p1 O58
+s . e. O14 d p2 '6
+s _ e_ ## nothing, reverse, case... base stuff
+s _ e_ :
+s _ e_ r
+s _ e_ u
+s _ e_ T0
+s _ e_ 
+s _ e_ ## simple number append
+s _ e_ $0
+s _ e_ $1
+s _ e_ $2
+s _ e_ $3
+s _ e_ $4
+s _ e_ $5
+s _ e_ $6
+s _ e_ $7
+s _ e_ $8
+s _ e_ $9
+s _ e_ 
+s _ e_ ## special number append
+s _ e_ $0 $0
+s _ e_ $0 $1
+s _ e_ $0 $2
+s _ e_ $1 $1
+s _ e_ $1 $2
+s _ e_ $1 $3
+s _ e_ $2 $1
+s _ e_ $2 $2
+s _ e_ $2 $3
+s _ e_ $6 $9
+s _ e_ $7 $7
+s _ e_ $8 $8
+s _ e_ $9 $9
+s _ e_ $1 $2 $3
+s _ e_ 
+s _ e_ ## high frequency append
+s _ e_ $e
+s _ e_ $s
+s _ e_ 
+s _ e_ ## high frequency overwrite at end
+s _ e_ ] $a
+s _ e_ ] ] $s
+s _ e_ ] ] $a
+s _ e_ ] ] $e $r
+s _ e_ ] ] $i $e
+s _ e_ ] ] ] $o
+s _ e_ ] ] ] $y
+s _ e_ ] ] ] $1 $2 $3
+s _ e_ ] ] ] $m $a $n
+s _ e_ ] ] ] $d $o $g
+s _ e_ 
+s _ e_ ## high frequency prepend
+s _ e_ ^1
+s _ e_ ^e ^h ^t
+s _ e_ 
+s _ e_ ## high frequency overwrite at start
+s _ e_ o0d
+s _ e_ o0m o1a
+s _ e_ 
+s _ e_ ## leetify
+s _ e_ so0
+s _ e_ si1
+s _ e_ se3
+s _ e_ 
+s _ e_ ## simple extracts
+s _ e_ D2
+s _ e_ D2 D2
+s _ e_ D3
+s _ e_ D4
+s _ e_ 
+s _ e_ ## undouble word
+s _ e_ '5 D3
+s _ e_ '5 $1
+s _ e_ 
+s _ e_ ## removes suffixes from 'strongified' passwords in dict
+s _ e_ ]
+s _ e_ ] ]
+s _ e_ ] ] ]
+s _ e_ ] ] ] d
+s _ e_ ] ] D1 ]
+s _ e_ 
+s _ e_ ## rotates
+s _ e_ +5 ] } } } } '4
+s _ e_ O02 { { { { { {
+s _ e_ } ] ] {
+s _ e_ } } -0 O12
+s _ e_ } } }
+s _ e_ } } } } '4
+s _ e_ } } } } } '5
+s _ e_ } } } } } } Y4 '4 d
+s _ e_ 
+s _ e_ ## unknown
+s _ e_ *04 +0 '4
+s _ e_ *05 O03 d '3 p1
+s _ e_ +0 +0 +0 +0 +0 +0 +0 +0
+s _ e_ +0 +0 +0 O12
+s _ e_ Z4 '8 O42
+s _ e_ Z5 '6 O31 ] p1
+s _ e_ Z5 *75 '5 { O02
+s _ e_ d O28 Y4 '4 d
+s _ e_ f *A5 '8 O14
+s _ e_ p2 '7 p1 O58
+s _ e_ O14 d p2 '6
+s / e/ ## nothing, reverse, case... base stuff
+s / e/ :
+s / e/ r
+s / e/ u
+s / e/ T0
+s / e/ 
+s / e/ ## simple number append
+s / e/ $0
+s / e/ $1
+s / e/ $2
+s / e/ $3
+s / e/ $4
+s / e/ $5
+s / e/ $6
+s / e/ $7
+s / e/ $8
+s / e/ $9
+s / e/ 
+s / e/ ## special number append
+s / e/ $0 $0
+s / e/ $0 $1
+s / e/ $0 $2
+s / e/ $1 $1
+s / e/ $1 $2
+s / e/ $1 $3
+s / e/ $2 $1
+s / e/ $2 $2
+s / e/ $2 $3
+s / e/ $6 $9
+s / e/ $7 $7
+s / e/ $8 $8
+s / e/ $9 $9
+s / e/ $1 $2 $3
+s / e/ 
+s / e/ ## high frequency append
+s / e/ $e
+s / e/ $s
+s / e/ 
+s / e/ ## high frequency overwrite at end
+s / e/ ] $a
+s / e/ ] ] $s
+s / e/ ] ] $a
+s / e/ ] ] $e $r
+s / e/ ] ] $i $e
+s / e/ ] ] ] $o
+s / e/ ] ] ] $y
+s / e/ ] ] ] $1 $2 $3
+s / e/ ] ] ] $m $a $n
+s / e/ ] ] ] $d $o $g
+s / e/ 
+s / e/ ## high frequency prepend
+s / e/ ^1
+s / e/ ^e ^h ^t
+s / e/ 
+s / e/ ## high frequency overwrite at start
+s / e/ o0d
+s / e/ o0m o1a
+s / e/ 
+s / e/ ## leetify
+s / e/ so0
+s / e/ si1
+s / e/ se3
+s / e/ 
+s / e/ ## simple extracts
+s / e/ D2
+s / e/ D2 D2
+s / e/ D3
+s / e/ D4
+s / e/ 
+s / e/ ## undouble word
+s / e/ '5 D3
+s / e/ '5 $1
+s / e/ 
+s / e/ ## removes suffixes from 'strongified' passwords in dict
+s / e/ ]
+s / e/ ] ]
+s / e/ ] ] ]
+s / e/ ] ] ] d
+s / e/ ] ] D1 ]
+s / e/ 
+s / e/ ## rotates
+s / e/ +5 ] } } } } '4
+s / e/ O02 { { { { { {
+s / e/ } ] ] {
+s / e/ } } -0 O12
+s / e/ } } }
+s / e/ } } } } '4
+s / e/ } } } } } '5
+s / e/ } } } } } } Y4 '4 d
+s / e/ 
+s / e/ ## unknown
+s / e/ *04 +0 '4
+s / e/ *05 O03 d '3 p1
+s / e/ +0 +0 +0 +0 +0 +0 +0 +0
+s / e/ +0 +0 +0 O12
+s / e/ Z4 '8 O42
+s / e/ Z5 '6 O31 ] p1
+s / e/ Z5 *75 '5 { O02
+s / e/ d O28 Y4 '4 d
+s / e/ f *A5 '8 O14
+s / e/ p2 '7 p1 O58
+s / e/ O14 d p2 '6
+s , e, ## nothing, reverse, case... base stuff
+s , e, :
+s , e, r
+s , e, u
+s , e, T0
+s , e, 
+s , e, ## simple number append
+s , e, $0
+s , e, $1
+s , e, $2
+s , e, $3
+s , e, $4
+s , e, $5
+s , e, $6
+s , e, $7
+s , e, $8
+s , e, $9
+s , e, 
+s , e, ## special number append
+s , e, $0 $0
+s , e, $0 $1
+s , e, $0 $2
+s , e, $1 $1
+s , e, $1 $2
+s , e, $1 $3
+s , e, $2 $1
+s , e, $2 $2
+s , e, $2 $3
+s , e, $6 $9
+s , e, $7 $7
+s , e, $8 $8
+s , e, $9 $9
+s , e, $1 $2 $3
+s , e, 
+s , e, ## high frequency append
+s , e, $e
+s , e, $s
+s , e, 
+s , e, ## high frequency overwrite at end
+s , e, ] $a
+s , e, ] ] $s
+s , e, ] ] $a
+s , e, ] ] $e $r
+s , e, ] ] $i $e
+s , e, ] ] ] $o
+s , e, ] ] ] $y
+s , e, ] ] ] $1 $2 $3
+s , e, ] ] ] $m $a $n
+s , e, ] ] ] $d $o $g
+s , e, 
+s , e, ## high frequency prepend
+s , e, ^1
+s , e, ^e ^h ^t
+s , e, 
+s , e, ## high frequency overwrite at start
+s , e, o0d
+s , e, o0m o1a
+s , e, 
+s , e, ## leetify
+s , e, so0
+s , e, si1
+s , e, se3
+s , e, 
+s , e, ## simple extracts
+s , e, D2
+s , e, D2 D2
+s , e, D3
+s , e, D4
+s , e, 
+s , e, ## undouble word
+s , e, '5 D3
+s , e, '5 $1
+s , e, 
+s , e, ## removes suffixes from 'strongified' passwords in dict
+s , e, ]
+s , e, ] ]
+s , e, ] ] ]
+s , e, ] ] ] d
+s , e, ] ] D1 ]
+s , e, 
+s , e, ## rotates
+s , e, +5 ] } } } } '4
+s , e, O02 { { { { { {
+s , e, } ] ] {
+s , e, } } -0 O12
+s , e, } } }
+s , e, } } } } '4
+s , e, } } } } } '5
+s , e, } } } } } } Y4 '4 d
+s , e, 
+s , e, ## unknown
+s , e, *04 +0 '4
+s , e, *05 O03 d '3 p1
+s , e, +0 +0 +0 +0 +0 +0 +0 +0
+s , e, +0 +0 +0 O12
+s , e, Z4 '8 O42
+s , e, Z5 '6 O31 ] p1
+s , e, Z5 *75 '5 { O02
+s , e, d O28 Y4 '4 d
+s , e, f *A5 '8 O14
+s , e, p2 '7 p1 O58
+s , e, O14 d p2 '6
