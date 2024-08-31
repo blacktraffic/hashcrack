@@ -154,7 +154,8 @@ def friendlymap( name ):
          'zip':'13600',
          'wpa':'2500',
          'wpa-pmk':'2501',
-         'wpa-pmkid':'16800'
+         'wpa-pmkid':'16800',
+         'gen':'99999'
    }
 
    t = fmap.get(name, 'auto')
@@ -440,6 +441,10 @@ def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, 
 
     if nuke:
         found=1
+
+    if hashtype=="99999":
+        d=pwdfile
+        pwdfile='--stdout'
         
     if show:
         trailer=' '+potfile+' '+username
@@ -762,18 +767,18 @@ def main():
         pathstyle='unix'
         unix=1
         crackopts=crackopts+" -w4 "
-        hashcathome='./hashcat-6.1.1'
-        ruleshome='./hashcat-6.1.1/rules'
+        hashcathome='./hashcat-6.2.6'
+        ruleshome='./hashcat-6.2.6/rules'
         exe='.bin'
     else:
         if re.match(r'Windows',p_os):
             if not show:
                 print("Running under win32")
             exe='.exe'
-            hashcathome='hashcat-6.1.1' #relative path issues with 4.10
+            hashcathome='hashcat-6.2.6' #relative path issues with 4.10
             pathstyle='win32'
             pathsep=r'\\'
-            ruleshome='hashcat-6.1.1\\rules'
+            ruleshome='hashcat-6.2.6\\rules'
             crackopts=crackopts+" -w1 "
         else:
             print("Unknown platform")
@@ -870,7 +875,7 @@ def main():
         javapath='java'
         python2path='python'
         perlpath='perl'
-        hcpath=os.path.abspath('hashcat-6.1.1')
+        hcpath=os.path.abspath('hashcat-6.2.6')
 
         
     hashtype=args.type
@@ -1058,7 +1063,8 @@ def main():
                '14400':1,
                '14900':1,
                '15000':1,
-               '18200':1 }
+               '18200':1,
+               '99999':0 }
 
     colons=line.count(':')
     expectedcolons=colonmap.get(hashtype,0)
