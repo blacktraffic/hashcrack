@@ -154,14 +154,15 @@ def friendlymap( name ):
          'zip':'13600',
          'wpa':'2500',
          'wpa-pmk':'2501',
-         'wpa-pmkid':'16800'
+         'wpa-pmkid':'16800',
+         'gen':'99999'
    }
 
    t = fmap.get(name, 'auto')
    return t 
 
 #pick some sensible defaults for the given hashtype
-def selectparams( hashtype, nuke, ruleshome, dicthome ):
+def selectparams( hashtype, ruleshome, dicthome ):
 
     # default these, but then see if they're in the config fiile
     
@@ -170,7 +171,6 @@ def selectparams( hashtype, nuke, ruleshome, dicthome ):
     hugedict="breachcompilation.txt" 
     bigdict="Top258Million-probable.txt" 
     smalldict="Top95Thousand-probable.txt"
-    dumbdict="words.txt"
         
     # rules
     hugerules="rules/l33tnsa.rule"
@@ -185,7 +185,7 @@ def selectparams( hashtype, nuke, ruleshome, dicthome ):
         hugedict = config.get('dicts', 'hugedict')
         bigdict = config.get('dicts', 'bigdict')
         smalldict = config.get('dicts', 'smalldict')
-        dumbdict = config.get('dicts', 'dumbdict')
+
 
         hugerules = config.get('rules', 'hugerules')
         bigrules = config.get('rules', 'bigrules')
@@ -213,39 +213,21 @@ def selectparams( hashtype, nuke, ruleshome, dicthome ):
     if not rules_exist(smallrules,ruleshome):
         print("Small rules file "+smallrules+" doesn't seem to exist - could cause problems. Check config file hashcat.cfg",file=sys.stderr)        
         
-    if nuke:
-        #unhelpful naming, sorry
-
-        #open map.cfg
-        with open("map.cfg") as f:
-            for line in f:
-                if line[0]!='#':
-                    try:
-                        (key, val) = line.split(':')
-                    
-                        if key == hashtype:
-                            (dict,rules,inc,hr)=val.split(',')
-                            #print('Found '+key)
-                        
-                    except:
-                        print(line)
-                
-    else:
         
-        #open quickmap.cfg
-
-        with open("quickmap.cfg") as f:
-            for line in f:
-                if line[0]!='#':
-                    try:
-                        (key, val) = line.split(':')
-
-                        if key == hashtype:
-                            (dict,rules,inc,hr)=val.split(',')
-                            #print('Found '+key)
+    #open quickmap.cfg
+    
+    with open("quickmap.cfg") as f:
+        for line in f:
+            if line[0]!='#':
+                try:
+                    (key, val) = line.split(':')
+                    
+                    if key == hashtype:
+                        (dict,rules,inc,hr)=val.split(',')
+                        #print('Found '+key)
                         
-                    except:
-                        print(line)
+                except:
+                    print(line)
 
 
     try:                
@@ -311,7 +293,7 @@ def btexeccwd(command,scwd,show=0,dryrun=0):
             junk = p.communicate()
     
 #jtr - experimental
-def runjtr( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdictoverride, rulesoverride, mask, lmask, rmask, dolast, ruleshome, words, pathsep, exe, crib, phrases, username, nuke, found, potfile, noinc, show, skip, restore, force, remove, statusfile):
+def runjtr( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdictoverride, rulesoverride, mask, lmask, rmask, ruleshome, pathsep, exe, crib, username, potfile, noinc, show, skip, restore, force, remove, statusfile, dryrun):
     
     if pathsep=='/':
         jtrbin='./john/run/john'
@@ -331,22 +313,24 @@ def runjtr( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome,
 
     if dictoverride:
         d=dictoverride
+        print(d)
         if not is_non_zero_file_or_dir(d):
             d='dict'+pathsep+d
     else:
         if not re.search('^/',dict):
             d=dicthome+pathsep+dict
 
+
     if mask is not None:
          print("Using specified mask "+mask)
          btexec(jtrbin+' --format='+hashtype+' '+pwdfile+' --mask='+mask,show,dryrun)
     else:
-         btexec(jtrbin+' --format='+hashtype+' '+pwdfile+' '+rules+' --wordlist='+dicthome+pathsep+dict,show,dryrun)
+         btexec(jtrbin+' --format='+hashtype+' '+pwdfile+' '+rules+' --wordlist='+d,show,dryrun)
         
         
 #actually do the hashcat runs
 #this can get somewhat complex depending on what it's been asked to do
-def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdictoverride, rulesoverride, mask, lmask, rmask, dolast, ruleshome, words, pathsep, exe, crib, phrases, username, nuke, found, potfile, noinc, show, skip, restore, force, remove, statusfile, leet, prince, princemin, princemax, purplerain, dryrun, xrules, debugfile):
+def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdictoverride, rulesoverride, mask, lmask, rmask, ruleshome, pathsep, exe, crib, username, potfile, noinc, show, skip, restore, force, remove, statusfile, leet, prince, princemin, princemax, purplerain, dryrun, xrules, debugfile):
 
     if pathsep=='/':
         hcbin='./hashcat.bin'
@@ -438,8 +422,9 @@ def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, 
     if statusfile is not None:
         trailer=trailer+' --status >> '+statusfile
 
-    if nuke:
-        found=1
+    if hashtype=="99999":
+        d=pwdfile
+        pwdfile='--stdout'
         
     if show:
         trailer=' '+potfile+' '+username
@@ -453,41 +438,6 @@ def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, 
         btexeccwd(hcbin+' -a0 -m '+hashtype+' '+pwdfile+' '+tmpcrib+' -r '+ruleshome+pathsep+'best84581.rule --loopback '+trailer,hashcathome,show,dryrun)
         return
 
-    if found:
-        print("Using previous found list with variations")
-        #run list of found passwords against the new ones, various combinations
-        btexeccwd(hcbin+' -a6 -m '+hashtype+' '+pwdfile+' found.txt ?a?a -i '+trailer,hashcathome,show,dryrun)
-        btexeccwd(hcbin+' -a0 -m '+hashtype+' '+pwdfile+' found.txt -r '+ruleshome+pathsep+'best64.rule --loopback '+trailer,hashcathome,show,dryrun)
-        btexeccwd(hcbin+' -a1 -m '+hashtype+' '+pwdfile+' found.txt '+dicthome+'/last3.txt '+trailer,hashcathome,show,dryrun)
-
-        if is_non_zero_file('dict/found.txt'):
-            btexeccwd(hcbin+' -a6 -m '+hashtype+' '+pwdfile+' dict/found.txt ?a?a -i '+trailer,hashcathome,show,dryrun)
-            btexeccwd(hcbin+' -a1 -m '+hashtype+' '+pwdfile+' dict/found.txt '+dicthome+'/last3.txt '+trailer,hashcathome,show,dryrun)
-            if dolast==1:
-                btexeccwd(hcbin+' -a1 -m '+hashtype+' '+pwdfile+' '+dicthome+'/found.txt '+dicthome+'/last4.txt '+trailer,hashcathome,show,dryrun)
-        
-        if dolast==1 or nuke:
-            btexeccwd(hcbin+' -a1 -m '+hashtype+' '+pwdfile+' found.txt '+dicthome+'/last4.txt '+trailer,hashcathome,show,dryrun)
-
-    if words:
-        print("Using bog standard dictionary words with variations")
-        btexeccwd(hcbin+' -a6 -m '+hashtype+' '+pwdfile+' '+dicthome+'/words.txt ?a?a -i '+trailer,hashcathome,show,dryrun)
-        btexeccwd(hcbin+' -a0 -m '+hashtype+' '+pwdfile+' '+dicthome+'/words.txt -r '+ruleshome+pathsep+'best64.rule --loopback '+trailer,hashcathome,show,dryrun)
-        btexeccwd(hcbin+' -a1 -m '+hashtype+' '+pwdfile+' '+dicthome+'/words.txt '+dicthome+'/last3.txt '+trailer,hashcathome,show,dryrun)
-                
-        if dolast==1 or nuke:
-            btexeccwd(hcbin+' -a1 -m '+hashtype+' '+pwdfile+' '+dicthome+'/words.txt '+dicthome+'/last4.txt '+trailer,hashcathome,show,dryrun)
-
-
-    if phrases:
-        print("Using phrases with variations")
-        btexeccwd(hcbin+' -a6 -m '+hashtype+' '+pwdfile+' '+dicthome+'/phrases.txt ?a?a -i '+trailer,hashcathome,show,dryrun)
-        btexeccwd(hcbin+' -a0 -m '+hashtype+' '+pwdfile+' '+dicthome+'/phrases.txt -r '+ruleshome+pathsep+'best64.rule --loopback '+trailer,hashcathome,show,dryrun)
-        btexeccwd(hcbin+' -a1 -m '+hashtype+' '+pwdfile+' '+dicthome+'/phrases.txt '+dicthome+'/last3.txt '+trailer,hashcathome,show,dryrun)
-        
-        if dolast==1 or nuke:     
-            btexeccwd(hcbin+' -a1 -m '+hashtype+' '+pwdfile+' '+dicthome+'/phrases.txt '+dicthome+'/last4.txt '+trailer,hashcathome,show,dryrun)
-
     #if we've got a dict + mask specified, they probably want this            
     if dictoverride and mask:
         rmask=mask
@@ -499,7 +449,7 @@ def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, 
         if rmask or mask:
             if mask:
                 print("Using specified mask "+mask)
-                if re.match('\?',mask): 
+                if re.match(r'\?',mask): 
                     btexeccwd(hcbin+' -a3 -m '+hashtype+' '+pwdfile+' '+mask+' -i '+trailer+skip,hashcathome,show,dryrun)
                 else:
                     if mask!='default':
@@ -526,11 +476,11 @@ def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, 
                     if pathsep=='/':
                         btexeccwd('../princeprocessor/pp64.bin --pw-min='+princemin+' '+d+' | '+hcbin+' -a0 -m '+hashtype+' '+pwdfile+' -g 300000 '+trailer,hashcathome,show,dryrun)
                     else:
-                        btexeccwd('..\princeprocessor\pp64.exe --pw-min='+princemin+' '+d+' | '+hcbin+' -a0 -m '+hashtype+' '+pwdfile+' -g 300000 '+trailer,hashcathome,show,dryrun)
+                        btexeccwd('..\\princeprocessor\\pp64.exe --pw-min='+princemin+' '+d+' | '+hcbin+' -a0 -m '+hashtype+' '+pwdfile+' -g 300000 '+trailer,hashcathome,show,dryrun)
 
 
                 if leet:
-                    btexeccwd('python ../scripts/leetify.py '+d+' | '+hcbin+' -a0 -m '+hashtype+' '+pwdfile+' -r '+r+'  --loopback '+trailer+skip,hashcathome,d)
+                    btexeccwd('python3 ../scripts/leetify.py '+d+' | '+hcbin+' -a0 -m '+hashtype+' '+pwdfile+' -r '+r+'  --loopback '+trailer+skip,hashcathome,d)
                                     
                 if prince:
 
@@ -542,7 +492,7 @@ def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, 
                     if pathsep=='/':
                         btexeccwd('../princeprocessor/pp64.bin '+princeargs+' '+d+' | '+hcbin+' -a0 -m '+hashtype+' '+pwdfile+' -r '+r+'  --loopback '+trailer+skip,hashcathome,d)
                     else:
-                        btexeccwd('..\princeprocessor\pp64.exe '+princeargs+' '+d+' | '+hcbin+' -a0 -m '+hashtype+' '+pwdfile+' -r '+r+'  --loopback '+trailer+skip,hashcathome,d)
+                        btexeccwd('..\\princeprocessor\\pp64.exe '+princeargs+' '+d+' | '+hcbin+' -a0 -m '+hashtype+' '+pwdfile+' -r '+r+'  --loopback '+trailer+skip,hashcathome,d)
 
                 else:
                     if xrules is not None: 
@@ -550,11 +500,6 @@ def runhc( hashcathome, pwdfile, hashtype, dict, rules, inc, trailer, dicthome, 
                     else:
                         btexeccwd(hcbin+' -a0 -m '+hashtype+' '+pwdfile+' '+d+' -r '+r+'  --loopback '+trailer+skip,hashcathome,show,dryrun)
                     
-                    if dolast==1 or nuke:
-                        btexeccwd(hcbin+' -a1 -m '+hashtype+' '+pwdfile+' '+d+' '+dicthome+'/last3.txt '+trailer,hashcathome,show,dryrun)
-                            
-                    if nuke:                    
-                        btexeccwd(hcbin+' -a1 -m '+hashtype+' '+pwdfile+' '+d+' '+dicthome+'/last4.txt '+trailer,hashcathome,show,dryrun)
 
     if not noinc:
         if inc>0:
@@ -638,8 +583,6 @@ def main():
     dict=''
     inc=0
     mininc=1
-    nuke=''
-    dolast=0
     rules='best64.rule'
     colon=''
     pathstyle=''
@@ -676,7 +619,7 @@ def main():
     parser.add_argument('-r','--rules', help='Rules override')
     parser.add_argument('-x','--xrules', help='Extra rules override')
     parser.add_argument('--potfile', help='Potfile override')
-    parser.add_argument('-tf','--thisfound', help='Use this instead of found.txt')
+
     parser.add_argument('-P','--prince', action="store_true", help='Use PRINCE preprocessor on the input dictionary')
     parser.add_argument('-R','--rain', action="store_true", help='Use purple rain attack; shuf | pp64 | hashcat -g 300000')
     parser.add_argument('--princemin', help='PRINCE min')
@@ -689,15 +632,13 @@ def main():
 
     parser.add_argument('--restore', action="store_true", help='Restore to last session')
     parser.add_argument('-s','--show', action="store_true", help='Just show stuff')
-    parser.add_argument('-l','--last', action="store_true", help='Use last3 file together with the given or default dictionary')
-    parser.add_argument('-f','--found', action="store_true", help='Update found list')
+
     parser.add_argument('--force', action="store_true", help='Run with CPU as well. Gets you up to 8 percent extra oomph, depending on hash type')
     parser.add_argument('--remove', action="store_true", help='Remove found hashes from input file')
-    parser.add_argument('-w','--words', action="store_true", help='Use words file')
+
     parser.add_argument('--noinc', action="store_true", help='Do not use increment')
-    parser.add_argument('-p','--phrases', action="store_true", help='Use phrases file')
+    
     parser.add_argument('-u','--username', action="store_true", help='Override username flag')
-    parser.add_argument('-n','--nuke', action="store_true", help='Throw everything at it')
     parser.add_argument('-3','--leet', action="store_true", help='Use CPU leetification - slower, but does one char at a time')
     parser.add_argument('-Z','--dryrun', action="store_true", help='Do not do anything, just show commands')
 
@@ -727,11 +668,7 @@ def main():
         if is_non_zero_file(mask):
             mask=os.path.abspath(mask)
 
-    words=args.words
-    phrases=args.phrases
     username=args.username
-    dolast=args.last
-    nuke=args.nuke
     skip=args.skip
     dryrun=args.dryrun
     leet=args.leet
@@ -742,7 +679,6 @@ def main():
     rightdict=args.rightdict
     mininc=args.mininc
     maxinc=args.maxinc
-    thisfound=args.found
     prince=args.prince
     purplerain=args.rain
 
@@ -762,18 +698,18 @@ def main():
         pathstyle='unix'
         unix=1
         crackopts=crackopts+" -w4 "
-        hashcathome='./hashcat-6.1.1'
-        ruleshome='./hashcat-6.1.1/rules'
+        hashcathome='./hashcat-6.2.6'
+        ruleshome='./hashcat-6.2.6/rules'
         exe='.bin'
     else:
         if re.match(r'Windows',p_os):
             if not show:
                 print("Running under win32")
             exe='.exe'
-            hashcathome='hashcat-6.1.1' #relative path issues with 4.10
+            hashcathome='hashcat-6.2.6' #relative path issues with 4.10
             pathstyle='win32'
             pathsep=r'\\'
-            ruleshome='hashcat-6.1.1\\rules'
+            ruleshome='hashcat-6.2.6\\rules'
             crackopts=crackopts+" -w1 "
         else:
             print("Unknown platform")
@@ -870,7 +806,7 @@ def main():
         javapath='java'
         python2path='python'
         perlpath='perl'
-        hcpath=os.path.abspath('hashcat-6.1.1')
+        hcpath=os.path.abspath('hashcat-6.2.6')
 
         
     hashtype=args.type
@@ -882,22 +818,7 @@ def main():
         if re.match('^[a-zA-Z][a-zA-z0-9]+$',hashtype):
             hashtype=friendlymap(hashtype)
             
-    found=args.found
 
-    #grab a crib from previously found passwords
-    if found:
-        if not is_non_zero_file('found.txt'):
-            if potfile:
-                getregexpfromfile(':([^:]+)$',potfile,'found.txt',True)
-            else:
-                getregexpfromfile(':([^:]+)$',hashcathome+pathsep+'hashcat.potfile','found.txt',True)
-        else:    
-            if file_age_in_seconds('found.txt')>3600:
-                if potfile and is_non_zero_file(potfile):
-                    getregexpfromfile(':([^:]+)$',potfile,'found.txt',True)
-                else:
-                    getregexpfromfile(':([^:]+)$',hashcathome+pathsep+'hashcat.potfile','found.txt',True)
-            
     if infile:
         if not show:
             print("Reading file: "+infile)
@@ -930,6 +851,11 @@ def main():
         if re.search(r'\.gpg$',infile):
             hashtype='gpg'
             stype='gpg'            
+
+        if re.search(r'\.pfx$',infile):
+            hashtype='pfx'
+            stype='pfx'
+
             
     if infile:
         line=getfirstline(infile)
@@ -1058,7 +984,8 @@ def main():
                '14400':1,
                '14900':1,
                '15000':1,
-               '18200':1 }
+               '18200':1,
+               '99999':0 }
 
     colons=line.count(':')
     expectedcolons=colonmap.get(hashtype,0)
@@ -1113,22 +1040,22 @@ def main():
             if is_non_zero_file(sname):
                 hashtype='112'
 
-                (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+                (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
                 if maxinc is not None:
                     inc=maxinc
             
-                runhc(hashcathome=hashcathome, pwdfile=sname, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, dolast=dolast, ruleshome=ruleshome, words=words, pathsep=pathsep, exe=exe, crib=crib, phrases=phrases, username='', nuke=nuke, found=found, potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
+                runhc(hashcathome=hashcathome, pwdfile=sname, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, ruleshome=ruleshome, pathsep=pathsep, exe=exe, crib=crib, username='',   potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
 
             if is_non_zero_file(tname):
                 hashtype='12300'
 
-                (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+                (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
                 if maxinc is not None:
                     inc=maxinc
 
-                runhc(hashcathome=hashcathome, pwdfile=tname, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, dolast=dolast, ruleshome=ruleshome, words=words, pathsep=pathsep, exe=exe, crib=crib, phrases=phrases, username='', nuke=nuke, found=found, potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
+                runhc(hashcathome=hashcathome, pwdfile=tname, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, ruleshome=ruleshome, pathsep=pathsep, exe=exe, crib=crib, username='',   potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
 
                     
         # jks - invoke a subprocess to build the compatible file     
@@ -1137,13 +1064,12 @@ def main():
             
             hashtype='15500'
             
-            (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+            (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
             if maxinc is not None:
                 inc=maxinc
 
-
-                runhc(hashcathome=hashcathome, pwdfile=tmpfile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, dolast=dolast, ruleshome=ruleshome, words=words, pathsep=pathsep, exe=exe, crib=crib, phrases=phrases, username=username, nuke=nuke, found=found, potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
+            runhc(hashcathome=hashcathome, pwdfile=tmpfile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, ruleshome=ruleshome, pathsep=pathsep, exe=exe, crib=crib, username=username,   potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
 
         #first JTR target ! 
         if stype=='gpg':
@@ -1154,11 +1080,27 @@ def main():
                 btexec('john\\run\\gpg2john.exe '+infile+' > '+tmpfile)
                   
             hashtype='gpg-opencl'
-            (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+            (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
             print('RULES- '+rules)
             
-            runjtr(hashcathome, tmpfile, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdict, rulesoverride, mask, lmask, rmask, dolast, ruleshome, words, pathsep, exe, crib, phrases, username, nuke , found, potfile, noinc, show, skip, restore, force, remove, statusfile, leet, prince, princemin, princemax, purplerain, dryrun, xrules)
+            runjtr(hashcathome, tmpfile, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdict, rulesoverride, mask, lmask, rmask, ruleshome, pathsep, exe, crib, username, nuke , potfile, noinc, show, skip, restore, force, remove, statusfile, dryrun)
+
+
+        #fsecond JTR target ! 
+        if stype=='pfx':
+            #windows / linux switch
+            if pathsep=='/':
+                btexec('python3 john/run/pfx2john.py '+infile+' > '+tmpfile)
+            else:
+                btexec('python3 john\\run\\pfx2john.py '+infile+' > '+tmpfile)
+                  
+            hashtype='pfx-opencl'
+            (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
+
+            print('RULES- '+rules)
+            
+            runjtr(hashcathome, tmpfile, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdict, rulesoverride, mask, lmask, rmask, ruleshome, pathsep, exe, crib, username, potfile, noinc, show, skip, restore, force, remove, statusfile, dryrun)
 
         if stype=='ntlm-jtr':
             #windows / linux switch
@@ -1168,11 +1110,11 @@ def main():
                 btexec('john\\run\\gpg2john.exe '+infile+' > '+tmpfile)
                   
             hashtype='ntlm-jtr'
-            (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+            (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
             print('RULES- '+rules)
             
-            runjtr(hashcathome, tmpfile, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdict, rulesoverride, mask, lmask, rmask, dolast, ruleshome, words, pathsep, exe, crib, phrases, username, nuke , found, potfile, noinc, show, skip, restore, force, remove, statusfile, leet, prince, princemin, princemax, purplerain, dryrun, xrules)        
+            runjtr(hashcathome, tmpfile, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdict, rulesoverride, mask, lmask, rmask, ruleshome, pathsep, exe, crib, username, potfile, noinc, show, skip, restore, force, remove, statusfile, dryrun)
 
         if stype=='zip-jtr':
             #windows / linux switch
@@ -1182,12 +1124,12 @@ def main():
                 btexec('john\\run\\zip2john.exe '+infile+' > '+tmpfile)
 
             hashtype='zip-opencl'
-            (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+            (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
             if maxinc is not None:
                 inc=maxinc
             
-            runjtr(hashcathome, tmpfile2, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdict, rulesoverride, mask, lmask, rmask, dolast, ruleshome, words, pathsep, exe, crib, phrases, username, nuke , found, potfile, noinc, show, skip, restore, force, remove, statusfile, leet, prince, princemin, princemax, purplerain, dryrun, xrules)  
+            runjtr(hashcathome, tmpfile2, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdict, rulesoverride, mask, lmask, rmask, ruleshome, pathsep, exe, crib, username, potfile, noinc, show, skip, restore, force, remove, statusfile, dryrun)
 
         if stype=='shadow':
             ff = open(tmpfile,'w')
@@ -1210,12 +1152,12 @@ def main():
             ff.close()
             username=1
                 
-            (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+            (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
             if maxinc is not None:
                 inc=maxinc
                 
-            runhc(hashcathome=hashcathome, pwdfile=tmpfile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, dolast=dolast, ruleshome=ruleshome, words=words, pathsep=pathsep, exe=exe, crib=crib, phrases=phrases, username=username, nuke=nuke, found=found, potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
+            runhc(hashcathome=hashcathome, pwdfile=tmpfile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, ruleshome=ruleshome, pathsep=pathsep, exe=exe, crib=crib, username=username,   potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
             
         if stype=='zip':
             #windows / linux switch
@@ -1242,12 +1184,12 @@ def main():
             ff.close()
                 
             hashtype='13600'
-            (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+            (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
             if maxinc is not None:
                 inc=maxinc
 
-                runhc(hashcathome=hashcathome, pwdfile=tmpfile2, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, dolast=dolast, ruleshome=ruleshome, words=words, pathsep=pathsep, exe=exe, crib=crib, phrases=phrases, username=username, nuke=nuke, found=found, potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)            
+                runhc(hashcathome=hashcathome, pwdfile=tmpfile2, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, ruleshome=ruleshome, pathsep=pathsep, exe=exe, crib=crib, username=username,   potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)            
             
         # ifm - ntsdutil zipped output
         # reg - 3 reg hives in a zip file - SAM, SYSTEM, SECURITY
@@ -1318,7 +1260,7 @@ def main():
                         for i in f:
                             if re.search(r'Enabled', i):
                                 # lose inactive accounts
-                                if not re.search('\$',i):
+                                if not re.search(r'\$',i):
                                     ## lose the machine accounts, ie. no $ 
                                     l=i.split(' ')
                                     h=l[0] #lose enabled/disabled status 
@@ -1380,12 +1322,12 @@ def main():
 
             hashtype='1000'
 
-            (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+            (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
             if maxinc is not None:
                 inc=maxinc
 
-            runhc(hashcathome=hashcathome, pwdfile=infile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, dolast=dolast, ruleshome=ruleshome, words=words, pathsep=pathsep, exe=exe, crib=crib, phrases=phrases, username=username, nuke=nuke, found=found, potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)        
+            runhc(hashcathome=hashcathome, pwdfile=infile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, ruleshome=ruleshome, pathsep=pathsep, exe=exe, crib=crib, username=username,   potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)        
 
         #7z
         if stype=='7z':
@@ -1393,12 +1335,12 @@ def main():
             
             hashtype='11600'
 
-            (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+            (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
             if maxinc is not None:
                 inc=maxinc
 
-            runhc(hashcathome=hashcathome, pwdfile=tmpfile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, dolast=dolast, ruleshome=ruleshome, words=words, pathsep=pathsep, exe=exe, crib=crib, phrases=phrases, username=username, nuke=nuke, found=found, potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
+            runhc(hashcathome=hashcathome, pwdfile=tmpfile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, ruleshome=ruleshome, pathsep=pathsep, exe=exe, crib=crib, username=username,   potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
 
         #ms office, various subtypes
         if stype=='msoffice':
@@ -1429,12 +1371,12 @@ def main():
                 print("Failed to  file - check python2 and jtr path - specifically john/run/office2john.py")
                 sys.exit(1)
                                 
-            (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+            (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
             if maxinc is not None:
                 inc=maxinc
                 
-            runhc(hashcathome=hashcathome, pwdfile=tmpfile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, dolast=dolast, ruleshome=ruleshome, words=words, pathsep=pathsep, exe=exe, crib=crib, phrases=phrases, username=1, nuke=nuke, found=found, potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
+            runhc(hashcathome=hashcathome, pwdfile=tmpfile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, ruleshome=ruleshome, pathsep=pathsep, exe=exe, crib=crib, username=1,   potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
 
         #PDF, various subtypes
         if stype=='pdf':
@@ -1465,12 +1407,12 @@ def main():
                 print("Failed to  file - check perl and jtr path - specifically john/run/pdf2john.pl")
                 sys.exit(1)                
 
-            (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+            (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
             if maxinc is not None:
                 inc=maxinc
 
-            runhc(hashcathome=hashcathome, pwdfile=tmpfile2, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, dolast=dolast, ruleshome=ruleshome, words=words, pathsep=pathsep, exe=exe, crib=crib, phrases=phrases, username=username, nuke=nuke, found=found, potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
+            runhc(hashcathome=hashcathome, pwdfile=tmpfile2, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, ruleshome=ruleshome, pathsep=pathsep, exe=exe, crib=crib, username=username,   potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
                        
         #responder DB, so unpack and then run
         if stype=='responder':
@@ -1489,12 +1431,12 @@ def main():
             if recs>0: # if there are any NetLMv2 hashes
                 hashtype='5600'
 
-                (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+                (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
                 if maxinc is not None:
                     inc=maxinc
 
-                runhc(hashcathome=hashcathome, pwdfile=tmpfile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, dolast=dolast, ruleshome=ruleshome, words=words, pathsep=pathsep, exe=exe, crib=crib, phrases=phrases, username=username, nuke=nuke, found=found, potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
+                runhc(hashcathome=hashcathome, pwdfile=tmpfile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, ruleshome=ruleshome, pathsep=pathsep, exe=exe, crib=crib, username=username,   potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
             else:
                 print("No NetLMv2 hashes obtained - check sqlite3 install")
 
@@ -1509,12 +1451,12 @@ def main():
             if recs>0: # if there are any NetLMv1 hashes
                 hashtype='5500'
 
-                (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+                (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
                 if maxinc is not None:
                     inc=maxinc
 
-                runhc(hashcathome=hashcathome, pwdfile=tmpfile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, dolast=dolast, ruleshome=ruleshome, words=words, pathsep=pathsep, exe=exe, crib=crib, phrases=phrases, username=username, nuke=nuke, found=found, potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
+                runhc(hashcathome=hashcathome, pwdfile=tmpfile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, ruleshome=ruleshome, pathsep=pathsep, exe=exe, crib=crib, username=username,   potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
             else:
                 print("No NetLMv1 hashes obtained - check sqlite3 install")
             
@@ -1547,7 +1489,7 @@ def main():
             ff.close()
 
             
-        (dict,rules,inc)=selectparams( hashtype, nuke, ruleshome, dicthome )
+        (dict,rules,inc)=selectparams( hashtype, ruleshome, dicthome )
 
         if maxinc is not None:
             inc=maxinc
@@ -1555,7 +1497,7 @@ def main():
         if not show:
             print("Selected rules: "+rules+", dict "+dict+", inc "+str(inc))
 
-        runhc(hashcathome=hashcathome, pwdfile=infile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, dolast=dolast, ruleshome=ruleshome, words=words, pathsep=pathsep, exe=exe, crib=crib, phrases=phrases, username=username, nuke=nuke, found=found, potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
+        runhc(hashcathome=hashcathome, pwdfile=infile, hashtype=hashtype, dict=dict, rules=rules, inc=inc, trailer=trailer, dicthome=dicthome, dictoverride=dictoverride, rightdictoverride=rightdict, rulesoverride=rulesoverride, mask=mask, lmask=lmask, rmask=rmask, ruleshome=ruleshome, pathsep=pathsep, exe=exe, crib=crib, username=username,   potfile=potfile, noinc=noinc, show=show, skip=skip, restore=restore, force=force, remove=remove, statusfile=statusfile, leet=leet, prince=prince, princemin=princemin, princemax=princemax, purplerain=purplerain, dryrun=dryrun, xrules=xrules, debugfile=debugfile)
                             
   
 if __name__== "__main__":

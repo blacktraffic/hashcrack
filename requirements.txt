@@ -1,6 +1,6 @@
 configparser
 bs4
 requests
-jupyter
 bokeh
 impacket
+asn1crypto
