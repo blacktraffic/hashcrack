@@ -872,18 +872,19 @@ def main():
 
         #jwt base64 decode             
         try:
+            firstdot=line.find('.')
             try:
-                decodedBytes = base64.b64decode(line[0:40])
+                decodedBytes = base64.b64decode(line[0:firstdot])
             except:
                 try:
-                    decodedBytes = base64.b64decode(line[0:40]+'=')
+                    decodedBytes = base64.b64decode(line[0:firstdot]+'=')
                 except:
                     try:
-                        decodedBytes = base64.b64decode(line[0:40]+'==')
+                        decodedBytes = base64.b64decode(line[0:firstdot]+'==')
                     except:
                         print("Doesn't look like base64 - no base64 decode possible")
                                                
-            decodedStr = str(decodedBytes[:40], "ascii")
+            decodedStr = str(decodedBytes[:firstdot], "ascii")
 
             print(decodedStr)
 
@@ -1087,7 +1088,7 @@ def main():
             runjtr(hashcathome, tmpfile, hashtype, dict, rules, inc, trailer, dicthome, dictoverride, rightdict, rulesoverride, mask, lmask, rmask, ruleshome, pathsep, exe, crib, username, nuke , potfile, noinc, show, skip, restore, force, remove, statusfile, dryrun)
 
 
-        #fsecond JTR target ! 
+        #second JTR target ! 
         if stype=='pfx':
             #windows / linux switch
             if pathsep=='/':
